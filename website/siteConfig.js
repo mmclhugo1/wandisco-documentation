@@ -43,7 +43,7 @@ const siteConfig = {
     {doc: 'docs/doc1', label: 'Docs'},
     {doc: 'glossary/a', label: 'Glossary'},
     {doc: 'api/api', label: 'API'},
-    {page: 'help', label: 'Help'},
+    {doc: 'help/need_help', label: 'Help'},
   ],
 
   // If you have users set above, you add it here:

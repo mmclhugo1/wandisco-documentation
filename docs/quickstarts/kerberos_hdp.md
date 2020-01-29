@@ -87,7 +87,7 @@ This method will allow the Hadoop configuration and Kerberos keytabs to be share
 
 4. Log in to the Ambari Server via a terminal session and confirm that the container is accessible via ssh.
 
-   `ssh -i hdp-key.pem -p 2022 root@<DOCKER_HOSTNAME>`
+   `ssh -i hdp-key.pem -p 2022 root@<docker-hostname>`
 
    Either copy the `hdp-key.pem` file over to the Ambari Server or create the file and paste in the contents of your clipboard. You can exit the container once SSH access is confirmed.
 

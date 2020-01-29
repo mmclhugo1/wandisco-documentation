@@ -95,7 +95,7 @@ Please see the [Useful information](https://wandisco.github.io/wandisco-document
 
   * NameNode port: `8020` - The value will be the port defined in the `fs.defaultFS` property in the HDFS config.
 
-  * NameNode Service Name: `<docker_hostname/IP>:8890` - Press enter to leave as default.
+  * NameNode Service Name: `<docker-hostname>:8890` - Press enter to leave as default.
 
   _Example entries for Live Hive_
 
@@ -213,7 +213,7 @@ After all the prompts have been completed, you will be able to start the contain
 
 6. Log into the Fusion UI for the HDP zone, and activate the Live Hive plugin.
 
-   `http://<docker_hostname/IP>:8083`
+   `http://<docker-hostname>:8083`
 
    Username: `admin`
    Password: `wandisco`
@@ -280,7 +280,7 @@ After all the prompts have been completed, you will be able to start the contain
 
 1. Log into the Fusion UI for the ADLS Gen2 zone.
 
-   `http://<docker_hostname/IP>:8583`
+   `http://<docker-hostname>:8583`
 
    Username: `admin`
    Password: `admin`
@@ -339,7 +339,7 @@ After all the prompts have been completed, you will be able to start the contain
 
 1. Log into the Fusion UI for the HDP zone.
 
-   `http://<docker_hostname/IP>:8083`
+   `http://<docker-hostname>:8083`
 
    Username: `admin`
    Password: `wandisco`

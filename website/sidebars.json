@@ -16,6 +16,12 @@
       "api/api"
     ]
   },
+  "help": {
+    "Help": [
+      "help/variables",
+      "help/need_help"
+    ]
+  },
   "quickstarts": {
     "Preparation": [
       "quickstarts/preparation/azure_vm_creation",

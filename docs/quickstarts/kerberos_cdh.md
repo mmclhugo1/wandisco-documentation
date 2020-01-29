@@ -149,7 +149,7 @@ If creating a new principal/keytab for Fusion, the following configuration is re
      </property>
      <property>
        <name>fusion.server</name>
-       <value>${DOCKER_HOSTNAME}:8023</value>
+       <value>${docker-hostname}:8023</value>
      </property>
    ```
 

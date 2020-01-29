@@ -50,7 +50,7 @@ Pull down latest docker container images:
 
 ### Service
 
-`docker-compose start|stop|restart ${SERVICE_NAME}`
+`docker-compose start|stop|restart <service-name>`
 
 _Example to restart Fusion ONEUI Server_
 
@@ -60,23 +60,23 @@ _Example to restart Fusion ONEUI Server_
 
 #### General services
 
-`fusion-ui-server-${ZONE_NAME}`
+`fusion-ui-server-<zone-name>`
 
-`fusion-ihc-server-${ZONE_NAME`
+`fusion-ihc-server-<zone-name>`
 
-`fusion-server-${ZONE_NAME}`
+`fusion-server-<zone-name>`
 
 `fusion-oneui-server`
 
 #### Environment specific services
 
-`fusion-nn-proxy-${ZONE_NAME}`
+`fusion-nn-proxy-<zone-name>`
 
-`sshd-${ZONE_NAME}`
+`sshd-<zone-name>`
 
 #### Plugin services
 
-`fusion-livehive-proxy-${ZONE_NAME}`
+`fusion-livehive-proxy-<zone-name>`
 
 ## Rebuild
 

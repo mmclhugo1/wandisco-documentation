@@ -87,7 +87,7 @@ Start the Fusion containers with:
 
 Log into the ONEUI via a web browser with the VM's hostname and port 8081.
 
-`http://<docker_hostname>:8081/`
+`http://<docker-hostname>:8081/`
 
 Register your email address and password, and then use these to log into the ONEUI.
 

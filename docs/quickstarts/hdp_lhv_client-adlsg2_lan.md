@@ -144,7 +144,7 @@ After all the prompts have been completed, you will be able to start the contain
 
 4. Log into the Fusion UI for the HDP zone, and activate the Live Hive plugin.
 
-   `http://<docker_hostname/IP>:8083`
+   `http://<docker-hostname>:8083`
 
    Username: `admin`
    Password: `admin`
@@ -159,7 +159,7 @@ After all the prompts have been completed, you will be able to start the contain
 
 2. Download the Fusion Client stack package located here:
 
-   `wget http://<docker_hostname/IP>:8083/ui/downloads/stack_packages/fusion-hcfs-hdp-2.6.5-2.14.2.1.stack.tar.gz`
+   `wget http://<docker-hostname>:8083/ui/downloads/stack_packages/fusion-hcfs-hdp-2.6.5-2.14.2.1.stack.tar.gz`
 
 3. Decompress the stack to the Ambari services directory.
 
@@ -195,7 +195,7 @@ After all the prompts have been completed, you will be able to start the contain
 
 2. Download the Live Hiveserver2 template stack from the docker host.
 
-   `wget http://<docker_hostname/IP>:8083/ui/downloads/core_plugins/live-hive/stack_packages/live-hiveserver2-template-5.0.0.1.stack.tar.gz`
+   `wget http://<docker-hostname>:8083/ui/downloads/core_plugins/live-hive/stack_packages/live-hiveserver2-template-5.0.0.1.stack.tar.gz`
 
 3. Decompress the stack to the Ambari services directory.
 
@@ -241,12 +241,12 @@ After all the prompts have been completed, you will be able to start the contain
    fusion.client.ssl.enabled=false
    fusion.http.authentication.enabled=false
    fusion.http.authorization.enabled=false
-   fusion.server=<docker_hostname/IP>:8023
-   hadoop.proxyuser.hdfs.hosts=<docker_hostname/IP>
+   fusion.server=<docker-hostname>:8023
+   hadoop.proxyuser.hdfs.hosts=<docker-hostname>
    hadoop.proxyuser.hdfs.groups=*
    ```
 
-   Please ensure to adjust the `<namenode_hostname>` and `<docker_hostname/IP>` values to your environment.
+   Please ensure to adjust the `<namenode_hostname>` and `<docker-hostname>` values to your environment.
 
    Select **Add** and then **Save** the HDFS config.
 
@@ -345,7 +345,7 @@ After all the prompts have been completed, you will be able to start the contain
 
 1. Log into the Fusion UI for the ADLS Gen2 zone.
 
-   `http://<docker_hostname/IP>:8583`
+   `http://<docker-hostname>:8583`
 
    Username: `admin`
    Password: `admin`
@@ -370,7 +370,7 @@ After all the prompts have been completed, you will be able to start the contain
 
 3. Log into one of the containers for the ADLS Gen2 zone.
 
-   `ssh <docker_hostname/IP>`
+   `ssh <docker-hostname>`
 
    `cd fusion-docker-compose`
 
@@ -417,7 +417,7 @@ In this section, follow the steps detailed to perform live replication of HCFS d
 
 1. Log into the Fusion UI for the HDP zone.
 
-   `http://<docker_hostname/IP>:8083`
+   `http://<docker-hostname>:8083`
 
    Username: `admin`
    Password: `admin`
