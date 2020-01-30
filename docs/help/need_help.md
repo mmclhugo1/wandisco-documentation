@@ -1,7 +1,7 @@
 ---
 id: need_help
-title: Help
-sidebar_label: Help
+title: Need help?
+sidebar_label: Need help?
 ---
 
 ## Browse the Docs

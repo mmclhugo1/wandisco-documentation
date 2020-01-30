@@ -4,13 +4,11 @@ title: Variables
 sidebar_label: Variables
 ---
 
-These variables are used throughout the Fusion documentation, and will depend on the environment you have created.
-
-All variables will be encased with `<VARIABLE>` when written in the documentation.
+Many variables are used throughout our documentation. Below you will find a list of the variables with an explanation of their usage.
 
 ## Variables
 
-### `ihc-version`
+### &lt;ihc-version&gt;
 
 The IHC distribution version of the zone, this is referenced in all IHC service scripts.
 
@@ -18,21 +16,21 @@ The IHC distribution version of the zone, this is referenced in all IHC service 
 - Example of usage: `service fusion-ihc-server-<ihc-version> restart`
 - Where to find: `/etc/init.d` directory on the Fusion server.
 
-### `fusion-version`
+### &lt;fusion-version&gt;
 
-The version of WANdisco Fusion.
+The version of WANdisco Fusion, this may include the distribution version within the value.
 
 - Example of value: `2.14.2.2.2.6.5`
 - Example of usage: `ls -l /opt/cloudera/parcels/FUSION-<fusion-version>-cdh5.16.1-el7/lib/`
 
-### `hadoop-username`
+### &lt;hadoop-username&gt;
 
 The Hadoop username that is used or defined in HCFS/HDFS environments.
 
 - Example of value: `hive`
 - Example of usage: `hdfs dfs -ls /user/<hadoop-username>`
 
-### `cluster-name`
+### &lt;cluster-name&gt;
 
 The Hadoop cluster name.
 
@@ -40,21 +38,21 @@ The Hadoop cluster name.
 - Example of usage: `curl -u admin:password -H "X-Requested-By: ambari" http://ambari.server.com:8080/api/v1/clusters/CLUSTER-01/hosts/`
 - Where to find: Cluster manager UI or API.
 
-### `hdp-version`
+### &lt;hdp-version&gt;
 
 The Hortonworks (HDP) version string used on a HDP node's filesystem.
 
 - Example of value: `2.6.5.0-292`
 - Example of usage: `ls -l /usr/hdp/<hdp-version>/spark/lib/`
 
-### `cdh-version`
+### &lt;cdh-version&gt;
 
 The Cloudera (CDH) version string used on a CDH node's filesystem.
 
 - Example of value: `6.1.0-1.cdh6.1.0.p0.770702`
 - Example of usage: `ls -l /opt/cloudera/parcels/CDH-<cdh-version>/jars/`
 
-### `hdi-version`
+### &lt;hdi-version&gt;
 
 The HDInsight (HDI) version.
 
@@ -62,22 +60,22 @@ The HDInsight (HDI) version.
 - Example of usage: `scp fusion-hcfs-azure-hdi-<hdi-version>-client-hdfs_2.14.2.2-2977_all.deb hdi_node:/downloads/`
 - Where to find: [Microsoft Azure documentation](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-component-versioning)
 
-### `hadoop-version`
+### &lt;hadoop-version&gt;
 
-The Hadoop version, used on MapR filesystems.
+The underlying Hadoop version, this is often used on MapR filesystems.
 
 - Example of value: `hadoop-2.7.0`
 - Example of usage: `ls -l /opt/mapr/hadoop/<hadoop-version>/etc/hadoop/`
 - Where to find: [MapR documentation](https://mapr.com/docs/61/ReferenceGuide/hadoop-version.html)
 
-### `docker-hostname`
+### &lt;docker-hostname&gt;
 
 The hostname or IP address of the Docker host.
 
 - Example of value: `docker-hostname.01.com`
 - Example of usage: `ssh <docker-hostname>`
 
-### `container-name`
+### &lt;container-name&gt;
 
 The name assigned to the docker container.
 
@@ -85,7 +83,7 @@ The name assigned to the docker container.
 - Example of usage: `docker exec -it <container-name> bash`
 - Where to find: Output of `docker container ls -a` (Names column).
 
-### `service-name`
+### &lt;service-name&gt;
 
 The service name for a Fusion docker container.
 
@@ -93,7 +91,7 @@ The service name for a Fusion docker container.
 - Example of usage: `docker-compose restart <service-name>`
 - Where to find: [List of service names](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/troubleshooting/useful_info#service-names)
 
-### `zone-name`
+### &lt;zone-name&gt;
 
 The zone name of a Fusion environment.
 
