@@ -18,8 +18,8 @@
   },
   "help": {
     "Help": [
-      "help/variables",
-      "help/need_help"
+      "help/need_help",
+      "help/variables"
     ]
   },
   "quickstarts": {
