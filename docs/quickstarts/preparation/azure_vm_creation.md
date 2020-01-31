@@ -48,7 +48,7 @@ The two required templates are given below. Create these in the same location wi
      echo "Example: ./create_docker_vm.sh -g DEV -r DEV-john.smith1 -v DEV-westeurope-vnet -s default -n johnsmith-docker -u john -t Standard_D8_v3 -d 128 -i UbuntuLTS"
    }
    #Setup of env
-   while getopts "g:G:r:R:v:V:n:N:u:U:t:T:d:D:i:I:hH*" opt; do
+   while getopts "g:G:r:R:v:V:s:S:n:N:u:U:t:T:d:D:i:I:h:H:" opt; do
      case $opt in
        g|G) GROUP="${OPTARG}" ;;
        r|R) RG="${OPTARG}" ;;
