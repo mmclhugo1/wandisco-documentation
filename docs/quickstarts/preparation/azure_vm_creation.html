@@ -93,7 +93,7 @@ IMAGE=<span class="hljs-string">''</span>
   <span class="hljs-built_in">echo</span> <span class="hljs-string">"Example: ./create_docker_vm.sh -g DEV -r DEV-john.smith1 -v DEV-westeurope-vnet -s default -n johnsmith-docker -u john -t Standard_D8_v3 -d 128 -i UbuntuLTS"</span>
 }
 <span class="hljs-comment">#Setup of env</span>
-<span class="hljs-keyword">while</span> <span class="hljs-built_in">getopts</span> <span class="hljs-string">"g:G:r:R:v:V:n:N:u:U:t:T:d:D:i:I:hH*"</span> opt; <span class="hljs-keyword">do</span>
+<span class="hljs-keyword">while</span> <span class="hljs-built_in">getopts</span> <span class="hljs-string">"g:G:r:R:v:V:s:S:n:N:u:U:t:T:d:D:i:I:h:H:"</span> opt; <span class="hljs-keyword">do</span>
   <span class="hljs-keyword">case</span> <span class="hljs-variable">$opt</span> <span class="hljs-keyword">in</span>
     g|G) GROUP=<span class="hljs-string">"<span class="hljs-variable">${OPTARG}</span>"</span> ;;
     r|R) RG=<span class="hljs-string">"<span class="hljs-variable">${OPTARG}</span>"</span> ;;
