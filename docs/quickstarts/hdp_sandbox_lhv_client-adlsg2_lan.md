@@ -4,11 +4,7 @@ title: Hortonworks (HDP) Sandbox to Azure Databricks with LiveAnalytics
 sidebar_label: HDP Sandbox to Azure Databricks with LiveAnalytics
 ---
 
-_THIS GUIDE IS WORK IN PROGRESS, PLEASE DO NOT FOLLOW ANYTHING HERE UNTIL THIS WARNING IS REMOVED_
-
-[//]: <This quickstart is work in progress, and new items are still being added. The development approach is that all known workarounds/configuration steps will be kept in the document until we have fully confirmed their fix (see MTC label). At which point, they will be removed. The same will apply for configuration/installation steps when blueprints for HDP or Fusion have been completed (see DAP-144).>
-
-Use this quickstart if you want to configure Fusion to replicate from a Hortonworks (HDP) Sandbox to an Azure Databricks cluster.
+Use this quickstart if you want to configure Fusion to replicate from a non-kerberized Hortonworks (HDP) Sandbox to an Azure Databricks cluster.
 
 This will involve the use of Live Hive for the HDP cluster, and the Databricks Delta Lake plugin for the Azure Databricks cluster. These two products form the LiveAnalytics solution.
 
@@ -18,7 +14,7 @@ What this guide will cover:
 - Integrating WANdisco Fusion with Azure Databricks.
 - Performing a sample data migration.
 
-Please see the [shutdown and start up](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/hdp_sandbox_fusion_stop_start) guide for when you wish to safely shutdown or start back up the installation.
+Please see the [shutdown and start up](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/hdp_sandbox_fusion_stop_start) guide for when you wish to safely shutdown or start back up the environment.
 
 ## Prerequisites
 
@@ -26,12 +22,21 @@ Please see the [shutdown and start up](https://wandisco.github.io/wandisco-docum
 
 To complete this quickstart, you will need:
 
-* Azure VM created and started. See the [Azure VM creation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation) guide for steps to create an Azure VM.
+* Azure VM created and started, matching the following specifications:
   * Minimum size VM recommendation = **Standard D8 v3 (8 vcpus, 32 GiB memory).**
-  * CentOS-based 7.7 (or higher) or UbuntuLTS 18.04. Instructions are provided for these releases.
-  * A minimum of 128GB storage. The [Azure VM creation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation) guide includes this by default.
+  * A minimum of 32GB storage.
   * Root access on server (this is normally available by default).
-* Azure VM prepared for Fusion installation, see [Azure VM preparation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_prep) guide for all required steps.
+
+If seeking guidance on how to create a suitable VM, see our [Azure VM creation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation) guide.
+
+* The following utilities must be installed on the server:
+  * Git
+  * Docker
+  * Docker Compose
+
+If seeking guidance on how to install these utilities, see our [Azure VM preparation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_prep) guide.
+
+_These instructions have been tested on Ubuntu LTS._
 
 ## Installation
 
@@ -41,9 +46,9 @@ Please log into your VM prior to starting these steps. All the commands within t
 
 [//]: <Still not determined as to where the users will pull the fusion-docker-compose repository. We will need to provide pre-baked config files so that the only entries required will be the ADLS Gen2 details.>
 
-1. (**TBC - branch name**) Clone the Fusion docker repository to your Azure VM instance:
+1. Clone the Fusion docker repository to your Azure VM instance:
 
-   `git clone https://github.com/WANdisco/fusion-docker-compose.git`
+   `git clone -b features/hdp-sandbox https://github.com/WANdisco/fusion-docker-compose.git`
 
 2. Change to the repository directory:
 
@@ -53,7 +58,9 @@ Please log into your VM prior to starting these steps. All the commands within t
 
    `./setup-env.sh`
 
-4. Follow the prompts to configure your ADLS Gen2 Zone, see the next section below for guidance on this.
+4. Enter `y` when asked whether to use the HDP sandbox.
+
+5. Follow the prompts to configure your ADLS Gen2 Zone, see the next section below for guidance on this.
 
 #### Setup prompts for ADLS Gen2
 
@@ -74,23 +81,43 @@ At this point, the setup prompts will be complete and the script will exit out w
 
 ### Startup Fusion
 
-After all the prompts have been completed, you will be able to start the containers.
+After all the prompts have been completed, you will be able to start the containers:
 
-1. Ensure that Docker is started:
+`docker-compose up -d`
 
-   `systemctl status docker`
-
-   If not, start the Docker service:
-
-   `systemctl start docker`
-
-2. Start the Fusion containers with:
-
-   `docker-compose up -d`
+Docker will now download all required images and start the containers, please wait until this is completed.
 
 ## Configuration
 
-### Live Hive configuration and activation
+### Install LiveAnalytics on Databricks cluster
+
+Prior to performing these tasks, the Databricks cluster must be in a **running** state. Please access the Azure portal and check the status of the cluster. If it is not running, select to start the cluster and wait until it is **running**.
+
+[//]: <(Host live-analytics-databricks-etl-6.0.0.1.jar externally - cuts the steps right down)>
+
+1. Download LiveAnalytics Jar file from the Github repository:
+
+   [live-analytics-databricks-etl-6.0.0.1.jar](https://github.com/WANdisco/wandisco-documentation/raw/master/docs/quickstarts/resources/live-analytics-databricks-etl-6.0.0.1.jar)
+
+   Save the file on your local machine.
+
+[//]: <DAP-135 workaround>
+
+2. In your Workspace for the Databricks cluster, on the left-hand panel, select **Clusters** and then select your interactive cluster.
+
+3. Click on the **Libraries** tab, and select the option to **Install New**.
+
+4. Select the following options for the Install Library prompt:
+
+   * Library Source = `Upload`
+
+   * Library Type = `Jar`
+
+   * File Path = Find save location of `datatransformer.jar` from step 1.
+
+5. Select **Install** once the details are entered. Wait for the **Status** of the jar to display as **Installed** before continuing.
+
+### Live Hive activation
 
 1. Log into the Fusion UI for the HDP zone, and activate the Live Hive plugin.
 
@@ -99,14 +126,11 @@ After all the prompts have been completed, you will be able to start the contain
    Username: `admin`
    Password: `admin`
 
-   Proceed to the Settings tab and select the *Live Hive: Plugin Activation* option on the left-hand panel.
+2. Proceed to the Settings tab and select the *Live Hive: Plugin Activation* option on the left-hand panel.
 
-   Click on the *Activate* option. Wait for the **Reload this window** message to appear and refresh the page.
+3. Click on the *Activate* option. Wait for the **Reload this window** message to appear and refresh the page.
 
-### Setup Databricks
-[//]: <> (Host live-analytics-databricks-etl-6.0.0.1.jar externally - cuts the steps right down)
-
-Prior to performing these tasks, the Databricks cluster must be in a **running** state. Please access the Azure portal and check the status of the cluster. If it is not running, select to start the cluster and wait until it is **running** before continuing.
+### Setup Databricks in Fusion
 
 1. Log into the Fusion UI for the ADLS Gen2 zone.
 
@@ -119,45 +143,19 @@ Prior to performing these tasks, the Databricks cluster must be in a **running**
 
    **Fusion UI -> Settings -> Databricks: Configuration**
 
-   _Examples for Databricks details_
+   * [Databricks Service Address](https://docs.databricks.com/dev-tools/databricks-connect.html#step-2-configure-connection-properties)
 
-   * Databricks Service Address: `westeurope.azuredatabricks.net`
+   * [Bearer Token](https://docs.databricks.com/dev-tools/api/latest/authentication.html#generate-a-token)
 
-   * Bearer Token: `dapicd7689jkb25473c765ghty78bb299a83`
+   * [Databricks Cluster ID](https://docs.databricks.com/workspace/workspace-details.html#cluster-url)
 
-   * Databricks Cluster ID: `2233-255452-boned277`
-
-   * Unique JDBC HTTP path: `sql/protocolv1/o/6987013384345789/2233-255452-boned277`
-
-   _Ensure to change the above examples to match your Databricks details._
+   * [Unique JDBC HTTP path](https://docs.databricks.com/bi/jdbc-odbc-bi.html#construct-the-jdbc-url)
 
    Click **Update** once complete.
 
-3. Download Jar file from Repo
-
-   https://github.com/mo-martin/wandisco-documentation/raw/hdp-adls-quickstart-refinements/docs/quickstarts/resources/live-analytics-databricks-etl-6.0.0.1.jar
-
-[//]: <DAP-135 workaround>
-
-4. Log into the Azure portal and Launch Workspace for your Databricks cluster.
-
-5. On the left-hand panel, select **Clusters** and then select your interactive cluster.
-
-6. Click on the **Libraries** tab, and select the option to **Install New**.
-
-7. Select the following options for the Install Library prompt:
-
-   * Library Source = `Upload`
-
-   * Library Type = `Jar`
-
-   * File Path = Find save location of `datatransformer.jar` from step 3.
-
-8. Select **Install** once the details are entered. Wait for the **Status** of the jar to display as **Installed** before continuing.
-
 ## Replication
 
-In this section, follow the steps detailed to perform live replication of HCFS data and Hive metadata from the HDP cluster to the Azure Databricks cluster.
+Follow the steps detailed to perform live replication of HCFS data and Hive metadata from the HDP sandbox to the Azure Databricks cluster.
 
 ### Create replication rules
 
@@ -200,7 +198,7 @@ In this section, follow the steps detailed to perform live replication of HCFS d
 
    * Table name = `*`
 
-   * Description = `Testing` _- this field is optional_
+   * Description = `Demo` _- this field is optional_
 
    Click **Create rule** once complete.
 
@@ -208,39 +206,39 @@ In this section, follow the steps detailed to perform live replication of HCFS d
 
 ### Test replication
 
-Prior to performing these tasks, the Databricks cluster must be in a **running** state. Please access the Azure portal and check the status of the cluster. If it is not running, select to start the cluster and wait until it is **running** before continuing.
+Prior to performing these tasks, the Databricks cluster must be in a **running** state. Please access the Azure portal and check the status of the cluster. If it is not running, select to start the cluster and wait until it is **running**.
 
-1. On the **Docker host:**
+1. On the **Docker host**:
 
-    a. Clone the sample-data Repo
+   a. Clone the sample-data repository.
 
-    `git clone https://github.com/pivotalsoftware/pivotal-samples.git /tmp/`
+   `git clone https://github.com/pivotalsoftware/pivotal-samples.git /tmp/pivotal-samples`
 
-    b. Copy the previously cloned Repo, into the docker_sandbox-hdp_1 container:
+   b. Copy the contents of this repository into the **docker_sandbox-hdp_1** container.
 
-    `docker cp /tmp/pivotal-samples/ docker_sandbox-hdp_1:/tmp/`
+   `docker cp /tmp/pivotal-samples/ fusion_sandbox-hdp_1:/tmp/`
 
-2. Login to the **docker_sandbox-hdp_1** container and place data into hdfs:
+2. Login to the **docker_sandbox-hdp_1** container and place data into HDFS.
 
-    a. Login to the docker_sandbox-hdp_1 container:
+   a. Login to the docker_sandbox-hdp_1 container.
 
-    `docker exec -it docker_sandbox-hdp_1 bash`
+   `docker exec -it fusion_sandbox-hdp_1 bash`
 
-    b. Switch to the hdfs user
+   b. Switch to the hdfs user.
 
-    `sudo -iu hdfs`
+   `sudo -iu hdfs`
 
-    c. Change directory into the pivotal sample's repo
+   c. Change directory into the pivotal sample repository.
 
-    `cd /tmp/pivotal-samples/sample-data`
+   `cd /tmp/pivotal-samples/sample-data`
 
-    d. Create directory within hdfs for the sample data
+   d. Create a directory within HDFS for the sample data.
 
-    `hdfs dfs -mkdir -p /retail_demo/customer_addresses_dim/`
+   `hdfs dfs -mkdir -p /retail_demo/customer_addresses_dim/`
 
-    e. Place the sample data into hdfs, so that it can be accessed by Hive
+   e. Place the sample data into HDFS, so that it can be accessed by Hive.
 
-    `hdfs dfs -put customer_addresses_dim.tsv.gz /retail_demo/customer_addresses_dim/`
+   `hdfs dfs -put customer_addresses_dim.tsv.gz /retail_demo/customer_addresses_dim/`
 
 3. Run beeline and use the `!connect` string to start a Hive session via the Hiveserver2 service.
 
@@ -256,115 +254,109 @@ Prior to performing these tasks, the Databricks cluster must be in a **running**
 
    `Enter password: ` _- leave blank and press enter._
 
-4. Create a database to use that will match the regex for the Hive replication rule created earlier in the Fusion UI.
+4. Create a database to use that will store the sample data.
 
    `CREATE DATABASE IF NOT EXISTS retail_demo;`
 
 5. Create a table inside of the database that points to the data previously uploaded.
 
-     ```
-     CREATE TABLE retail_demo.customer_addresses_dim_hive
-      (
-        Customer_Address_ID  bigint,
-        Customer_ID          bigint,
-        Valid_From_Timestamp timestamp,
-        Valid_To_Timestamp   timestamp,
-        House_Number         string,
-        Street_Name          string,
-        Appt_Suite_No        string,
-        City                 string,
-        State_Code           string,
-        Zip_Code             string,
-        Zip_Plus_Four        string,
-        Country              string,
-        Phone_Number         string
-      )
-        ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
-        STORED AS TEXTFILE
-        LOCATION '/retail_demo/customer_addresses_dim/';
-     ```
+   ```sql
+   CREATE TABLE retail_demo.customer_addresses_dim_hive
+   (
+   Customer_Address_ID  bigint,
+   Customer_ID          bigint,
+   Valid_From_Timestamp timestamp,
+   Valid_To_Timestamp   timestamp,
+   House_Number         string,
+   Street_Name          string,
+   Appt_Suite_No        string,
+   City                 string,
+   State_Code           string,
+   Zip_Code             string,
+   Zip_Plus_Four        string,
+   Country              string,
+   Phone_Number         string
+   )
+   ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
+   STORED AS TEXTFILE
+   LOCATION '/retail_demo/customer_addresses_dim/';
+   ```
 
+6. Create a second database and table that will match the regex for the Hive replication rule created earlier in the Fusion UI.
 
-6. Create a second database and table that we can migrate the uploaded data into.
+   a. Create Database:
 
-    a. Create Database:
+   `CREATE DATABASE IF NOT EXISTS databricksdemo;`
 
-    `CREATE DATABASE IF NOT EXISTS databricksdemo;`
+   b. Create Table:
 
-
-    b. Create Table:
-
-        ```
-        CREATE TABLE databricksdemo.customer_addresses_dim_hive
-         (
-            Customer_Address_ID  bigint,
-            Customer_ID          bigint,
-            Valid_From_Timestamp timestamp,
-            Valid_To_Timestamp   timestamp,
-            House_Number         string,
-            Street_Name          string,
-            Appt_Suite_No        string,
-            City                 string,
-            State_Code           string,
-            Zip_Code             string,
-            Zip_Plus_Four        string,
-            Country              string,
-            Phone_Number         string
-         ) stored as ORC;
-        ```
+   ```sql
+   CREATE TABLE databricksdemo.customer_addresses_dim_hive
+   (
+   Customer_Address_ID  bigint,
+   Customer_ID          bigint,
+   Valid_From_Timestamp timestamp,
+   Valid_To_Timestamp   timestamp,
+   House_Number         string,
+   Street_Name          string,
+   Appt_Suite_No        string,
+   City                 string,
+   State_Code           string,
+   Zip_Code             string,
+   Zip_Plus_Four        string,
+   Country              string,
+   Phone_Number         string
+   ) stored as ORC;
+   ```
 
 7. Now insert data into the table above by running the following:
 
-    `insert into databricksdemo.customer_addresses_dim_hive select * from retail_demo.customer_addresses_dim_hive where state_code ='CA';`
+   `insert into databricksdemo.customer_addresses_dim_hive select * from retail_demo.customer_addresses_dim_hive where state_code ='CA';`
 
+   This will now launch a Hive job that will insert the data values provided in this example. If this is successful, you will see **SUCCEEDED** written in the STATUS column.
 
-    This will now launch a Hive job that will insert the data values provided in this example. If this is successful, you will see **SUCCEEDED** written in the STATUS column.
-
-    _Example_
-
-    ```json
-     --------------------------------------------------------------------------------
-             VERTICES      STATUS  TOTAL  COMPLETED  RUNNING  PENDING  FAILED  KILLED
-     --------------------------------------------------------------------------------
-     Map 1 ..........   SUCCEEDED      1          1        0        0       0       0
-     --------------------------------------------------------------------------------
-     VERTICES: 01/01  [==========================>>] 100%  ELAPSED TIME: XY.ZA s
-     --------------------------------------------------------------------------------
-    ```
-
-    Please note that running an 'insert into table' for the first time on the HDP cluster may take a longer period of time than normal. Further jobs will complete at a much faster rate.
-
- 8. Verify the above data has been placed correctly by running:
-    `select * from databricksdemo.customer_addresses_dim_hive;`
-
+   ```json
+   --------------------------------------------------------------------------------
+           VERTICES      STATUS  TOTAL  COMPLETED  RUNNING  PENDING  FAILED  KILLED
+   --------------------------------------------------------------------------------
+   Map 1 ..........   SUCCEEDED      1          1        0        0       0       0
+   --------------------------------------------------------------------------------
+   VERTICES: 01/01  [==========================>>] 100%  ELAPSED TIME: X.YZ s
+   --------------------------------------------------------------------------------
+   ```
 
 ### Setup Databricks Notebook to view Data.
 
-  1. Navigate to your Azure Databricks Home page - The url is dependent on location, however if you are based in west Europe, you can visit https://westeurope.azuredatabricks.net.
+1. Return to your Workspace for the Databricks cluster.
 
-  2. Create a Cluster Notebook:
+2. Create a Cluster Notebook.
 
-      a. Click Workspace on the left hand side > click the drop down arrow > Create > Notebook > Name: WD-demo Language: SQL Cluster:(Choose cluster made earlier)
+   **Click Workspace on the left hand side > click the drop down arrow > Create > Notebook**
 
-  3. You should now see a blank notebook.
+   * Name: **WD-demo**
+   * Language: **SQL**
+   * Cluster: (Choose the cluster used in this demo)
 
-      a. Inside the 'Cmd 1' box add the query
+3. You should now see a blank notebook.
 
-      `select * from databricksdemo.customer_addresses_dim_hive;`
+   a. Inside the 'Cmd 1' box, add the query:
 
-      b. Click 'Run Cell' (looks like a play button in the top right of that box)
+   `select * from databricksdemo.customer_addresses_dim_hive;`
 
-  4. Wait for the query to return, then select the drop down graph-type and Choose Map
+   b. Click 'Run Cell' (looks like a play button in the top right of that box).
 
-  5. Under the Plot Options > remove all Keys > click and drag 'state_code' from the 'All fields' box, into the 'Keys' box.
+4. Wait for the query to return, then select the drop-down graph type and choose **Map**.
 
-  6. Click Apply.
+5. Under the Plot Options > remove all Keys > click and drag 'state_code' from the 'All fields' box into the 'Keys' box.
 
-  7. You should now see a plot of USA with colour shading - dependent on the population density.
+6. Click Apply.
 
-## Advanced options
+7. You should now see a plot of USA with colour shading - dependent on the population density.
 
-* This guide does not currently offer configuration of Fusion to a **Kerberized** HDP cluster.
-* This guide does not currently offer configuration of Fusion to a NameNode HA HDP cluster.
+You have now completed this demo.
+
+## Troubleshooting
+
+Please see our [Troubleshooting](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/hdp_sandbox_lan_troubleshooting) guide for help with this demo.
 
 Please contact [WANdisco](https://wandisco.com/contact) for further information on Fusion with docker.

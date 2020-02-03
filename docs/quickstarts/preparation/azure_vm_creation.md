@@ -14,7 +14,6 @@ This quickstart helps you create an Azure Linux VM suitable for a Fusion install
 ## Prerequisites
 
 * [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) with the ability to run `az login` on your terminal.
-* Connectivity from your terminal to Azure (via your company's VPN if required).
 
 ### SSH keys
 
@@ -43,7 +42,7 @@ The two required templates are given below. Create these in the same location wi
    print_usage() {
      echo "Usage: ./create_docker_vm.sh -g AZ-USER-GROUP -r AZ-RESOURCE-GROUP -v AZ-VNET -s AZ-SUBNET-NAME -n VM-NAME -u VM-USERNAME -t VM-TYPE -d VM-DISK-SIZE (GB) -i OPERATING-SYSTEM"
 
-     echo "Example: ./create_docker_vm.sh -g DEV -r DEV-john.smith1 -v DEV-westeurope-vnet -s default -n johnsmith-docker -u john -t Standard_D8_v3 -d 128 -i UbuntuLTS"
+     echo "Example: ./create_docker_vm.sh -g DEV -r DEV-john.smith1 -v DEV-westeurope-vnet -s default -n johnsmith-docker -u john -t Standard_D8_v3 -d 32 -i UbuntuLTS"
    }
    #Setup of env
    while getopts "g:G:r:R:v:V:s:S:n:N:u:U:t:T:d:D:i:I:h:H:" opt; do
@@ -136,7 +135,7 @@ The two required templates are given below. Create these in the same location wi
    |VM Name|`-n`|`docker_host01`|Define the Virtual Machine name in Azure.|
    |VM Username|`-u`|`vm_user`|Define the username to access the Virtual Machine with.|
    |[VM Type](https://docs.microsoft.com/en-us/cli/azure/vm?view=azure-cli-latest#az-vm-list-sizes)|`-t`|`Standard_D8_v3`|Define the Virtual Machine size from the [Azure templates](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes). The `name` value from `az vm list-sizes --location <vm_location>` should be the value here.|
-   |Disk Size|`-d`|`128`|Define the disk space on the Virtual Machine in GigaBytes (GB).|
+   |Disk Size|`-d`|`32`|Define the disk space on the Virtual Machine in GigaBytes (GB).|
    |[Image (OS)](https://docs.microsoft.com/en-us/cli/azure/vm/image?view=azure-cli-latest#az-vm-image-list)|`-i`|`UbuntuLTS`|Define the Virtual Machine's Operating System from the [Azure images](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-ps-findimage). The `urnAlias` value from `az vm image list [--all] [--location]` should be the value here.|
 
 2. Make the script executable.
@@ -145,7 +144,7 @@ The two required templates are given below. Create these in the same location wi
 
 3. Run the script using the variables collected above.
 
-   `./create_docker_vm.sh -g GRP -r GRP-my.name1 -v GRP-westeurope-vnet -s default -n docker_host01 -u vm_user -t Standard_D8_v3 -d 128 -i UbuntuLTS`
+   `./create_docker_vm.sh -g GRP -r GRP-my.name1 -v GRP-westeurope-vnet -s default -n docker_host01 -u vm_user -t Standard_D8_v3 -d 32 -i UbuntuLTS`
 
    _Example output_
 
@@ -158,7 +157,7 @@ The two required templates are given below. Create these in the same location wi
    VM Name: docker_host01
    VM Username: vm_user
    VM Type: Standard_D8_v3
-   Disk Size: 128 GB
+   Disk Size: 32 GB
    Image (OS): UbuntuLTS
    Subnet ID: /subscriptions/3842fefa-7697-4e7d-b051-a5a3ae601030/resourceGroups/GRP/providers/Microsoft.Network/virtualNetworks/GRP-westeurope-vnet/subnets/default
    {
