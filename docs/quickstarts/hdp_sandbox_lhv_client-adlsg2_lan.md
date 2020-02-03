@@ -15,7 +15,6 @@ This will involve the use of Live Hive for the HDP cluster, and the Databricks D
 What this guide will cover:
 
 - Installing WANdisco Fusion using the [docker-compose](https://docs.docker.com/compose/) tool.
-- Using the 'wandocker' tool to deploy a pre-configured Hadoop Sandbox based on HDP 2.6.5.
 - Integrating WANdisco Fusion with Azure Databricks.
 - Performing a sample data migration.
 
@@ -89,134 +88,11 @@ After all the prompts have been completed, you will be able to start the contain
 
    `docker-compose up -d`
 
-### Setup and start HDP Sandbox (TBC)
-
-[//]: <DAP-142>
-
-[//]: <These steps are being performed using the 'wandocker.run' script. This script allows for the creation of a custom network name, as well as selecting existing ones. It is also using Ambari 2.7.3, which will allow us to export blueprints via the UI when we have configured everything on the cluster. There is also expansion planned to the script capabilities (on the side) for multiple node HDP clusters, so that future testing could be done with NameNode HA.>
-
-1. (**TBC**) Download the HDP sandbox in compressed format.
-
-   _Example_
-
-   `wget https://URL/wandocker.tar.gz`
-
-2. (**TBC**) Decompress the gzip file and run the script.
-
-   `tar -xf wandocker.tar.gz`
-
-   `./wandocker.run`
-
-[//]: <DAP-151 workaround>
-
-3. Change directory and run the wandocker management script.
-
-   `cd wandocker`
-
-   `./wandocker.sh -i hdp265_docker.ini`
-
-4. (**TBC if Repos are required**) Choose Option 1 to set up all the required images for the HDP sandbox and repository.
-
-   `1` - Build All Images (Repo, Agent, Server)
-
-   This may take up to 15-20 minutes.
-
-   Once this has completed (i.e the event log stream will eventually stop), hit enter to return to the main menu. Press `l` to list all images and confirm the following four images are listed:
-
-   ```text
-   hdp_master:2.7.3.0
-   repo_cache_host:2.6.5.0-292
-   repo_host:2.6.5.0-292
-   hdp_slave:2.7.3.0
-   ```
-
-   Press enter to return to the Main Menu.
-
-5. (**TBC if required**) Select option 2 to create and start the HDP repository and cache.
-
-   `2` - Create and start Local Repo Containers
-
-   Type the Index number for the `fusion_fusion` network, followed by enter.
-
-   This may take 2-3 minutes. Once the following two lines are displayed in the Event Log, the repositories are ready:
-
-   ```text
-   Container /repo_host created OK
-   Container /repo_cache_host created OK
-   ```
-
-   Press enter to return to the Main Menu.
-
-   You can perform another check of the repositories by selecting option `c` to list containers, and check that the following two entries are listed:
-
-   ```text
-   repo_host:2.6.5.0-292, [/repo_host]
-   repo_cache_host:2.6.5.0-292, [/repo_cache_host]
-   ```
-
-   Press enter to return to the Main Menu afterwards.
-
-6. Select option 3 to create the HDP sandbox.
-
-   `3` - Create and start Sandbox Container(s)
-
-   Type the Index number for the `fusion_fusion` network, followed by enter.
-
-   This may take up to 5 minutes. Once the following line is displayed in the Event Log, the sandbox container is ready:
-
-   ```text
-   [/root/firstInit.sh] on /sandbox-hdp Completed.
-   ```
-
-   Press enter to return to the Main Menu.
-
-   Wait until the Ambari UI is accessible on `http://<docker_IP_address>:8080` via a web browser before continuing, you do not need to log in at this time.
-
-7. Install the Cluster blueprint by selecting option 4.
-
-   `4` - Install Cluster from Blueprint
-
-   Press `q` to quit out of the wandocker main menu after completing this.
-
-8. Log into the Ambari UI.
-
-   Username = `admin`
-   Password = `admin`
-
-   Two automated jobs will automatically be started for installing and starting components, observable in **Background Operations**. Wait until these are complete before continuing (~15mins).
-
 ## Configuration
 
 ### Live Hive configuration and activation
 
-1. Log into one of the containers for the HDP zone.
-
-   `docker exec -it fusion_fusion-ui-server-hdp_1 bash`
-
-[//]: <DAP-131>
-
-2. Add an additional property to the Live Hive config:
-
-   `vi /etc/wandisco/fusion/plugins/hive/live-hive-site.xml`
-
-   Add the following property and value below:
-
-   ```json
-     <property>
-       <name>live.hive.cluster.delegation.token.delayed.removal.interval.in.seconds</name>
-       <value>5</value>
-     </property>
-   ```
-
-   Once complete, save and quit the file (e.g. `:wq`).
-
-3. Exit back into the docker host and restart the Fusion containers so that the configuration changes are picked up.
-
-   `exit`
-
-   `docker-compose restart`
-
-4. Log into the Fusion UI for the HDP zone, and activate the Live Hive plugin.
+1. Log into the Fusion UI for the HDP zone, and activate the Live Hive plugin.
 
    `http://<docker_IP_address>:8083`
 
@@ -228,6 +104,7 @@ After all the prompts have been completed, you will be able to start the contain
    Click on the *Activate* option. Wait for the **Reload this window** message to appear and refresh the page.
 
 ### Setup Databricks
+[//]: <> (Host live-analytics-databricks-etl-6.0.0.1.jar externally - cuts the steps right down)
 
 Prior to performing these tasks, the Databricks cluster must be in a **running** state. Please access the Azure portal and check the status of the cluster. If it is not running, select to start the cluster and wait until it is **running** before continuing.
 
@@ -256,55 +133,27 @@ Prior to performing these tasks, the Databricks cluster must be in a **running**
 
    Click **Update** once complete.
 
-3. On the docker host, log into one of the containers for the ADLS Gen2 zone.
+3. Download Jar file from Repo
 
-   `docker exec -it fusion_fusion-server-adls2_1 bash`
+   https://github.com/mo-martin/wandisco-documentation/raw/hdp-adls-quickstart-refinements/docs/quickstarts/resources/live-analytics-databricks-etl-6.0.0.1.jar
 
 [//]: <DAP-135 workaround>
 
-4. Upload the LiveAnalytics "datatransformer" jar using a curl command.
+4. Log into the Azure portal and Launch Workspace for your Databricks cluster.
 
-   `curl -v -H "Authorization: Bearer <bearer_token>" -F contents=@/opt/wandisco/fusion/plugins/databricks/live-analytics-databricks-etl-5.0.0.0.jar -F path="/datatransformer.jar" https://<databricks_service_address>/api/2.0/dbfs/put`
+5. On the left-hand panel, select **Clusters** and then select your interactive cluster.
 
-   You will need to adjust the `curl` command so that your **Bearer Token** and **Databricks Service Address** is referenced.
+6. Click on the **Libraries** tab, and select the option to **Install New**.
 
-   _Example values_
+7. Select the following options for the Install Library prompt:
 
-   * Bearer Token: `dapicd7689jkb25473c765ghty78bb299a83`
-   * Databricks Service Address: `westeurope.azuredatabricks.net`
-
-   _Example command_
-
-   `curl -v -H "Authorization: Bearer dapicd7689jkb25473c765ghty78bb299a83"  -F contents=@/opt/wandisco/fusion/plugins/databricks/live-analytics-databricks-etl-5.0.0.0.jar -F path="/datatransformer.jar" https://westeurope.azuredatabricks.net/api/2.0/dbfs/put`
-
-   If the command is successful, you will see that the message output contains the following text below:
-
-   ```json
-   < HTTP/1.1 100 Continue
-   < HTTP/1.1 200 OK
-   ```
-
-5. Exit back into the docker host and restart the Fusion containers so that the configuration changes are picked up.
-
-   `exit`
-
-   `docker-compose restart`
-
-6. Log into the Azure portal and Launch Workspace for your Databricks cluster.
-
-7. On the left-hand panel, select **Clusters** and then select your interactive cluster.
-
-8. Click on the **Libraries** tab, and select the option to **Install New**.
-
-9. Select the following options for the Install Library prompt:
-
-   * Library Source = `DBFS`
+   * Library Source = `Upload`
 
    * Library Type = `Jar`
 
-   * File Path = `dbfs:/datatransformer.jar`
+   * File Path = Find save location of `datatransformer.jar` from step 3.
 
-10. Select **Install** once the details are entered. Wait for the **Status** of the jar to display as **Installed** before continuing.
+8. Select **Install** once the details are entered. Wait for the **Status** of the jar to display as **Installed** before continuing.
 
 ## Replication
 
@@ -325,9 +174,9 @@ In this section, follow the steps detailed to perform live replication of HCFS d
 
    * Type = `HCFS`
 
-   * Zones = `adls2, hdp` _- Leave as default._
+   * Zones = `adls2, sandbox-hdp` _- Leave as default._
 
-   * Priority Zone = `hdp` _- Leave as default._
+   * Priority Zone = `sandbox-hdp` _- Leave as default._
 
    * Rule Name = `warehouse`
 
@@ -347,7 +196,7 @@ In this section, follow the steps detailed to perform live replication of HCFS d
 
    * Type = `Hive`
 
-   * Database name = `test*`
+   * Database name = `*`
 
    * Table name = `*`
 
@@ -361,17 +210,45 @@ In this section, follow the steps detailed to perform live replication of HCFS d
 
 Prior to performing these tasks, the Databricks cluster must be in a **running** state. Please access the Azure portal and check the status of the cluster. If it is not running, select to start the cluster and wait until it is **running** before continuing.
 
-1. On the docker host, log into the HDP cluster node.
+1. On the **Docker host:**
 
-   `docker exec -it sandbox-hdp bash`
+    a. Clone the sample-data Repo
 
-2. Run beeline and use the `!connect` string to start a Hive session via the Hiveserver2 service.
+    `git clone https://github.com/pivotalsoftware/pivotal-samples.git /tmp/`
+
+    b. Copy the previously cloned Repo, into the docker_sandbox-hdp_1 container:
+
+    `docker cp /tmp/pivotal-samples/ docker_sandbox-hdp_1:/tmp/`
+
+2. Login to the **docker_sandbox-hdp_1** container and place data into hdfs:
+
+    a. Login to the docker_sandbox-hdp_1 container:
+
+    `docker exec -it docker_sandbox-hdp_1 bash`
+
+    b. Switch to the hdfs user
+
+    `sudo -iu hdfs`
+
+    c. Change directory into the pivotal sample's repo
+
+    `cd /tmp/pivotal-samples/sample-data`
+
+    d. Create directory within hdfs for the sample data
+
+    `hdfs dfs -mkdir -p /retail_demo/customer_addresses_dim/`
+
+    e. Place the sample data into hdfs, so that it can be accessed by Hive
+
+    `hdfs dfs -put customer_addresses_dim.tsv.gz /retail_demo/customer_addresses_dim/`
+
+3. Run beeline and use the `!connect` string to start a Hive session via the Hiveserver2 service.
 
    `beeline`
 
-   `beeline> !connect jdbc:hive2://sandbox-hdp:2181/;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2`
+   `!connect jdbc:hive2://sandbox-hdp:2181/;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2`
 
-   This connection string can also be found on the Ambari UI under **Hive -> Summary -> HIVESERVER2 JDBC URL**.
+   The above connection string can also be found on the Ambari UI under **Hive -> Summary -> HIVESERVER2 JDBC URL**.
 
    When prompted for a username and password, enter the following:
 
@@ -379,127 +256,111 @@ Prior to performing these tasks, the Databricks cluster must be in a **running**
 
    `Enter password: ` _- leave blank and press enter._
 
-2. Create a database to use that will match the regex for the Hive replication rule created earlier in the Fusion UI.
+4. Create a database to use that will match the regex for the Hive replication rule created earlier in the Fusion UI.
 
-   `0: jdbc:hive2://sandbox-hdp:2181/> create database test01;`
+   `CREATE DATABASE IF NOT EXISTS retail_demo;`
 
-3. Create a table inside of the database.
+5. Create a table inside of the database that points to the data previously uploaded.
 
-   `0: jdbc:hive2://sandbox-hdp:2181/> use test01;`
+     ```
+     CREATE TABLE retail_demo.customer_addresses_dim_hive
+      (
+        Customer_Address_ID  bigint,
+        Customer_ID          bigint,
+        Valid_From_Timestamp timestamp,
+        Valid_To_Timestamp   timestamp,
+        House_Number         string,
+        Street_Name          string,
+        Appt_Suite_No        string,
+        City                 string,
+        State_Code           string,
+        Zip_Code             string,
+        Zip_Plus_Four        string,
+        Country              string,
+        Phone_Number         string
+      )
+        ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
+        STORED AS TEXTFILE
+        LOCATION '/retail_demo/customer_addresses_dim/';
+     ```
 
-   `0: jdbc:hive2://sandbox-hdp:2181/> create table table01(id int, name string) stored as ORC;`
 
-4. Insert data inside of the table.
+6. Create a second database and table that we can migrate the uploaded data into.
 
-   `0: jdbc:hive2://sandbox-hdp:2181/> insert into table01 values (1,'words');`
+    a. Create Database:
 
-   This will now launch a Hive job that will insert the data values provided in this example. If this is successful, you will see **SUCCEEDED** written in the STATUS column.
+    `CREATE DATABASE IF NOT EXISTS databricksdemo;`
 
-   _Example_
 
-   ```json
-   --------------------------------------------------------------------------------
-           VERTICES      STATUS  TOTAL  COMPLETED  RUNNING  PENDING  FAILED  KILLED
-   --------------------------------------------------------------------------------
-   Map 1 ..........   SUCCEEDED      1          1        0        0       0       0
-   --------------------------------------------------------------------------------
-   VERTICES: 01/01  [==========================>>] 100%  ELAPSED TIME: XY.ZA s
-   --------------------------------------------------------------------------------
-   ```
+    b. Create Table:
 
-   Please note that running an 'insert into table' for the first time on the HDP cluster may take a longer period of time than normal. Further jobs will complete at a much faster rate.
+        ```
+        CREATE TABLE databricksdemo.customer_addresses_dim_hive
+         (
+            Customer_Address_ID  bigint,
+            Customer_ID          bigint,
+            Valid_From_Timestamp timestamp,
+            Valid_To_Timestamp   timestamp,
+            House_Number         string,
+            Street_Name          string,
+            Appt_Suite_No        string,
+            City                 string,
+            State_Code           string,
+            Zip_Code             string,
+            Zip_Plus_Four        string,
+            Country              string,
+            Phone_Number         string
+         ) stored as ORC;
+        ```
 
-### Verify replication
+7. Now insert data into the table above by running the following:
 
-1. To verify the data values inside of the table on the **HDP** zone, run the command below when still logged into the Hive beeline session:
+    `insert into databricksdemo.customer_addresses_dim_hive select * from retail_demo.customer_addresses_dim_hive where state_code ='CA';`
 
-   `0: jdbc:hive2://sandbox-hdp:2181/> select * from table01;`
 
-   The output will be similar to that of below:
+    This will now launch a Hive job that will insert the data values provided in this example. If this is successful, you will see **SUCCEEDED** written in the STATUS column.
 
-   ```json
-   +-------------+----------------+--+
-   | table01.id  |  table01.name  |
-   +-------------+----------------+--+
-   | 1           | words          |
-   +-------------+----------------+--+
-   1 rows selected (X.YZA seconds)
-   ```
+    _Example_
 
-2. To verify the data has replicated to the ADLS Gen2 zone and Databricks cluster, access the Azure portal and and Launch Workspace for your Databricks cluster (if not already opened).
+    ```json
+     --------------------------------------------------------------------------------
+             VERTICES      STATUS  TOTAL  COMPLETED  RUNNING  PENDING  FAILED  KILLED
+     --------------------------------------------------------------------------------
+     Map 1 ..........   SUCCEEDED      1          1        0        0       0       0
+     --------------------------------------------------------------------------------
+     VERTICES: 01/01  [==========================>>] 100%  ELAPSED TIME: XY.ZA s
+     --------------------------------------------------------------------------------
+    ```
 
-3. On the left-hand panel, select **Data** and then select the database created for this test (i.e. `test01`).
+    Please note that running an 'insert into table' for the first time on the HDP cluster may take a longer period of time than normal. Further jobs will complete at a much faster rate.
 
-4. In the _Tables_ list, select the table created for this test (i.e. `table01`).
+ 8. Verify the above data has been placed correctly by running:
+    `select * from databricksdemo.customer_addresses_dim_hive;`
 
-5. Wait for the table details to be loaded, and verify that the Schema and Sample Data match that seen in the HDP zone.
 
-   **Schema**
-   ```json
-   col_name   data_type
-   id         int
-   name       string
-   ```
+### Setup Databricks Notebook to view Data.
 
-   **Sample Data**
-   ```json
-   id         name
-   1          words
-   ```
+  1. Navigate to your Azure Databricks Home page - The url is dependent on location, however if you are based in west Europe, you can visit https://westeurope.azuredatabricks.net.
 
-## Troubleshooting
+  2. Create a Cluster Notebook:
 
-Please see the [Useful information](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/troubleshooting/useful_info) section for additional commands and help.
+      a. Click Workspace on the left hand side > click the drop down arrow > Create > Notebook > Name: WD-demo Language: SQL Cluster:(Choose cluster made earlier)
 
-### Error 'connection refused' after starting Fusion for the first time
+  3. You should now see a blank notebook.
 
-You may see the following error occur when running `docker-compose up -d` for the first time inside the fusion-docker-compose repository:
+      a. Inside the 'Cmd 1' box add the query
 
-```json
-ERROR: Get https://registry-1.docker.io/v2/: dial tcp: lookup registry-1.docker.io on [::1]:53: read udp [::1]:52155->[::1]:53: read: connection refused
-```
+      `select * from databricksdemo.customer_addresses_dim_hive;`
 
-If encountering this error, run the `docker-compose up -d` command again, and this should initiate the download of the docker images.
+      b. Click 'Run Cell' (looks like a play button in the top right of that box)
 
-### Fusion zones not inducted together
+  4. Wait for the query to return, then select the drop down graph-type and Choose Map
 
-[//]: <DAP-136 workaround>
+  5. Under the Plot Options > remove all Keys > click and drag 'state_code' from the 'All fields' box, into the 'Keys' box.
 
-If the Fusion zones are not inducted together after starting Fusion for the first time (`docker-compose up -d`), you can simply run the same command again to start the induction container:
+  6. Click Apply.
 
-`docker-compose up -d`
-
-### Hiveserver2 down after HDP Sandbox is started
-
-The Hiveserver2 component in the HDP sandbox may be down after starting the cluster. If so, try the following steps to start it back up.
-
-1. On the docker host, change directory to the Fusion docker compose directory and restart the Fusion Server container for the HDP zone.
-
-   `cd /path/to/fusion-docker-compose`
-
-   `docker-compose restart fusion-server-hdp`
-
-   Wait until the container has finished restarting before continuing.
-
-2. Access the Ambari UI, and manually start the Hiveserver2 component.
-
-   **Ambari UI -> Hive -> Summary -> Click on the "HIVESERVER2" written in blue text.**
-
-3. Locate the HiveServer2 in the component list and click the `...` in the Action column. Select to **Start** the component in the drop-down list.
-
-### Spark2 History Server down after HDP Sandbox is started for first time
-
-When starting the HDP Sandbox for the first time, the Spark2 History Server may be in a stopped state. This is often due to the order in which Spark2 and the WANdisco Fusion client is installed.
-
-To resolve and bring the History Server online, follow the steps below:
-
-1. In the Ambari UI, select to Refresh configs for the WANdisco Fusion service.
-
-   **Ambari UI -> WANdisco Fusion -> Actions -> Refresh configs -> OK**
-
-2. Start the Spark2 service.
-
-   **Ambari UI -> Spark2 -> Actions -> Start -> CONFIRM START**
+  7. You should now see a plot of USA with colour shading - dependent on the population density.
 
 ## Advanced options
 
