@@ -4,8 +4,6 @@ title: Preparing an Azure Linux VM for a Fusion installation
 sidebar_label: Azure VM preparation
 ---
 
-_THIS GUIDE IS WORK IN PROGRESS, PLEASE DO NOT FOLLOW ANYTHING HERE UNTIL THIS WARNING IS REMOVED_
-
 This quickstart helps you prepare an Azure Linux VM suitable for a Fusion installation using docker. It walks you through:
 
 * Disabling firewall and selinux/apparmor for the Fusion installation to complete.

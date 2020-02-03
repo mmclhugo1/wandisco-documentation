@@ -4,8 +4,6 @@ title: Creating an Azure Linux VM for a Fusion installation
 sidebar_label: Azure VM creation
 ---
 
-_THIS GUIDE IS WORK IN PROGRESS, PLEASE DO NOT FOLLOW ANYTHING HERE UNTIL THIS WARNING IS REMOVED_
-
 This quickstart helps you create an Azure Linux VM suitable for a Fusion installation. It walks you through:
 
 * Creating an [Azure Linux VM template](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/create-ssh-secured-vm-from-template) script.
