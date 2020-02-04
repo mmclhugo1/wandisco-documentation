@@ -23,7 +23,7 @@ Please see the [shutdown and start up](https://wandisco.github.io/wandisco-docum
 To complete this quickstart, you will need:
 
 * Azure VM created and started, matching the following specifications:
-  * Minimum size VM recommendation = **Standard D8 v3 (8 vcpus, 32 GiB memory).**
+  * Minimum size VM recommendation = **Standard D4 v3 (4 vcpus, 16 GiB memory).**
   * A minimum of 32GB storage.
   * Root access on server (this is normally available by default).
 
