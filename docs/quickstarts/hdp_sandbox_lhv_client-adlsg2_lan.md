@@ -30,9 +30,9 @@ To complete this quickstart, you will need:
 If seeking guidance on how to create a suitable VM, see our [Azure VM creation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation) guide.
 
 * The following utilities must be installed on the server:
-  * Git
-  * Docker
-  * Docker Compose
+  * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+  * [Docker](https://docs.docker.com/install/) (v19.03.5 or higher)
+  * [Docker Compose for Linux](https://docs.docker.com/compose/install/#install-compose) (v1.25.0 or higher)
 
 If seeking guidance on how to install these utilities, see our [Azure VM preparation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_prep) guide.
 
@@ -77,7 +77,7 @@ The examples shown below are for guidance only.
 
 * underlying FS: `abfs://fusionreplication@adlsg2storage.dfs.core.windows.net/` - press enter for the default value.
 
-At this point, the setup prompts will be complete and the script will exit out with an informational message. Please ignore this for now and continue following the steps below.
+At this point, the setup prompts will be complete and the script will exit out with an informational message.
 
 ### Startup Fusion
 
@@ -116,6 +116,21 @@ Prior to performing these tasks, the Databricks cluster must be in a **running**
    * File Path = Find save location of `datatransformer.jar` from step 1.
 
 5. Select **Install** once the details are entered. Wait for the **Status** of the jar to display as **Installed** before continuing.
+
+### Check HDP services are started
+
+The HDP sandbox services can take up to 5-10 minutes to start. You will need to ensure that the HDFS service is started before continuing.
+
+1. Log in to the Ambari UI via a web browser.
+
+   `http://<docker_IP_address>:8080`
+
+   Username: `admin`
+   Password: `admin`
+
+2. Select the **HDFS** service.
+
+3. Wait until all the HDFS components are showing as **Started**.
 
 ### Live Hive activation
 
@@ -234,11 +249,11 @@ Prior to performing these tasks, the Databricks cluster must be in a **running**
 
    d. Create a directory within HDFS for the sample data.
 
-   `hdfs dfs -mkdir -p /retail_demo/customer_addresses_dim/`
+   `hdfs dfs -mkdir -p /retail_demo/customer_addresses_dim_hive/`
 
    e. Place the sample data into HDFS, so that it can be accessed by Hive.
 
-   `hdfs dfs -put customer_addresses_dim.tsv.gz /retail_demo/customer_addresses_dim/`
+   `hdfs dfs -put customer_addresses_dim.tsv.gz /retail_demo/customer_addresses_dim_hive/`
 
 3. Run beeline and use the `!connect` string to start a Hive session via the Hiveserver2 service.
 
@@ -279,19 +294,19 @@ Prior to performing these tasks, the Databricks cluster must be in a **running**
    )
    ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
    STORED AS TEXTFILE
-   LOCATION '/retail_demo/customer_addresses_dim/';
+   LOCATION '/retail_demo/customer_addresses_dim_hive/';
    ```
 
 6. Create a second database and table that will match the regex for the Hive replication rule created earlier in the Fusion UI.
 
    a. Create Database:
 
-   `CREATE DATABASE IF NOT EXISTS databricksdemo;`
+   `CREATE DATABASE IF NOT EXISTS databricks_demo;`
 
    b. Create Table:
 
    ```sql
-   CREATE TABLE databricksdemo.customer_addresses_dim_hive
+   CREATE TABLE databricks_demo.customer_addresses_dim_hive
    (
    Customer_Address_ID  bigint,
    Customer_ID          bigint,
@@ -311,7 +326,7 @@ Prior to performing these tasks, the Databricks cluster must be in a **running**
 
 7. Now insert data into the table above by running the following:
 
-   `insert into databricksdemo.customer_addresses_dim_hive select * from retail_demo.customer_addresses_dim_hive where state_code ='CA';`
+   `insert into databricks_demo.customer_addresses_dim_hive select * from retail_demo.customer_addresses_dim_hive where state_code ='CA';`
 
    This will now launch a Hive job that will insert the data values provided in this example. If this is successful, you will see **SUCCEEDED** written in the STATUS column.
 
@@ -325,7 +340,7 @@ Prior to performing these tasks, the Databricks cluster must be in a **running**
    --------------------------------------------------------------------------------
    ```
 
-### Setup Databricks Notebook to view Data.
+### Setup Databricks Notebook to view data
 
 1. Return to your Workspace for the Databricks cluster.
 
@@ -341,7 +356,7 @@ Prior to performing these tasks, the Databricks cluster must be in a **running**
 
    a. Inside the 'Cmd 1' box, add the query:
 
-   `select * from databricksdemo.customer_addresses_dim_hive;`
+   `select * from databricks_demo.customer_addresses_dim_hive;`
 
    b. Click 'Run Cell' (looks like a play button in the top right of that box).
 
@@ -357,6 +372,6 @@ You have now completed this demo.
 
 ## Troubleshooting
 
-Please see our [Troubleshooting](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/hdp_sandbox_lan_troubleshooting) guide for help with this demo.
+* Please see our [Troubleshooting](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/hdp_sandbox_lan_troubleshooting) guide for help with this demo.
 
-Please contact [WANdisco](https://wandisco.com/contact) for further information on Fusion with docker.
+* Please contact [WANdisco](https://wandisco.com/contact) for further information about Fusion.
