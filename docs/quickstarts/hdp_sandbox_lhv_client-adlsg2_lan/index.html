@@ -21,9 +21,9 @@
 <ul>
 <li>The following utilities must be installed on the server:
 <ul>
-<li>Git</li>
-<li>Docker</li>
-<li>Docker Compose</li>
+<li><a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">Git</a></li>
+<li><a href="https://docs.docker.com/install/">Docker</a> (v19.03.5 or higher)</li>
+<li><a href="https://docs.docker.com/compose/install/#install-compose">Docker Compose for Linux</a> (v1.25.0 or higher)</li>
 </ul></li>
 </ul>
 <p>If seeking guidance on how to install these utilities, see our <a href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_prep">Azure VM preparation</a> guide.</p>
@@ -51,7 +51,7 @@ The examples shown below are for guidance only.</p>
 <li><p>default FS: <code>abfss://fusionreplication@adlsg2storage.dfs.core.windows.net/</code> - press enter for the default value.</p></li>
 <li><p>underlying FS: <code>abfs://fusionreplication@adlsg2storage.dfs.core.windows.net/</code> - press enter for the default value.</p></li>
 </ul>
-<p>At this point, the setup prompts will be complete and the script will exit out with an informational message. Please ignore this for now and continue following the steps below.</p>
+<p>At this point, the setup prompts will be complete and the script will exit out with an informational message.</p>
 <h3><a class="anchor" aria-hidden="true" id="startup-fusion"></a><a href="#startup-fusion" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Startup Fusion</h3>
 <p>After all the prompts have been completed, you will be able to start the containers:</p>
 <p><code>docker-compose up -d</code></p>
@@ -74,6 +74,16 @@ The examples shown below are for guidance only.</p>
 <li><p>File Path = Find save location of <code>datatransformer.jar</code> from step 1.</p></li>
 </ul></li>
 <li><p>Select <strong>Install</strong> once the details are entered. Wait for the <strong>Status</strong> of the jar to display as <strong>Installed</strong> before continuing.</p></li>
+</ol>
+<h3><a class="anchor" aria-hidden="true" id="check-hdp-services-are-started"></a><a href="#check-hdp-services-are-started" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Check HDP services are started</h3>
+<p>The HDP sandbox services can take up to 5-10 minutes to start. You will need to ensure that the HDFS service is started before continuing.</p>
+<ol>
+<li><p>Log in to the Ambari UI via a web browser.</p>
+<p><code>http://&lt;docker_IP_address&gt;:8080</code></p>
+<p>Username: <code>admin</code>
+Password: <code>admin</code></p></li>
+<li><p>Select the <strong>HDFS</strong> service.</p></li>
+<li><p>Wait until all the HDFS components are showing as <strong>Started</strong>.</p></li>
 </ol>
 <h3><a class="anchor" aria-hidden="true" id="live-hive-activation"></a><a href="#live-hive-activation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Live Hive activation</h3>
 <ol>
@@ -150,9 +160,9 @@ Password: <code>admin</code></p></li>
 <p>c. Change directory into the pivotal sample repository.</p>
 <p><code>cd /tmp/pivotal-samples/sample-data</code></p>
 <p>d. Create a directory within HDFS for the sample data.</p>
-<p><code>hdfs dfs -mkdir -p /retail_demo/customer_addresses_dim/</code></p>
+<p><code>hdfs dfs -mkdir -p /retail_demo/customer_addresses_dim_hive/</code></p>
 <p>e. Place the sample data into HDFS, so that it can be accessed by Hive.</p>
-<p><code>hdfs dfs -put customer_addresses_dim.tsv.gz /retail_demo/customer_addresses_dim/</code></p></li>
+<p><code>hdfs dfs -put customer_addresses_dim.tsv.gz /retail_demo/customer_addresses_dim_hive/</code></p></li>
 <li><p>Run beeline and use the <code>!connect</code> string to start a Hive session via the Hiveserver2 service.</p>
 <p><code>beeline</code></p>
 <p><code>!connect jdbc:hive2://sandbox-hdp:2181/;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2</code></p>
@@ -181,13 +191,13 @@ Phone_Number         <span class="hljs-keyword">string</span>
 )
 <span class="hljs-keyword">ROW</span> <span class="hljs-keyword">FORMAT</span> <span class="hljs-keyword">DELIMITED</span> <span class="hljs-keyword">FIELDS</span> <span class="hljs-keyword">TERMINATED</span> <span class="hljs-keyword">BY</span> <span class="hljs-string">'\t'</span>
 <span class="hljs-keyword">STORED</span> <span class="hljs-keyword">AS</span> TEXTFILE
-LOCATION <span class="hljs-string">'/retail_demo/customer_addresses_dim/'</span>;
+LOCATION <span class="hljs-string">'/retail_demo/customer_addresses_dim_hive/'</span>;
 </code></pre></li>
 <li><p>Create a second database and table that will match the regex for the Hive replication rule created earlier in the Fusion UI.</p>
 <p>a. Create Database:</p>
-<p><code>CREATE DATABASE IF NOT EXISTS databricksdemo;</code></p>
+<p><code>CREATE DATABASE IF NOT EXISTS databricks_demo;</code></p>
 <p>b. Create Table:</p>
-<pre><code class="hljs css language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> databricksdemo.customer_addresses_dim_hive
+<pre><code class="hljs css language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> databricks_demo.customer_addresses_dim_hive
 (
 Customer_Address_ID  <span class="hljs-built_in">bigint</span>,
 Customer_ID          <span class="hljs-built_in">bigint</span>,
@@ -205,7 +215,7 @@ Phone_Number         <span class="hljs-keyword">string</span>
 ) <span class="hljs-keyword">stored</span> <span class="hljs-keyword">as</span> ORC;
 </code></pre></li>
 <li><p>Now insert data into the table above by running the following:</p>
-<p><code>insert into databricksdemo.customer_addresses_dim_hive select * from retail_demo.customer_addresses_dim_hive where state_code ='CA';</code></p>
+<p><code>insert into databricks_demo.customer_addresses_dim_hive select * from retail_demo.customer_addresses_dim_hive where state_code ='CA';</code></p>
 <p>This will now launch a Hive job that will insert the data values provided in this example. If this is successful, you will see <strong>SUCCEEDED</strong> written in the STATUS column.</p>
 <pre><code class="hljs css language-json">--------------------------------------------------------------------------------
         VERTICES      STATUS  TOTAL  COMPLETED  RUNNING  PENDING  FAILED  KILLED
@@ -216,7 +226,7 @@ VERTICES: 01/01  [==========================&gt;&gt;] 100%  ELAPSED TIME: X.YZ s
 --------------------------------------------------------------------------------
 </code></pre></li>
 </ol>
-<h3><a class="anchor" aria-hidden="true" id="setup-databricks-notebook-to-view-data"></a><a href="#setup-databricks-notebook-to-view-data" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Setup Databricks Notebook to view Data.</h3>
+<h3><a class="anchor" aria-hidden="true" id="setup-databricks-notebook-to-view-data"></a><a href="#setup-databricks-notebook-to-view-data" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Setup Databricks Notebook to view data</h3>
 <ol>
 <li><p>Return to your Workspace for the Databricks cluster.</p></li>
 <li><p>Create a Cluster Notebook.</p>
@@ -228,7 +238,7 @@ VERTICES: 01/01  [==========================&gt;&gt;] 100%  ELAPSED TIME: X.YZ s
 </ul></li>
 <li><p>You should now see a blank notebook.</p>
 <p>a. Inside the 'Cmd 1' box, add the query:</p>
-<p><code>select * from databricksdemo.customer_addresses_dim_hive;</code></p>
+<p><code>select * from databricks_demo.customer_addresses_dim_hive;</code></p>
 <p>b. Click 'Run Cell' (looks like a play button in the top right of that box).</p></li>
 <li><p>Wait for the query to return, then select the drop-down graph type and choose <strong>Map</strong>.</p></li>
 <li><p>Under the Plot Options &gt; remove all Keys &gt; click and drag 'state_code' from the 'All fields' box into the 'Keys' box.</p></li>
@@ -237,9 +247,11 @@ VERTICES: 01/01  [==========================&gt;&gt;] 100%  ELAPSED TIME: X.YZ s
 </ol>
 <p>You have now completed this demo.</p>
 <h2><a class="anchor" aria-hidden="true" id="troubleshooting"></a><a href="#troubleshooting" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Troubleshooting</h2>
-<p>Please see our <a href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/hdp_sandbox_lan_troubleshooting">Troubleshooting</a> guide for help with this demo.</p>
-<p>Please contact <a href="https://wandisco.com/contact">WANdisco</a> for further information on Fusion with docker.</p>
-</span></div></article></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#prerequisites">Prerequisites</a></li><li><a href="#installation">Installation</a><ul class="toc-headings"><li><a href="#setup-fusion">Setup Fusion</a></li><li><a href="#startup-fusion">Startup Fusion</a></li></ul></li><li><a href="#configuration">Configuration</a><ul class="toc-headings"><li><a href="#install-liveanalytics-on-databricks-cluster">Install LiveAnalytics on Databricks cluster</a></li><li><a href="#live-hive-activation">Live Hive activation</a></li><li><a href="#setup-databricks-in-fusion">Setup Databricks in Fusion</a></li></ul></li><li><a href="#replication">Replication</a><ul class="toc-headings"><li><a href="#create-replication-rules">Create replication rules</a></li><li><a href="#test-replication">Test replication</a></li><li><a href="#setup-databricks-notebook-to-view-data">Setup Databricks Notebook to view Data.</a></li></ul></li><li><a href="#troubleshooting">Troubleshooting</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="https://wandisco.github.io/wandisco-documentation/" class="nav-home"></a><div><h5>Docs</h5><a href="https://wandisco.github.io/wandisco-documentation/docs/en/quickstarts/quickstart-config.html">Getting Started</a><a href="https://docs.wandisco.com">Product User Guides</a><a href="https://community.wandisco.com/s/knowledge-base">Knowledge Base</a></div><div><h5>Community</h5><a href="https://community.wandisco.com/">WANdisco Community</a><a href="//wandisco.com/partners/find">Partners</a><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="https://wandisco.com/blog">Blog</a><a href="https://blogs.wandisco.com/">Developer Blog</a><a href="https://github.com/wandisco">GitHub</a></div></section><section class="copyright">Copyright © 2020 WANdisco, Inc.</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+<ul>
+<li><p>Please see our <a href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/hdp_sandbox_lan_troubleshooting">Troubleshooting</a> guide for help with this demo.</p></li>
+<li><p>Please contact <a href="https://wandisco.com/contact">WANdisco</a> for further information about Fusion.</p></li>
+</ul>
+</span></div></article></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#prerequisites">Prerequisites</a></li><li><a href="#installation">Installation</a><ul class="toc-headings"><li><a href="#setup-fusion">Setup Fusion</a></li><li><a href="#startup-fusion">Startup Fusion</a></li></ul></li><li><a href="#configuration">Configuration</a><ul class="toc-headings"><li><a href="#install-liveanalytics-on-databricks-cluster">Install LiveAnalytics on Databricks cluster</a></li><li><a href="#check-hdp-services-are-started">Check HDP services are started</a></li><li><a href="#live-hive-activation">Live Hive activation</a></li><li><a href="#setup-databricks-in-fusion">Setup Databricks in Fusion</a></li></ul></li><li><a href="#replication">Replication</a><ul class="toc-headings"><li><a href="#create-replication-rules">Create replication rules</a></li><li><a href="#test-replication">Test replication</a></li><li><a href="#setup-databricks-notebook-to-view-data">Setup Databricks Notebook to view data</a></li></ul></li><li><a href="#troubleshooting">Troubleshooting</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="https://wandisco.github.io/wandisco-documentation/" class="nav-home"></a><div><h5>Docs</h5><a href="https://wandisco.github.io/wandisco-documentation/docs/en/quickstarts/quickstart-config.html">Getting Started</a><a href="https://docs.wandisco.com">Product User Guides</a><a href="https://community.wandisco.com/s/knowledge-base">Knowledge Base</a></div><div><h5>Community</h5><a href="https://community.wandisco.com/">WANdisco Community</a><a href="//wandisco.com/partners/find">Partners</a><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="https://wandisco.com/blog">Blog</a><a href="https://blogs.wandisco.com/">Developer Blog</a><a href="https://github.com/wandisco">GitHub</a></div></section><section class="copyright">Copyright © 2020 WANdisco, Inc.</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;
