@@ -217,29 +217,21 @@ Follow the steps detailed to perform live replication of HCFS data and Hive meta
 
 Prior to performing these tasks, the Databricks cluster must be in a **running** state. Please access the Azure portal and check the status of the cluster. If it is not running, select to start the cluster and wait until it is **running**.
 
-1. On the **Docker host**:
+1. Return to the terminal session on the **Docker host**.
 
-   a. Clone the sample-data repository.
-
-   `git clone https://github.com/pivotalsoftware/pivotal-samples.git /tmp/pivotal-samples`
-
-   b. Copy the contents of this repository into the **fusion_sandbox-hdp_1** container.
-
-   `docker cp /tmp/pivotal-samples/ fusion_sandbox-hdp_1:/tmp/`
-
-2. Log in to the **sandbox-hdp** container and place data into HDFS.
+2. Log in to the **fusion_sandbox-hdp_1** container as hdfs user and place data into HDFS.
 
    a. Log in to the container.
 
-   `docker-compose exec sandbox-hdp bash`
+   `docker exec -u hdfs -it fusion_sandbox-hdp_1 bash`
 
-   b. Switch to the hdfs user.
+   b. Change directory to *tmp*.
 
-   `sudo -iu hdfs`
+   `cd /tmp/`
 
-   c. Change directory into the pivotal sample repository.
+   c. Obtain the sample data to be used with the Hive table.
 
-   `cd /tmp/pivotal-samples/sample-data`
+   `curl -o customer_addresses_dim.tsv.gz -Lf 'https://github.com/pivotalsoftware/pivotal-samples/blob/master/sample-data/customer_addresses_dim.tsv.gz?raw=true'`
 
    d. Create a directory within HDFS for the sample data.
 
@@ -249,19 +241,11 @@ Prior to performing these tasks, the Databricks cluster must be in a **running**
 
    `hdfs dfs -put customer_addresses_dim.tsv.gz /retail_demo/customer_addresses_dim_hive/`
 
-3. Run beeline and use the `!connect` string to start a Hive session via the Hiveserver2 service.
+3. Use beeline to start a Hive session and connect to the Hiveserver2 service as hdfs user.
 
-   `beeline`
+   `beeline -u jdbc:hive2://sandbox-hdp:10000/ -n hdfs`
 
-   `!connect jdbc:hive2://sandbox-hdp:2181/;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2`
-
-   The above connection string can also be found on the Ambari UI under **Hive -> Summary -> HIVESERVER2 JDBC URL**.
-
-   When prompted for a username and password, enter the following:
-
-   `Enter username: hdfs`
-
-   `Enter password: ` _- leave blank and press enter._
+   An alternative connection string can also be found on the Ambari UI under **Hive -> Summary -> HIVESERVER2 JDBC URL**.
 
 4. Create a database to use that will store the sample data.
 
@@ -291,37 +275,13 @@ Prior to performing these tasks, the Databricks cluster must be in a **running**
    LOCATION '/retail_demo/customer_addresses_dim_hive/';
    ```
 
-6. Create a second database and table that will match the regex for the Hive replication rule created earlier in the Fusion UI.
-
-   a. Create Database:
+6. Create a second database that will match the regex for the Hive replication rule created earlier in the Fusion UI.
 
    `CREATE DATABASE IF NOT EXISTS databricks_demo;`
 
-   b. Create Table:
+7. Now create insert data into a table by running the following:
 
-   ```sql
-   CREATE TABLE databricks_demo.customer_addresses_dim_hive
-   (
-   Customer_Address_ID  bigint,
-   Customer_ID          bigint,
-   Valid_From_Timestamp timestamp,
-   Valid_To_Timestamp   timestamp,
-   House_Number         string,
-   Street_Name          string,
-   Appt_Suite_No        string,
-   City                 string,
-   State_Code           string,
-   Zip_Code             string,
-   Zip_Plus_Four        string,
-   Country              string,
-   Phone_Number         string
-   )
-   stored as ORC;
-   ```
-
-7. Now insert data into the table above by running the following:
-
-   `insert into databricks_demo.customer_addresses_dim_hive select * from retail_demo.customer_addresses_dim_hive where state_code ='CA';`
+   `CREATE TABLE databricks_demo.customer_addresses_dim_hive STORED AS ORC AS SELECT * FROM retail_demo.customer_addresses_dim_hive WHERE state_code ='CA';`
 
    This will now launch a Hive job that will insert the data values provided in this example. If this is successful, you will see **SUCCEEDED** written in the STATUS column.
 
@@ -362,6 +322,14 @@ Prior to performing these tasks, the Databricks cluster must be in a **running**
 6. Click Apply.
 
 7. You should now see a plot of USA with colour shading - dependent on the population density.
+
+8. If desired, you can repeat this process except using the Texas state code instead of California.
+
+   a. Back in the Hive beeline session on the **fusion_sandbox-hdp_1** container, run the following command:
+
+   `insert into databricks_demo.customer_addresses_dim_hive select * from retail_demo.customer_addresses_dim_hive where state_code ='TX';`
+
+   b. Repeat from step 3 to observe the results for Texas.
 
 You have now completed this demo.
 
