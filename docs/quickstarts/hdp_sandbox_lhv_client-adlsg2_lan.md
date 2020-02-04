@@ -18,23 +18,21 @@ Please see the [shutdown and start up](https://wandisco.github.io/wandisco-docum
 
 ## Prerequisites
 
-[//]: <We are still working out the minimum VM requirements, at the moment, we are working with Standard D8 v3.>
-
 To complete this quickstart, you will need:
 
 * Azure VM created and started, matching the following specifications:
   * Minimum size VM recommendation = **Standard D4 v3 (4 vcpus, 16 GiB memory).**
-  * A minimum of 32GB storage.
+  * A minimum of 32GB Temp storage for the `/var/lib/docker` directory.
   * Root access on server (this is normally available by default).
 
-If seeking guidance on how to create a suitable VM, see our [Azure VM creation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation) guide.
+If seeking guidance on how to create a suitable VM with all utilities installed, see our [Azure VM creation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation) guide.
 
 * The following utilities must be installed on the server:
   * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
   * [Docker](https://docs.docker.com/install/) (v19.03.5 or higher)
   * [Docker Compose for Linux](https://docs.docker.com/compose/install/#install-compose) (v1.25.0 or higher)
 
-If seeking guidance on how to install these utilities, see our [Azure VM preparation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_prep) guide.
+If seeking guidance on how to install these utilities, see our [Azure VM preparation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_prep) guide. This is not required if you have used our [Azure VM creation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation) guide as all utilities will have been included.
 
 _These instructions have been tested on Ubuntu LTS._
 
@@ -43,8 +41,6 @@ _These instructions have been tested on Ubuntu LTS._
 Please log into your VM prior to starting these steps. All the commands within this guidance should be run as **root** user.
 
 ### Setup Fusion
-
-[//]: <Still not determined as to where the users will pull the fusion-docker-compose repository. We will need to provide pre-baked config files so that the only entries required will be the ADLS Gen2 details.>
 
 1. Clone the Fusion docker repository to your Azure VM instance:
 
@@ -85,7 +81,7 @@ After all the prompts have been completed, you will be able to start the contain
 
 `docker-compose up -d`
 
-Docker will now download all required images and start the containers, please wait until this is completed.
+Docker will now download all required images and create the containers, please wait until this is done.
 
 ## Configuration
 
@@ -93,15 +89,13 @@ Docker will now download all required images and start the containers, please wa
 
 Prior to performing these tasks, the Databricks cluster must be in a **running** state. Please access the Azure portal and check the status of the cluster. If it is not running, select to start the cluster and wait until it is **running**.
 
-[//]: <(Host live-analytics-databricks-etl-6.0.0.1.jar externally - cuts the steps right down)>
+[//]: <Hosted live-analytics-databricks-etl-6.0.0.1.jar externally on wandisco-documentation repository.>
 
 1. Download LiveAnalytics Jar file from the Github repository:
 
    [live-analytics-databricks-etl-6.0.0.1.jar](https://github.com/WANdisco/wandisco-documentation/raw/master/docs/quickstarts/resources/live-analytics-databricks-etl-6.0.0.1.jar)
 
    Save the file on your local machine.
-
-[//]: <DAP-135 workaround>
 
 2. In your Workspace for the Databricks cluster, on the left-hand panel, select **Clusters** and then select your interactive cluster.
 
@@ -209,7 +203,7 @@ Follow the steps detailed to perform live replication of HCFS data and Hive meta
 
    * Type = `Hive`
 
-   * Database name = `*`
+   * Database name = `databricks_demo`
 
    * Table name = `*`
 
@@ -229,15 +223,15 @@ Prior to performing these tasks, the Databricks cluster must be in a **running**
 
    `git clone https://github.com/pivotalsoftware/pivotal-samples.git /tmp/pivotal-samples`
 
-   b. Copy the contents of this repository into the **docker_sandbox-hdp_1** container.
+   b. Copy the contents of this repository into the **fusion_sandbox-hdp_1** container.
 
    `docker cp /tmp/pivotal-samples/ fusion_sandbox-hdp_1:/tmp/`
 
-2. Login to the **docker_sandbox-hdp_1** container and place data into HDFS.
+2. Log in to the **sandbox-hdp** container and place data into HDFS.
 
-   a. Login to the docker_sandbox-hdp_1 container.
+   a. Log in to the container.
 
-   `docker exec -it fusion_sandbox-hdp_1 bash`
+   `docker-compose exec sandbox-hdp bash`
 
    b. Switch to the hdfs user.
 
@@ -321,7 +315,8 @@ Prior to performing these tasks, the Databricks cluster must be in a **running**
    Zip_Plus_Four        string,
    Country              string,
    Phone_Number         string
-   ) stored as ORC;
+   )
+   stored as ORC;
    ```
 
 7. Now insert data into the table above by running the following:

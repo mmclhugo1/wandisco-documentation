@@ -42,12 +42,12 @@ The two required templates are given below. Create these in the same location wi
    IMAGE=''
 
    print_usage() {
-     echo "Usage: ./create_docker_vm.sh -g AZ-USER-GROUP -r AZ-RESOURCE-GROUP -v AZ-VNET -s AZ-SUBNET-NAME -n VM-NAME -u VM-USERNAME -t VM-TYPE -d VM-DISK-SIZE (GB) -i OPERATING-SYSTEM"
+     echo "Usage: ./create_docker_vm.sh -g AZ-USER-GROUP -r AZ-RESOURCE-GROUP -v AZ-VNET -s AZ-SUBNET-NAME -n VM-NAME -u VM-USERNAME -t VM-TYPE -i OPERATING-SYSTEM"
 
-     echo "Example: ./create_docker_vm.sh -g DEV -r DEV-john.smith1 -v DEV-westeurope-vnet -s default -n johnsmith-docker -u john -t Standard_D4_v3 -d 32 -i UbuntuLTS"
+     echo "Example: ./create_docker_vm.sh -g DEV -r DEV-john.smith1 -v DEV-westeurope-vnet -s default -n johnsmith-docker -u john -t Standard_D4_v3 -i UbuntuLTS"
    }
    #Setup of env
-   while getopts "g:G:r:R:v:V:s:S:n:N:u:U:t:T:d:D:i:I:h:H:" opt; do
+   while getopts "g:G:r:R:v:V:s:S:n:N:u:U:t:T:i:I:h:H:" opt; do
      case $opt in
        g|G) GROUP="${OPTARG}" ;;
        r|R) RG="${OPTARG}" ;;
@@ -56,7 +56,6 @@ The two required templates are given below. Create these in the same location wi
        n|N) VM_NAME="${OPTARG}" ;;
        u|U) VM_USERNAME="${OPTARG}" ;;
        t|T) TYPE=${OPTARG} ;;
-       d|D) DISK=${OPTARG} ;;
        i|I) IMAGE=${OPTARG} ;;
        h|H) print_usage exit 1;;
        *) print_usage
@@ -76,7 +75,6 @@ The two required templates are given below. Create these in the same location wi
    echo "VM Name: $VM_NAME"
    echo "VM Username: $VM_USERNAME"
    echo "VM Type: $TYPE"
-   echo "Disk Size: $DISK GB"
    echo "Image (OS): $IMAGE"
    echo "Subnet ID: $SUBNETID"
 
@@ -88,7 +86,6 @@ The two required templates are given below. Create these in the same location wi
        --admin-username $VM_USERNAME \
        --generate-ssh-keys \
        --storage-sku Standard_LRS \
-       --os-disk-size-gb $DISK \
        --custom-data cloud-init.txt \
        --subnet $SUBNETID \
        --public-ip-address ""
@@ -217,8 +214,7 @@ The two required templates are given below. Create these in the same location wi
    |Subnet Name|`-s`|`default`|The Azure Virtual Network [Subnet name](https://docs.microsoft.com/en-us/cli/azure/network/vnet/subnet?view=azure-cli-latest). **Must already exist**.|
    |VM Name|`-n`|`docker_host01`|Define the Virtual Machine name in Azure.|
    |VM Username|`-u`|`vm_user`|Define the username to access the Virtual Machine with.|
-   |[VM Type](https://docs.microsoft.com/en-us/cli/azure/vm?view=azure-cli-latest#az-vm-list-sizes)|`-t`|`Standard_D8_v3`|Define the Virtual Machine size from the [Azure templates](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes). The `name` value from `az vm list-sizes --location <vm_location>` should be the value here.|
-   |Disk Size|`-d`|`32`|Define the disk space on the Virtual Machine in GigaBytes (GB).|
+   |[VM Type](https://docs.microsoft.com/en-us/cli/azure/vm?view=azure-cli-latest#az-vm-list-sizes)|`-t`|`Standard_D4_v3`|Define the Virtual Machine size from the [Azure templates](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes). The `name` value from `az vm list-sizes --location <vm_location>` should be the value here.|
    |[Image (OS)](https://docs.microsoft.com/en-us/cli/azure/vm/image?view=azure-cli-latest#az-vm-image-list)|`-i`|`UbuntuLTS`|Define the Virtual Machine's Operating System from the [Azure images](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-ps-findimage). The `urnAlias` value from `az vm image list [--all] [--location]` should be the value here.|
 
 2. Make the script executable.
@@ -227,7 +223,7 @@ The two required templates are given below. Create these in the same location wi
 
 3. Run the script using the variables collected above.
 
-   `./create_docker_vm.sh -g GRP -r GRP-my.name1 -v GRP-westeurope-vnet -s default -n docker_host01 -u vm_user -t Standard_D8_v3 -d 32 -i UbuntuLTS`
+   `./create_docker_vm.sh -g GRP -r GRP-my.name1 -v GRP-westeurope-vnet -s default -n docker_host01 -u vm_user -t Standard_D4_v3 -i UbuntuLTS`
 
    _Example output_
 
@@ -239,8 +235,7 @@ The two required templates are given below. Create these in the same location wi
    Subnet Name: default
    VM Name: docker_host01
    VM Username: vm_user
-   VM Type: Standard_D8_v3
-   Disk Size: 32 GB
+   VM Type: Standard_D4_v3
    Image (OS): UbuntuLTS
    Subnet ID: /subscriptions/3842fefa-7697-4e7d-b051-a5a3ae601030/resourceGroups/GRP/providers/Microsoft.Network/virtualNetworks/GRP-westeurope-vnet/subnets/default
    {
@@ -257,7 +252,3 @@ The two required templates are given below. Create these in the same location wi
    ```
 
 You can now log in to your Azure VM, for example `ssh vm_user@172.10.1.10`.
-
-## Next steps
-
-To prepare your VM for a Fusion installation, see the [Azure VM preparation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_prep) guide.

@@ -9,13 +9,15 @@ This quickstart helps you prepare an Azure Linux VM suitable for a Fusion instal
 * Installation of utilities.
 * Verification of available storage for docker images.
 
+**This is not required if you have used our [Azure VM creation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation) guide, as all utilities and disk requirements will have been included.**
+
 ## Prerequisites
 
 [//]: <Issues with running out of disk space because of docker images filling up the root partition (see DAP-134). As such, we suggest adding a data disk for storage.>
 
-* Azure VM created and started. See the [Azure VM creation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation) guide for steps to create an Azure VM.
+* Azure VM created and started.
   * Instructions are provided for UbuntuLTS 18.04.
-  * A minimum of 32GB storage. The [Azure VM creation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation) guide includes this in the default example.
+  * A minimum of 32GB Temp storage for the `/var/lib/docker` directory.
   * Root access on server (this is normally available by default). All the commands given here should be run as **root** user.
 * Access to your company's VPN or similar if required.
 
@@ -66,7 +68,7 @@ This quickstart helps you prepare an Azure Linux VM suitable for a Fusion instal
 
 ### Verify storage for docker images
 
-Verify that there is at least 24GB of disk space available in the `/var/lib/docker` directory.
+Verify that there is at least 50GB of disk space available in the `/var/lib/docker` directory.
 
 `df -h /var/lib/docker`
 
@@ -74,5 +76,5 @@ _Example output_
 
 ```bash
 Filesystem      Size  Used Avail Use% Mounted on
-/dev/sda1        31G    3G   28G  10% /
+/dev/sdb1        65G   53M   62G   1% /var/lib/docker
 ```
