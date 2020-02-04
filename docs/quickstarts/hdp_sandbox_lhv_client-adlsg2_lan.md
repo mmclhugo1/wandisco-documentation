@@ -38,7 +38,7 @@ _These instructions have been tested on Ubuntu LTS._
 
 ## Installation
 
-Please log into your VM prior to starting these steps. All the commands within this guidance should be run as **root** user.
+Please log in to your VM prior to starting these steps. All the commands within this guidance should be run as **root** user.
 
 ### Setup Fusion
 
@@ -141,7 +141,7 @@ The HDP sandbox services can take up to 5-10 minutes to start. You will need to 
 
 ### Setup Databricks in Fusion
 
-1. Log into the Fusion UI for the ADLS Gen2 zone.
+1. Log in to the Fusion UI for the ADLS Gen2 zone.
 
    `http://<docker_IP_address>:8583`
 
@@ -168,7 +168,7 @@ Follow the steps detailed to perform live replication of HCFS data and Hive meta
 
 ### Create replication rules
 
-1. Log into the Fusion UI for the HDP zone.
+1. Log in to the Fusion UI for the HDP zone.
 
    `http://<docker_IP_address:8083`
 
