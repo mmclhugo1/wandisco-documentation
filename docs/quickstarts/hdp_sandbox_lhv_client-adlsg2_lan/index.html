@@ -13,11 +13,11 @@
 <li>Azure VM created and started, matching the following specifications:
 <ul>
 <li>Minimum size VM recommendation = <strong>Standard D4 v3 (4 vcpus, 16 GiB memory).</strong></li>
-<li>A minimum of 32GB storage.</li>
+<li>A minimum of 32GB Temp storage for the <code>/var/lib/docker</code> directory.</li>
 <li>Root access on server (this is normally available by default).</li>
 </ul></li>
 </ul>
-<p>If seeking guidance on how to create a suitable VM, see our <a href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation">Azure VM creation</a> guide.</p>
+<p>If seeking guidance on how to create a suitable VM with all utilities installed, see our <a href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation">Azure VM creation</a> guide.</p>
 <ul>
 <li>The following utilities must be installed on the server:
 <ul>
@@ -26,7 +26,7 @@
 <li><a href="https://docs.docker.com/compose/install/#install-compose">Docker Compose for Linux</a> (v1.25.0 or higher)</li>
 </ul></li>
 </ul>
-<p>If seeking guidance on how to install these utilities, see our <a href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_prep">Azure VM preparation</a> guide.</p>
+<p>If seeking guidance on how to install these utilities, see our <a href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_prep">Azure VM preparation</a> guide. This is not required if you have used our <a href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation">Azure VM creation</a> guide as all utilities will have been included.</p>
 <p><em>These instructions have been tested on Ubuntu LTS.</em></p>
 <h2><a class="anchor" aria-hidden="true" id="installation"></a><a href="#installation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Installation</h2>
 <p>Please log into your VM prior to starting these steps. All the commands within this guidance should be run as <strong>root</strong> user.</p>
@@ -55,7 +55,7 @@ The examples shown below are for guidance only.</p>
 <h3><a class="anchor" aria-hidden="true" id="startup-fusion"></a><a href="#startup-fusion" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Startup Fusion</h3>
 <p>After all the prompts have been completed, you will be able to start the containers:</p>
 <p><code>docker-compose up -d</code></p>
-<p>Docker will now download all required images and start the containers, please wait until this is completed.</p>
+<p>Docker will now download all required images and create the containers, please wait until this is done.</p>
 <h2><a class="anchor" aria-hidden="true" id="configuration"></a><a href="#configuration" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configuration</h2>
 <h3><a class="anchor" aria-hidden="true" id="install-liveanalytics-on-databricks-cluster"></a><a href="#install-liveanalytics-on-databricks-cluster" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install LiveAnalytics on Databricks cluster</h3>
 <p>Prior to performing these tasks, the Databricks cluster must be in a <strong>running</strong> state. Please access the Azure portal and check the status of the cluster. If it is not running, select to start the cluster and wait until it is <strong>running</strong>.</p>
@@ -63,8 +63,6 @@ The examples shown below are for guidance only.</p>
 <li><p>Download LiveAnalytics Jar file from the Github repository:</p>
 <p><a href="https://github.com/WANdisco/wandisco-documentation/raw/master/docs/quickstarts/resources/live-analytics-databricks-etl-6.0.0.1.jar">live-analytics-databricks-etl-6.0.0.1.jar</a></p>
 <p>Save the file on your local machine.</p></li>
-</ol>
-<ol start="2">
 <li><p>In your Workspace for the Databricks cluster, on the left-hand panel, select <strong>Clusters</strong> and then select your interactive cluster.</p></li>
 <li><p>Click on the <strong>Libraries</strong> tab, and select the option to <strong>Install New</strong>.</p></li>
 <li><p>Select the following options for the Install Library prompt:</p>
@@ -137,7 +135,7 @@ Password: <code>admin</code></p></li>
 <p>On the Replication tab, select to <strong>+ Create</strong> a replication rule again.</p>
 <ul>
 <li><p>Type = <code>Hive</code></p></li>
-<li><p>Database name = <code>*</code></p></li>
+<li><p>Database name = <code>databricks_demo</code></p></li>
 <li><p>Table name = <code>*</code></p></li>
 <li><p>Description = <code>Demo</code> <em>- this field is optional</em></p></li>
 </ul>
@@ -150,11 +148,11 @@ Password: <code>admin</code></p></li>
 <li><p>On the <strong>Docker host</strong>:</p>
 <p>a. Clone the sample-data repository.</p>
 <p><code>git clone https://github.com/pivotalsoftware/pivotal-samples.git /tmp/pivotal-samples</code></p>
-<p>b. Copy the contents of this repository into the <strong>docker_sandbox-hdp_1</strong> container.</p>
+<p>b. Copy the contents of this repository into the <strong>fusion_sandbox-hdp_1</strong> container.</p>
 <p><code>docker cp /tmp/pivotal-samples/ fusion_sandbox-hdp_1:/tmp/</code></p></li>
-<li><p>Login to the <strong>docker_sandbox-hdp_1</strong> container and place data into HDFS.</p>
-<p>a. Login to the docker_sandbox-hdp_1 container.</p>
-<p><code>docker exec -it fusion_sandbox-hdp_1 bash</code></p>
+<li><p>Log in to the <strong>sandbox-hdp</strong> container and place data into HDFS.</p>
+<p>a. Log in to the container.</p>
+<p><code>docker-compose exec sandbox-hdp bash</code></p>
 <p>b. Switch to the hdfs user.</p>
 <p><code>sudo -iu hdfs</code></p>
 <p>c. Change directory into the pivotal sample repository.</p>
@@ -212,7 +210,8 @@ Zip_Code             <span class="hljs-keyword">string</span>,
 Zip_Plus_Four        <span class="hljs-keyword">string</span>,
 Country              <span class="hljs-keyword">string</span>,
 Phone_Number         <span class="hljs-keyword">string</span>
-) <span class="hljs-keyword">stored</span> <span class="hljs-keyword">as</span> ORC;
+)
+<span class="hljs-keyword">stored</span> <span class="hljs-keyword">as</span> ORC;
 </code></pre></li>
 <li><p>Now insert data into the table above by running the following:</p>
 <p><code>insert into databricks_demo.customer_addresses_dim_hive select * from retail_demo.customer_addresses_dim_hive where state_code ='CA';</code></p>
