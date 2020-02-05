@@ -20,6 +20,9 @@ Please see the [shutdown and start up](https://wandisco.github.io/wandisco-docum
 
 To complete this quickstart, you will need:
 
+* ADLS Gen2 storage account with [hierarchical namespace](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-namespace) enabled.
+* Azure Databricks cluster.
+
 * Azure VM created and started, matching the following specifications:
   * Minimum size VM recommendation = **Standard D4 v3 (4 vcpus, 16 GiB memory).**
   * A minimum of 32GB Temp storage for the `/var/lib/docker` directory.
@@ -107,7 +110,7 @@ Prior to performing these tasks, the Databricks cluster must be in a **running**
 
    * Library Type = `Jar`
 
-   * File Path = Find save location of `datatransformer.jar` from step 1.
+   * File Path = Find save location of `live-analytics-databricks-etl-6.0.0.1.jar` from step 1.
 
 5. Select **Install** once the details are entered. Wait for the **Status** of the jar to display as **Installed** before continuing.
 
@@ -193,7 +196,9 @@ Follow the steps detailed to perform live replication of HCFS data and Hive meta
 
    Click **Add** after entering the Rule Name and Paths.
 
-   * Advanced Options: Preserve Origin Block Size = `true` _- click the checkbox to set this to true._
+   * **IMPORTANT - Advanced Options:**
+
+     * Preserve Origin Block Size = `true` _- Click the checkbox to set this to true._
 
    Click **Create rules (1)** once complete.
 
