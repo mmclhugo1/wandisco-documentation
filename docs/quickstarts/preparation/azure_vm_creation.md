@@ -38,7 +38,6 @@ The two required templates are given below. Create these in the same location wi
    VM_NAME=''
    ADMIN_USERNAME=''
    TYPE=''
-   DISK=''
    IMAGE=''
 
    print_usage() {

@@ -6,7 +6,7 @@ sidebar_label: HDP Sandbox to Azure Databricks with LiveAnalytics
 
 Use this quickstart if you want to configure Fusion to replicate from a non-kerberized Hortonworks (HDP) Sandbox to an Azure Databricks cluster.
 
-This will involve the use of Live Hive for the HDP cluster, and the Databricks Delta Lake plugin for the Azure Databricks cluster. These two products form the LiveAnalytics solution.
+This will involve the use of Live Hive for the HDP cluster, and the Fusion Plugin for Databricks Delta Lake for the Azure Databricks cluster. These two products form the LiveAnalytics solution.
 
 What this guide will cover:
 
@@ -44,7 +44,7 @@ Please log in to your VM prior to starting these steps. All the commands within 
 
 1. Clone the Fusion docker repository to your Azure VM instance:
 
-   `git clone -b features/hdp-sandbox https://github.com/WANdisco/fusion-docker-compose.git`
+   `git clone https://github.com/WANdisco/fusion-docker-compose.git`
 
 2. Change to the repository directory:
 
