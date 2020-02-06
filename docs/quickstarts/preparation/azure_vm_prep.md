@@ -17,7 +17,7 @@ This quickstart helps you prepare an Azure Linux VM suitable for a Fusion instal
 
 * Azure VM created and started.
   * Instructions are provided for UbuntuLTS 18.04.
-  * A minimum of 32GB Temp storage for the `/var/lib/docker` directory.
+  * A minimum of 24GB available storage for the `/var/lib/docker` directory.
   * Root access on server (this is normally available by default). All the commands given here should be run as **root** user.
 * Access to your company's VPN or similar if required.
 
@@ -68,7 +68,7 @@ This quickstart helps you prepare an Azure Linux VM suitable for a Fusion instal
 
 ### Verify storage for docker images
 
-Verify that there is at least 50GB of disk space available in the `/var/lib/docker` directory.
+Verify that there is at least 24GB of disk space available in the `/var/lib/docker` directory.
 
 `df -h /var/lib/docker`
 
@@ -76,5 +76,5 @@ _Example output_
 
 ```bash
 Filesystem      Size  Used Avail Use% Mounted on
-/dev/sdb1        65G   53M   62G   1% /var/lib/docker
+/dev/sda1        31G    3G   28G  10% /
 ```

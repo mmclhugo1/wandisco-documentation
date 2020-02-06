@@ -25,8 +25,7 @@ To complete this quickstart, you will need:
 
 * Azure VM created and started, matching the following specifications:
   * Minimum size VM recommendation = **Standard D4 v3 (4 vcpus, 16 GiB memory).**
-  * A minimum of 32GB Temp storage for the `/var/lib/docker` directory.
-  * Root access on server (this is normally available by default).
+  * A minimum of 24GB available storage for the `/var/lib/docker` directory.
 
 If seeking guidance on how to create a suitable VM with all utilities installed, see our [Azure VM creation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation) guide.
 
@@ -41,7 +40,7 @@ _These instructions have been tested on Ubuntu LTS._
 
 ## Installation
 
-Please log in to your VM prior to starting these steps. All the commands within this guidance should be run as **root** user.
+Please log in to your VM prior to starting these steps.
 
 ### Setup Fusion
 
@@ -92,27 +91,53 @@ Docker will now download all required images and create the containers, please w
 
 Prior to performing these tasks, the Databricks cluster must be in a **running** state. Please access the Azure portal and check the status of the cluster. If it is not running, select to start the cluster and wait until it is **running**.
 
-[//]: <Hosted live-analytics-databricks-etl-6.0.0.1.jar externally on wandisco-documentation repository.>
+1. On the docker host, log in to a container for the ADLS Gen2 zone.
 
-1. Download LiveAnalytics Jar file from the Github repository:
+   `docker-compose exec fusion-server-adls2 bash`
 
-   [live-analytics-databricks-etl-6.0.0.1.jar](https://github.com/WANdisco/wandisco-documentation/raw/master/docs/quickstarts/resources/live-analytics-databricks-etl-6.0.0.1.jar)
+[//]: <DAP-135 workaround>
 
-   Save the file on your local machine.
+2. Upload the LiveAnalytics 'datatransformer.jar' using a curl command.
 
-2. In your Workspace for the Databricks cluster, on the left-hand panel, select **Clusters** and then select your interactive cluster.
+   `curl -v -H "Authorization: Bearer <bearer_token>" -F contents=@/opt/wandisco/fusion/plugins/live-deltalake/live-analytics-databricks-etl-6.0.0.1.jar -F path="/datatransformer.jar" https://<databricks_service_address>/api/2.0/dbfs/put`
 
-3. Click on the **Libraries** tab, and select the option to **Install New**.
+   You will need to adjust the `curl` command so that your [Bearer Token](https://docs.databricks.com/dev-tools/api/latest/authentication.html#generate-a-token) and [Databricks Service Address](https://docs.databricks.com/dev-tools/databricks-connect.html#step-2-configure-connection-properties) is referenced.
 
-4. Select the following options for the Install Library prompt:
+   _Example values_
 
-   * Library Source = `Upload`
+   * Bearer Token: `dapibe21cfg45efae945t6f0b57dfd1dffb4`
+   * Databricks Service Address: `westeurope.azuredatabricks.net`
+
+   _Example command_
+
+   `curl -v -H "Authorization: Bearer dapibe21cfg45efae945t6f0b57dfd1dffb4"  -F contents=@/opt/wandisco/fusion/plugins/live-deltalake/live-analytics-databricks-etl-6.0.0.1.jar -F path="/datatransformer.jar" https://westeurope.azuredatabricks.net/api/2.0/dbfs/put`
+
+   If the command is successful, you will see that the message output contains the following text below:
+
+   ```json
+   < HTTP/1.1 100 Continue
+   < HTTP/1.1 200 OK
+   ```
+
+3. Exit back into the docker host once complete.
+
+   `exit`
+
+4. In your Workspace for the Databricks cluster, on the left-hand panel, select **Clusters** and then select your interactive cluster.
+
+5. Click on the **Libraries** tab, and select the option to **Install New**.
+
+6. Select the following options for the Install Library prompt:
+
+   * Library Source = `DBFS`
 
    * Library Type = `Jar`
 
-   * File Path = Find save location of `live-analytics-databricks-etl-6.0.0.1.jar` from step 1.
+   * File Path = `dbfs:/datatransformer.jar`
 
-5. Select **Install** once the details are entered. Wait for the **Status** of the jar to display as **Installed** before continuing.
+7. Select **Install** once the details are entered.
+
+   Wait for the **Status** of the jar to display as **Installed** before continuing.
 
 ### Check HDP services are started
 
@@ -151,17 +176,25 @@ The HDP sandbox services can take up to 5-10 minutes to start. You will need to 
    Username: `admin`
    Password: `admin`
 
-2. Enter the Databricks Configuration details on the Settings page.
+2. Enter your Databricks Configuration details on the Settings page.
 
    **Fusion UI -> Settings -> Databricks: Configuration**
 
    * [Databricks Service Address](https://docs.databricks.com/dev-tools/databricks-connect.html#step-2-configure-connection-properties)
 
+     _Example:_ `westeurope.azuredatabricks.net`
+
    * [Bearer Token](https://docs.databricks.com/dev-tools/api/latest/authentication.html#generate-a-token)
+
+     _Example:_ `dapibe21cfg45efae945t6f0b57dfd1dffb4`
 
    * [Databricks Cluster ID](https://docs.databricks.com/workspace/workspace-details.html#cluster-url)
 
+     _Example:_ `0234-125567-cowls978`
+
    * [Unique JDBC HTTP path](https://docs.databricks.com/bi/jdbc-odbc-bi.html#construct-the-jdbc-url)
+
+     _Example:_ `sql/protocolv1/o/8445611090456789/0234-125567-cowls978`
 
    Click **Update** once complete.
 
@@ -179,6 +212,8 @@ Follow the steps detailed to perform live replication of HCFS data and Hive meta
    Password: `admin`
 
 2. Enter the Replication tab, and select to **+ Create** a replication rule.
+
+[//]: <INC-846>
 
 3. Create a new HCFS rule using the UI with the following properties:
 
@@ -284,9 +319,33 @@ Prior to performing these tasks, the Databricks cluster must be in a **running**
 
    `CREATE DATABASE IF NOT EXISTS databricks_demo;`
 
-7. Now create insert data into a table by running the following:
+7. Create a table inside this second database:
 
-   `CREATE TABLE databricks_demo.customer_addresses_dim_hive STORED AS ORC AS SELECT * FROM retail_demo.customer_addresses_dim_hive WHERE state_code ='CA';`
+   ```sql
+   CREATE TABLE databricks_demo.customer_addresses_dim_hive
+   (
+   Customer_Address_ID  bigint,
+   Customer_ID          bigint,
+   Valid_From_Timestamp timestamp,
+   Valid_To_Timestamp   timestamp,
+   House_Number         string,
+   Street_Name          string,
+   Appt_Suite_No        string,
+   City                 string,
+   State_Code           string,
+   Zip_Code             string,
+   Zip_Plus_Four        string,
+   Country              string,
+   Phone_Number         string
+   )
+   stored as ORC;
+   ```
+
+[//]: <DAP-223>
+
+8. Now insert data into the table by running the following:
+
+   `insert into databricks_demo.customer_addresses_dim_hive select * from retail_demo.customer_addresses_dim_hive where state_code ='CA';`
 
    This will now launch a Hive job that will insert the data values provided in this example. If this is successful, you will see **SUCCEEDED** written in the STATUS column.
 
