@@ -71,8 +71,7 @@
 <li><p>Azure VM created and started, matching the following specifications:</p>
 <ul>
 <li>Minimum size VM recommendation = <strong>Standard D4 v3 (4 vcpus, 16 GiB memory).</strong></li>
-<li>A minimum of 32GB Temp storage for the <code>/var/lib/docker</code> directory.</li>
-<li>Root access on server (this is normally available by default).</li>
+<li>A minimum of 24GB available storage for the <code>/var/lib/docker</code> directory.</li>
 </ul></li>
 </ul>
 <p>If seeking guidance on how to create a suitable VM with all utilities installed, see our <a href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation">Azure VM creation</a> guide.</p>
@@ -87,7 +86,7 @@
 <p>If seeking guidance on how to install these utilities, see our <a href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_prep">Azure VM preparation</a> guide. This is not required if you have used our <a href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation">Azure VM creation</a> guide as all utilities will have been included.</p>
 <p><em>These instructions have been tested on Ubuntu LTS.</em></p>
 <h2><a class="anchor" aria-hidden="true" id="installation"></a><a href="#installation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Installation</h2>
-<p>Please log in to your VM prior to starting these steps. All the commands within this guidance should be run as <strong>root</strong> user.</p>
+<p>Please log in to your VM prior to starting these steps.</p>
 <h3><a class="anchor" aria-hidden="true" id="setup-fusion"></a><a href="#setup-fusion" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Setup Fusion</h3>
 <ol>
 <li><p>Clone the Fusion docker repository to your Azure VM instance:</p>
@@ -118,18 +117,36 @@ The examples shown below are for guidance only.</p>
 <h3><a class="anchor" aria-hidden="true" id="install-liveanalytics-on-databricks-cluster"></a><a href="#install-liveanalytics-on-databricks-cluster" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install LiveAnalytics on Databricks cluster</h3>
 <p>Prior to performing these tasks, the Databricks cluster must be in a <strong>running</strong> state. Please access the Azure portal and check the status of the cluster. If it is not running, select to start the cluster and wait until it is <strong>running</strong>.</p>
 <ol>
-<li><p>Download LiveAnalytics Jar file from the Github repository:</p>
-<p><a href="https://github.com/WANdisco/wandisco-documentation/raw/master/docs/quickstarts/resources/live-analytics-databricks-etl-6.0.0.1.jar">live-analytics-databricks-etl-6.0.0.1.jar</a></p>
-<p>Save the file on your local machine.</p></li>
+<li><p>On the docker host, log in to a container for the ADLS Gen2 zone.</p>
+<p><code>docker-compose exec fusion-server-adls2 bash</code></p></li>
+</ol>
+<ol start="2">
+<li><p>Upload the LiveAnalytics 'datatransformer.jar' using a curl command.</p>
+<p><code>curl -v -H &quot;Authorization: Bearer &lt;bearer_token&gt;&quot; -F contents=@/opt/wandisco/fusion/plugins/live-deltalake/live-analytics-databricks-etl-6.0.0.1.jar -F path=&quot;/datatransformer.jar&quot; https://&lt;databricks_service_address&gt;/api/2.0/dbfs/put</code></p>
+<p>You will need to adjust the <code>curl</code> command so that your <a href="https://docs.databricks.com/dev-tools/api/latest/authentication.html#generate-a-token">Bearer Token</a> and <a href="https://docs.databricks.com/dev-tools/databricks-connect.html#step-2-configure-connection-properties">Databricks Service Address</a> is referenced.</p>
+<p><em>Example values</em></p>
+<ul>
+<li>Bearer Token: <code>dapibe21cfg45efae945t6f0b57dfd1dffb4</code></li>
+<li>Databricks Service Address: <code>westeurope.azuredatabricks.net</code></li>
+</ul>
+<p><em>Example command</em></p>
+<p><code>curl -v -H &quot;Authorization: Bearer dapibe21cfg45efae945t6f0b57dfd1dffb4&quot; -F contents=@/opt/wandisco/fusion/plugins/live-deltalake/live-analytics-databricks-etl-6.0.0.1.jar -F path=&quot;/datatransformer.jar&quot; https://westeurope.azuredatabricks.net/api/2.0/dbfs/put</code></p>
+<p>If the command is successful, you will see that the message output contains the following text below:</p>
+<pre><code class="hljs css language-json">&lt; HTTP/1.1 100 Continue
+&lt; HTTP/1.1 200 OK
+</code></pre></li>
+<li><p>Exit back into the docker host once complete.</p>
+<p><code>exit</code></p></li>
 <li><p>In your Workspace for the Databricks cluster, on the left-hand panel, select <strong>Clusters</strong> and then select your interactive cluster.</p></li>
 <li><p>Click on the <strong>Libraries</strong> tab, and select the option to <strong>Install New</strong>.</p></li>
 <li><p>Select the following options for the Install Library prompt:</p>
 <ul>
-<li><p>Library Source = <code>Upload</code></p></li>
+<li><p>Library Source = <code>DBFS</code></p></li>
 <li><p>Library Type = <code>Jar</code></p></li>
-<li><p>File Path = Find save location of <code>live-analytics-databricks-etl-6.0.0.1.jar</code> from step 1.</p></li>
+<li><p>File Path = <code>dbfs:/datatransformer.jar</code></p></li>
 </ul></li>
-<li><p>Select <strong>Install</strong> once the details are entered. Wait for the <strong>Status</strong> of the jar to display as <strong>Installed</strong> before continuing.</p></li>
+<li><p>Select <strong>Install</strong> once the details are entered.</p>
+<p>Wait for the <strong>Status</strong> of the jar to display as <strong>Installed</strong> before continuing.</p></li>
 </ol>
 <h3><a class="anchor" aria-hidden="true" id="check-hdp-services-are-started"></a><a href="#check-hdp-services-are-started" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Check HDP services are started</h3>
 <p>The HDP sandbox services can take up to 5-10 minutes to start. You will need to ensure that the HDFS service is started before continuing.</p>
@@ -156,13 +173,17 @@ Password: <code>admin</code></p></li>
 <p><code>http://&lt;docker_IP_address&gt;:8583</code></p>
 <p>Username: <code>admin</code>
 Password: <code>admin</code></p></li>
-<li><p>Enter the Databricks Configuration details on the Settings page.</p>
+<li><p>Enter your Databricks Configuration details on the Settings page.</p>
 <p><strong>Fusion UI -&gt; Settings -&gt; Databricks: Configuration</strong></p>
 <ul>
-<li><p><a href="https://docs.databricks.com/dev-tools/databricks-connect.html#step-2-configure-connection-properties">Databricks Service Address</a></p></li>
-<li><p><a href="https://docs.databricks.com/dev-tools/api/latest/authentication.html#generate-a-token">Bearer Token</a></p></li>
-<li><p><a href="https://docs.databricks.com/workspace/workspace-details.html#cluster-url">Databricks Cluster ID</a></p></li>
-<li><p><a href="https://docs.databricks.com/bi/jdbc-odbc-bi.html#construct-the-jdbc-url">Unique JDBC HTTP path</a></p></li>
+<li><p><a href="https://docs.databricks.com/dev-tools/databricks-connect.html#step-2-configure-connection-properties">Databricks Service Address</a></p>
+<p><em>Example:</em> <code>westeurope.azuredatabricks.net</code></p></li>
+<li><p><a href="https://docs.databricks.com/dev-tools/api/latest/authentication.html#generate-a-token">Bearer Token</a></p>
+<p><em>Example:</em> <code>dapibe21cfg45efae945t6f0b57dfd1dffb4</code></p></li>
+<li><p><a href="https://docs.databricks.com/workspace/workspace-details.html#cluster-url">Databricks Cluster ID</a></p>
+<p><em>Example:</em> <code>0234-125567-cowls978</code></p></li>
+<li><p><a href="https://docs.databricks.com/bi/jdbc-odbc-bi.html#construct-the-jdbc-url">Unique JDBC HTTP path</a></p>
+<p><em>Example:</em> <code>sql/protocolv1/o/8445611090456789/0234-125567-cowls978</code></p></li>
 </ul>
 <p>Click <strong>Update</strong> once complete.</p></li>
 </ol>
@@ -175,6 +196,8 @@ Password: <code>admin</code></p></li>
 <p>Username: <code>admin</code>
 Password: <code>admin</code></p></li>
 <li><p>Enter the Replication tab, and select to <strong>+ Create</strong> a replication rule.</p></li>
+</ol>
+<ol start="3">
 <li><p>Create a new HCFS rule using the UI with the following properties:</p>
 <ul>
 <li><p>Type = <code>HCFS</code></p></li>
@@ -246,8 +269,29 @@ LOCATION <span class="hljs-string">'/retail_demo/customer_addresses_dim_hive/'</
 </code></pre></li>
 <li><p>Create a second database that will match the regex for the Hive replication rule created earlier in the Fusion UI.</p>
 <p><code>CREATE DATABASE IF NOT EXISTS databricks_demo;</code></p></li>
-<li><p>Now create insert data into a table by running the following:</p>
-<p><code>CREATE TABLE databricks_demo.customer_addresses_dim_hive STORED AS ORC AS SELECT * FROM retail_demo.customer_addresses_dim_hive WHERE state_code ='CA';</code></p>
+<li><p>Create a table inside this second database:</p>
+<pre><code class="hljs css language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> databricks_demo.customer_addresses_dim_hive
+(
+Customer_Address_ID  <span class="hljs-built_in">bigint</span>,
+Customer_ID          <span class="hljs-built_in">bigint</span>,
+Valid_From_Timestamp <span class="hljs-built_in">timestamp</span>,
+Valid_To_Timestamp   <span class="hljs-built_in">timestamp</span>,
+House_Number         <span class="hljs-keyword">string</span>,
+Street_Name          <span class="hljs-keyword">string</span>,
+Appt_Suite_No        <span class="hljs-keyword">string</span>,
+City                 <span class="hljs-keyword">string</span>,
+State_Code           <span class="hljs-keyword">string</span>,
+Zip_Code             <span class="hljs-keyword">string</span>,
+Zip_Plus_Four        <span class="hljs-keyword">string</span>,
+Country              <span class="hljs-keyword">string</span>,
+Phone_Number         <span class="hljs-keyword">string</span>
+)
+<span class="hljs-keyword">stored</span> <span class="hljs-keyword">as</span> ORC;
+</code></pre></li>
+</ol>
+<ol start="8">
+<li><p>Now insert data into the table by running the following:</p>
+<p><code>insert into databricks_demo.customer_addresses_dim_hive select * from retail_demo.customer_addresses_dim_hive where state_code ='CA';</code></p>
 <p>This will now launch a Hive job that will insert the data values provided in this example. If this is successful, you will see <strong>SUCCEEDED</strong> written in the STATUS column.</p>
 <pre><code class="hljs css language-json">--------------------------------------------------------------------------------
         VERTICES      STATUS  TOTAL  COMPLETED  RUNNING  PENDING  FAILED  KILLED

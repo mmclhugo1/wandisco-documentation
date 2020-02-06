@@ -84,15 +84,16 @@ VNET=<span class="hljs-string">''</span>
 VM_NAME=<span class="hljs-string">''</span>
 ADMIN_USERNAME=<span class="hljs-string">''</span>
 TYPE=<span class="hljs-string">''</span>
+DISK=<span class="hljs-string">''</span>
 IMAGE=<span class="hljs-string">''</span>
 
 <span class="hljs-function"><span class="hljs-title">print_usage</span></span>() {
-  <span class="hljs-built_in">echo</span> <span class="hljs-string">"Usage: ./create_docker_vm.sh -g AZ-USER-GROUP -r AZ-RESOURCE-GROUP -v AZ-VNET -s AZ-SUBNET-NAME -n VM-NAME -u VM-USERNAME -t VM-TYPE -i OPERATING-SYSTEM"</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">"Usage: ./create_docker_vm.sh -g AZ-USER-GROUP -r AZ-RESOURCE-GROUP -v AZ-VNET -s AZ-SUBNET-NAME -n VM-NAME -u VM-USERNAME -t VM-TYPE -d VM-DISK-SIZE (GB) -i OPERATING-SYSTEM"</span>
 
-  <span class="hljs-built_in">echo</span> <span class="hljs-string">"Example: ./create_docker_vm.sh -g DEV -r DEV-john.smith1 -v DEV-westeurope-vnet -s default -n johnsmith-docker -u john -t Standard_D4_v3 -i UbuntuLTS"</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">"Example: ./create_docker_vm.sh -g DEV -r DEV-john.smith1 -v DEV-westeurope-vnet -s default -n johnsmith-docker -u john -t Standard_D4_v3 -d 32 -i UbuntuLTS"</span>
 }
 <span class="hljs-comment">#Setup of env</span>
-<span class="hljs-keyword">while</span> <span class="hljs-built_in">getopts</span> <span class="hljs-string">"g:G:r:R:v:V:s:S:n:N:u:U:t:T:i:I:h:H:"</span> opt; <span class="hljs-keyword">do</span>
+<span class="hljs-keyword">while</span> <span class="hljs-built_in">getopts</span> <span class="hljs-string">"g:G:r:R:v:V:s:S:n:N:u:U:t:T:d:D:i:I:h:H:"</span> opt; <span class="hljs-keyword">do</span>
   <span class="hljs-keyword">case</span> <span class="hljs-variable">$opt</span> <span class="hljs-keyword">in</span>
     g|G) GROUP=<span class="hljs-string">"<span class="hljs-variable">${OPTARG}</span>"</span> ;;
     r|R) RG=<span class="hljs-string">"<span class="hljs-variable">${OPTARG}</span>"</span> ;;
@@ -100,8 +101,9 @@ IMAGE=<span class="hljs-string">''</span>
     s|S) SUBNAME=<span class="hljs-string">"<span class="hljs-variable">${OPTARG}</span>"</span> ;;
     n|N) VM_NAME=<span class="hljs-string">"<span class="hljs-variable">${OPTARG}</span>"</span> ;;
     u|U) VM_USERNAME=<span class="hljs-string">"<span class="hljs-variable">${OPTARG}</span>"</span> ;;
-    t|T) TYPE=<span class="hljs-variable">${OPTARG}</span> ;;
-    i|I) IMAGE=<span class="hljs-variable">${OPTARG}</span> ;;
+    t|T) TYPE=<span class="hljs-string">"<span class="hljs-variable">${OPTARG}</span>"</span> ;;
+    d|D) DISK=<span class="hljs-string">"<span class="hljs-variable">${OPTARG}</span>"</span> ;;
+    i|I) IMAGE=<span class="hljs-string">"<span class="hljs-variable">${OPTARG}</span>"</span> ;;
     h|H) print_usage <span class="hljs-built_in">exit</span> 1;;
     *) print_usage
        <span class="hljs-built_in">exit</span> 1 ;;
@@ -121,6 +123,7 @@ SUBNETID=$(az network vnet subnet show -g <span class="hljs-variable">$GROUP</sp
 <span class="hljs-built_in">echo</span> <span class="hljs-string">"VM Username: <span class="hljs-variable">$VM_USERNAME</span>"</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">"VM Type: <span class="hljs-variable">$TYPE</span>"</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">"Image (OS): <span class="hljs-variable">$IMAGE</span>"</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Disk Size: <span class="hljs-variable">$DISK</span> GB"</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">"Subnet ID: <span class="hljs-variable">$SUBNETID</span>"</span>
 
 az vm create \
@@ -131,6 +134,7 @@ az vm create \
     --admin-username <span class="hljs-variable">$VM_USERNAME</span> \
     --generate-ssh-keys \
     --storage-sku Standard_LRS \
+    --os-disk-size-gb <span class="hljs-variable">$DISK</span> \
     --custom-data cloud-init.txt \
     --subnet <span class="hljs-variable">$SUBNETID</span> \
     --public-ip-address <span class="hljs-string">""</span>
@@ -151,7 +155,7 @@ fs_setup:
     - device: ephemeral0.2
       filesystem: swap
 mounts:
-    - ["ephemeral0.1", "/var/lib/docker"]
+    - ["ephemeral0.1", "/mnt"]
     - ["ephemeral0.2", "none", "swap", "sw", "0", "0"]
 
 apt:
@@ -259,6 +263,7 @@ system_info:
 <tr><td>VM Name</td><td><code>-n</code></td><td><code>docker_host01</code></td><td>Define the Virtual Machine name in Azure.</td></tr>
 <tr><td>VM Username</td><td><code>-u</code></td><td><code>vm_user</code></td><td>Define the username to access the Virtual Machine with.</td></tr>
 <tr><td><a href="https://docs.microsoft.com/en-us/cli/azure/vm?view=azure-cli-latest#az-vm-list-sizes">VM Type</a></td><td><code>-t</code></td><td><code>Standard_D4_v3</code></td><td>Define the Virtual Machine size from the <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes">Azure templates</a>. The <code>name</code> value from <code>az vm list-sizes --location &lt;vm_location&gt;</code> should be the value here.</td></tr>
+<tr><td>Disk Size</td><td><code>-d</code></td><td><code>32</code></td><td>Define the disk space on the Virtual Machine in GigaBytes (GB).</td></tr>
 <tr><td><a href="https://docs.microsoft.com/en-us/cli/azure/vm/image?view=azure-cli-latest#az-vm-image-list">Image (OS)</a></td><td><code>-i</code></td><td><code>UbuntuLTS</code></td><td>Define the Virtual Machine's Operating System from the <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-ps-findimage">Azure images</a>. The <code>urnAlias</code> value from <code>az vm image list [--all] [--location]</code> should be the value here.</td></tr>
 </tbody>
 </table>
@@ -266,7 +271,7 @@ system_info:
 <li><p>Make the script executable.</p>
 <p><code>chmod +x create_docker_vm.sh</code></p></li>
 <li><p>Run the script using the variables collected above.</p>
-<p><code>./create_docker_vm.sh -g GRP -r GRP-my.name1 -v GRP-westeurope-vnet -s default -n docker_host01 -u vm_user -t Standard_D4_v3 -i UbuntuLTS</code></p>
+<p><code>./create_docker_vm.sh -g GRP -r GRP-my.name1 -v GRP-westeurope-vnet -s default -n docker_host01 -u vm_user -t Standard_D4_v3 -d 32 -i UbuntuLTS</code></p>
 <p><em>Example output</em></p>
 <pre><code class="hljs css language-text">Parameters
 Group: GRP
@@ -276,6 +281,7 @@ Subnet Name: default
 VM Name: docker_host01
 VM Username: vm_user
 VM Type: Standard_D4_v3
+Disk Size: 32 GB
 Image (OS): UbuntuLTS
 Subnet ID: /subscriptions/3842fefa-7697-4e7d-b051-a5a3ae601030/resourceGroups/GRP/providers/Microsoft.Network/virtualNetworks/GRP-westeurope-vnet/subnets/default
 {
