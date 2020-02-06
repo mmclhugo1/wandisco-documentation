@@ -20,21 +20,30 @@ Please see the [shutdown and start up](https://wandisco.github.io/wandisco-docum
 
 To complete this quickstart, you will need:
 
-* ADLS Gen2 storage account with [hierarchical namespace](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-namespace) enabled.
-* Azure Databricks cluster.
+* ADLS Gen2 storage account with [hierarchical namespace](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-namespace) enabled. You will also need:
+  * A container created inside this account.
+  * Your [Access Key](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage#view-access-keys-and-connection-string) for the account.
+* Azure Databricks cluster with the following credential information:
+  * [Databricks Service Address](https://docs.databricks.com/dev-tools/databricks-connect.html#step-2-configure-connection-properties) (Example: `westeurope.azuredatabricks.net`)
+
+  * [Bearer Token](https://docs.databricks.com/dev-tools/api/latest/authentication.html#generate-a-token) (Example: `dapibe21cfg45efae945t6f0b57dfd1dffb4`)
+
+  * [Databricks Cluster ID](https://docs.databricks.com/workspace/workspace-details.html#cluster-url) (Example: `0234-125567-cowls978`)
+
+  * [Unique JDBC HTTP path](https://docs.databricks.com/bi/jdbc-odbc-bi.html#construct-the-jdbc-url) (Example: `sql/protocolv1/o/8445611090456789/0234-125567-cowls978`)
 
 * Azure VM created and started, matching the following specifications:
   * Minimum size VM recommendation = **Standard D4 v3 (4 vcpus, 16 GiB memory).**
   * A minimum of 24GB available storage for the `/var/lib/docker` directory.
 
-If seeking guidance on how to create a suitable VM with all utilities installed, see our [Azure VM creation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation) guide.
+  If seeking guidance on how to create a suitable VM with all utilities installed, see our [Azure VM creation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation) guide.
 
 * The following utilities must be installed on the server:
   * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
   * [Docker](https://docs.docker.com/install/) (v19.03.5 or higher)
   * [Docker Compose for Linux](https://docs.docker.com/compose/install/#install-compose) (v1.25.0 or higher)
 
-If seeking guidance on how to install these utilities, see our [Azure VM preparation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_prep) guide. This is not required if you have used our [Azure VM creation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation) guide as all utilities will have been included.
+  If seeking guidance on how to install these utilities, see our [Azure VM preparation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_prep) guide. This is not required if you have used our [Azure VM creation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation) guide as all utilities will have been included.
 
 _These instructions have been tested on Ubuntu LTS._
 
@@ -180,21 +189,13 @@ The HDP sandbox services can take up to 5-10 minutes to start. You will need to 
 
    **Fusion UI -> Settings -> Databricks: Configuration**
 
-   * [Databricks Service Address](https://docs.databricks.com/dev-tools/databricks-connect.html#step-2-configure-connection-properties)
+   * [Databricks Service Address](https://docs.databricks.com/dev-tools/databricks-connect.html#step-2-configure-connection-properties) (Example: `westeurope.azuredatabricks.net`)
 
-     _Example:_ `westeurope.azuredatabricks.net`
+   * [Bearer Token](https://docs.databricks.com/dev-tools/api/latest/authentication.html#generate-a-token) (Example: `dapibe21cfg45efae945t6f0b57dfd1dffb4`)
 
-   * [Bearer Token](https://docs.databricks.com/dev-tools/api/latest/authentication.html#generate-a-token)
+   * [Databricks Cluster ID](https://docs.databricks.com/workspace/workspace-details.html#cluster-url) (Example: `0234-125567-cowls978`)
 
-     _Example:_ `dapibe21cfg45efae945t6f0b57dfd1dffb4`
-
-   * [Databricks Cluster ID](https://docs.databricks.com/workspace/workspace-details.html#cluster-url)
-
-     _Example:_ `0234-125567-cowls978`
-
-   * [Unique JDBC HTTP path](https://docs.databricks.com/bi/jdbc-odbc-bi.html#construct-the-jdbc-url)
-
-     _Example:_ `sql/protocolv1/o/8445611090456789/0234-125567-cowls978`
+   * [Unique JDBC HTTP path](https://docs.databricks.com/bi/jdbc-odbc-bi.html#construct-the-jdbc-url) (Example: `sql/protocolv1/o/8445611090456789/0234-125567-cowls978`)
 
    Click **Update** once complete.
 
