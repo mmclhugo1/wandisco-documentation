@@ -236,7 +236,7 @@ Password: <code>admin</code></p></li>
 <li><p>Return to the terminal session on the <strong>Docker host</strong>.</p></li>
 <li><p>Log in to the <strong>fusion_sandbox-hdp_1</strong> container as hdfs user and place data into HDFS.</p>
 <p>a. Log in to the container.</p>
-<p><code>docker exec -u hdfs -it fusion_sandbox-hdp_1 bash</code></p>
+<p><code>docker-compose exec -u hdfs sandbox-hdp bash</code></p>
 <p>b. Change directory to <em>tmp</em>.</p>
 <p><code>cd /tmp/</code></p>
 <p>c. Obtain the sample data to be used with the Hive table.</p>
