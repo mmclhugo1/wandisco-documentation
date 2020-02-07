@@ -24,7 +24,7 @@ If you already have keys in the default location(s), these keys will be used wit
 
 ## Create templates
 
-The two required templates are given below. Create these in the same location with the names given.
+The two required templates are given below. Create these in the same location on your local machine with the names given.
 
 1. `create_docker_vm.sh` - this contains the template options required for the VM.
 

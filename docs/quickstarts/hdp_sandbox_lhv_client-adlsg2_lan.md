@@ -24,7 +24,7 @@ To complete this quickstart, you will need:
   * A container created inside this account.
   * Your [Access Key](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage#view-access-keys-and-connection-string) for the account.
 * Azure Databricks cluster with the following credential information:
-  * [Databricks Service Address](https://docs.databricks.com/dev-tools/databricks-connect.html#step-2-configure-connection-properties) (Example: `westeurope.azuredatabricks.net`)
+  * [Databricks Service Address (Instance name)](https://docs.databricks.com/workspace/workspace-details.html#workspace-instance-and-id) (Example: `westeurope.azuredatabricks.net`)
 
   * [Bearer Token](https://docs.databricks.com/dev-tools/api/latest/authentication.html#generate-a-token) (Example: `dapibe21cfg45efae945t6f0b57dfd1dffb4`)
 
@@ -110,7 +110,7 @@ Prior to performing these tasks, the Databricks cluster must be in a **running**
 
    `curl -v -H "Authorization: Bearer <bearer_token>" -F contents=@/opt/wandisco/fusion/plugins/live-deltalake/live-analytics-databricks-etl-6.0.0.1.jar -F path="/datatransformer.jar" https://<databricks_service_address>/api/2.0/dbfs/put`
 
-   You will need to adjust the `curl` command so that your [Bearer Token](https://docs.databricks.com/dev-tools/api/latest/authentication.html#generate-a-token) and [Databricks Service Address](https://docs.databricks.com/dev-tools/databricks-connect.html#step-2-configure-connection-properties) is referenced.
+   You will need to adjust the `curl` command so that your [<bearer_token>](https://docs.databricks.com/dev-tools/api/latest/authentication.html#generate-a-token) and [<databricks_service_address>](https://docs.databricks.com/dev-tools/databricks-connect.html#step-2-configure-connection-properties) is referenced.
 
    _Example values_
 
@@ -189,7 +189,7 @@ The HDP sandbox services can take up to 5-10 minutes to start. You will need to 
 
    **Fusion UI -> Settings -> Databricks: Configuration**
 
-   * [Databricks Service Address](https://docs.databricks.com/dev-tools/databricks-connect.html#step-2-configure-connection-properties) (Example: `westeurope.azuredatabricks.net`)
+   * [Databricks Service Address (Instance name)](https://docs.databricks.com/workspace/workspace-details.html#workspace-instance-and-id) (Example: `westeurope.azuredatabricks.net`)
 
    * [Bearer Token](https://docs.databricks.com/dev-tools/api/latest/authentication.html#generate-a-token) (Example: `dapibe21cfg45efae945t6f0b57dfd1dffb4`)
 
@@ -360,6 +360,8 @@ Prior to performing these tasks, the Databricks cluster must be in a **running**
    --------------------------------------------------------------------------------
    ```
 
+   The data will take a few moments to be replicated and appear in the Databricks cluster.
+
 ### Setup Databricks Notebook to view data
 
 1. Return to your Workspace for the Databricks cluster.
@@ -371,6 +373,8 @@ Prior to performing these tasks, the Databricks cluster must be in a **running**
    * Name: **WD-demo**
    * Language: **SQL**
    * Cluster: (Choose the cluster used in this demo)
+
+   Click **Create**.
 
 3. You should now see a blank notebook.
 
