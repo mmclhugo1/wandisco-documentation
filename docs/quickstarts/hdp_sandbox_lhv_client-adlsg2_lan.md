@@ -264,7 +264,7 @@ Prior to performing these tasks, the Databricks cluster must be in a **running**
 
    a. Log in to the container.
 
-   `docker exec -u hdfs -it fusion_sandbox-hdp_1 bash`
+   `docker-compose exec -u hdfs sandbox-hdp bash`
 
    b. Change directory to *tmp*.
 
