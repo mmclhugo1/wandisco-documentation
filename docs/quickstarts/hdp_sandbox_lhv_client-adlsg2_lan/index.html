@@ -73,7 +73,7 @@
 </ul></li>
 <li><p>Azure Databricks cluster with the following credential information:</p>
 <ul>
-<li><p><a href="https://docs.databricks.com/dev-tools/databricks-connect.html#step-2-configure-connection-properties">Databricks Service Address</a> (Example: <code>westeurope.azuredatabricks.net</code>)</p></li>
+<li><p><a href="https://docs.databricks.com/workspace/workspace-details.html#workspace-instance-and-id">Databricks Service Address (Instance name)</a> (Example: <code>westeurope.azuredatabricks.net</code>)</p></li>
 <li><p><a href="https://docs.databricks.com/dev-tools/api/latest/authentication.html#generate-a-token">Bearer Token</a> (Example: <code>dapibe21cfg45efae945t6f0b57dfd1dffb4</code>)</p></li>
 <li><p><a href="https://docs.databricks.com/workspace/workspace-details.html#cluster-url">Databricks Cluster ID</a> (Example: <code>0234-125567-cowls978</code>)</p></li>
 <li><p><a href="https://docs.databricks.com/bi/jdbc-odbc-bi.html#construct-the-jdbc-url">Unique JDBC HTTP path</a> (Example: <code>sql/protocolv1/o/8445611090456789/0234-125567-cowls978</code>)</p></li>
@@ -131,7 +131,7 @@ The examples shown below are for guidance only.</p>
 <ol start="2">
 <li><p>Upload the LiveAnalytics 'datatransformer.jar' using a curl command.</p>
 <p><code>curl -v -H &quot;Authorization: Bearer &lt;bearer_token&gt;&quot; -F contents=@/opt/wandisco/fusion/plugins/live-deltalake/live-analytics-databricks-etl-6.0.0.1.jar -F path=&quot;/datatransformer.jar&quot; https://&lt;databricks_service_address&gt;/api/2.0/dbfs/put</code></p>
-<p>You will need to adjust the <code>curl</code> command so that your <a href="https://docs.databricks.com/dev-tools/api/latest/authentication.html#generate-a-token">Bearer Token</a> and <a href="https://docs.databricks.com/dev-tools/databricks-connect.html#step-2-configure-connection-properties">Databricks Service Address</a> is referenced.</p>
+<p>You will need to adjust the <code>curl</code> command so that your <a href="https://docs.databricks.com/dev-tools/api/latest/authentication.html#generate-a-token">&lt;bearer_token&gt;</a> and <a href="https://docs.databricks.com/dev-tools/databricks-connect.html#step-2-configure-connection-properties">&lt;databricks_service_address&gt;</a> is referenced.</p>
 <p><em>Example values</em></p>
 <ul>
 <li>Bearer Token: <code>dapibe21cfg45efae945t6f0b57dfd1dffb4</code></li>
@@ -184,7 +184,7 @@ Password: <code>admin</code></p></li>
 <li><p>Enter your Databricks Configuration details on the Settings page.</p>
 <p><strong>Fusion UI -&gt; Settings -&gt; Databricks: Configuration</strong></p>
 <ul>
-<li><p><a href="https://docs.databricks.com/dev-tools/databricks-connect.html#step-2-configure-connection-properties">Databricks Service Address</a> (Example: <code>westeurope.azuredatabricks.net</code>)</p></li>
+<li><p><a href="https://docs.databricks.com/workspace/workspace-details.html#workspace-instance-and-id">Databricks Service Address (Instance name)</a> (Example: <code>westeurope.azuredatabricks.net</code>)</p></li>
 <li><p><a href="https://docs.databricks.com/dev-tools/api/latest/authentication.html#generate-a-token">Bearer Token</a> (Example: <code>dapibe21cfg45efae945t6f0b57dfd1dffb4</code>)</p></li>
 <li><p><a href="https://docs.databricks.com/workspace/workspace-details.html#cluster-url">Databricks Cluster ID</a> (Example: <code>0234-125567-cowls978</code>)</p></li>
 <li><p><a href="https://docs.databricks.com/bi/jdbc-odbc-bi.html#construct-the-jdbc-url">Unique JDBC HTTP path</a> (Example: <code>sql/protocolv1/o/8445611090456789/0234-125567-cowls978</code>)</p></li>
@@ -304,7 +304,8 @@ Map 1 ..........   SUCCEEDED      1          1        0        0       0       0
 --------------------------------------------------------------------------------
 VERTICES: 01/01  [==========================&gt;&gt;] 100%  ELAPSED TIME: X.YZ s
 --------------------------------------------------------------------------------
-</code></pre></li>
+</code></pre>
+<p>The data will take a few moments to be replicated and appear in the Databricks cluster.</p></li>
 </ol>
 <h3><a class="anchor" aria-hidden="true" id="setup-databricks-notebook-to-view-data"></a><a href="#setup-databricks-notebook-to-view-data" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Setup Databricks Notebook to view data</h3>
 <ol>
@@ -315,7 +316,8 @@ VERTICES: 01/01  [==========================&gt;&gt;] 100%  ELAPSED TIME: X.YZ s
 <li>Name: <strong>WD-demo</strong></li>
 <li>Language: <strong>SQL</strong></li>
 <li>Cluster: (Choose the cluster used in this demo)</li>
-</ul></li>
+</ul>
+<p>Click <strong>Create</strong>.</p></li>
 <li><p>You should now see a blank notebook.</p>
 <p>a. Inside the 'Cmd 1' box, add the query:</p>
 <p><code>select * from databricks_demo.customer_addresses_dim_hive;</code></p>
