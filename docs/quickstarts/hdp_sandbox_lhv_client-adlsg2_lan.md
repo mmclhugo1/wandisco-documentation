@@ -260,7 +260,7 @@ Prior to performing these tasks, the Databricks cluster must be in a **running**
 
 1. Return to the terminal session on the **Docker host**.
 
-2. Log in to the **fusion_sandbox-hdp_1** container as hdfs user and place data into HDFS.
+2. Log in to the **sandbox-hdp** container as the hdfs user and place data into HDFS.
 
    a. Log in to the container.
 
