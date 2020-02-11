@@ -1,12 +1,10 @@
 ---
 id: hdp_sandbox_fusion_stop_start
-title: How to safely shutdown and start up a WANdisco Fusion and Hortonworks Sandbox installation
-sidebar_label: Stop & Start WANdisco Fusion and HDP Sandbox
+title: How to safely shutdown and start up Hortonworks Sandbox and WANdisco Fusion
+sidebar_label: Stop/Start HDP Sandbox & WANdisco Fusion
 ---
 
-This guide is for when you want to safely shutdown or start up a WANdisco Fusion and Hortonworks Sandbox installation.
-
-All commands shown are to be run as root user.
+This guide is for when you want to safely shutdown or start up a Hortonworks Sandbox and WANdisco Fusion installation.
 
 ## Shutting down
 

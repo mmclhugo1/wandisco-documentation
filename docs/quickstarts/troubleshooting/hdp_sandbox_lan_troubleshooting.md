@@ -1,10 +1,10 @@
 ---
 id: hdp_sandbox_lan_troubleshooting
-title: Troubleshooting with Hortonworks (HDP) sandbox to Azure Databricks
-sidebar_label: Troubleshooting with HDP sandbox to Azure Databricks
+title: Troubleshooting Hortonworks (HDP) Sandbox to Azure Databricks
+sidebar_label: HDP Sandbox to Azure Databricks
 ---
 
-This troubleshooting guide should be used in conjunction with the [HDP Sandbox to Azure Databricks](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/hdp_sandbox_lhv_client-adlsg2_lan) guide.
+This troubleshooting guide should be used in conjunction with the [HDP Sandbox to Azure Databricks](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/installation/hdp_sandbox_lhv_client-adlsg2_lan) guide.
 
 Please see the [Useful information](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/troubleshooting/useful_info) section for additional commands and help.
 

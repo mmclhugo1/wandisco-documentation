@@ -14,7 +14,7 @@ What this guide will cover:
 - Integrating WANdisco Fusion with Azure Databricks.
 - Performing a sample data migration.
 
-Please see the [shutdown and start up](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/hdp_sandbox_fusion_stop_start) guide for when you wish to safely shutdown or start back up the environment.
+Please see the [shutdown and start up](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/operation/hdp_sandbox_fusion_stop_start) guide for when you wish to safely shutdown or start back up the environment.
 
 ## Prerequisites
 
@@ -404,6 +404,6 @@ You have now completed this demo.
 
 ## Troubleshooting
 
-* Please see our [Troubleshooting](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/hdp_sandbox_lan_troubleshooting) guide for help with this demo.
+* Please see our [Troubleshooting](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/troubleshooting/hdp_sandbox_lan_troubleshooting) guide for help with this demo.
 
 * Please contact [WANdisco](https://wandisco.com/contact) for further information about Fusion.
