@@ -8,7 +8,13 @@
       "docs/config-properties/config-properties",
       "docs/config-properties/application.properties",
       "docs/config-properties/ihc.server"
-
+    ]
+  },
+  "Why Fusion?": {
+    "Product Concepts": [
+      "why-fusion/benefits",
+      "why-fusion/features",
+      "why-fusion/deployment_models"
     ]
   },
   "api": {

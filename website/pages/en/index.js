@@ -98,7 +98,7 @@ class Index extends React.Component {
         {[
           {
             content: 'Welcome to our new docs site. More information coming soon.',
-            image: `https://wandisco.com/assets/wandisco_logo2.svg`,
+            image: `img/wandisco_logo2.svg`,
             imageAlign: 'left',
             title: '',
           },
@@ -113,13 +113,13 @@ class Index extends React.Component {
         {[
           {
             content: 'Migrate data to cloud without disruption or downtime.',
-            image: `https://wandisco.com/assets/front-page/july-2019/hybrid-cloud.png`,
+            image: `img/hybrid-cloud.png`,
             imageAlign: 'top',
             title: 'LiveMigrator',
           },
           {
             content: 'Immediate analytic data access.',
-            image: `https://wandisco.com/assets/blt81946ac27cc6a107/Flexibility.svg`,
+            image: `img/Flexibility.svg`,
             imageAlign: 'top',
             title: 'LiveAnalytics',
           },
@@ -138,7 +138,7 @@ class Index extends React.Component {
           },
           {
             content: 'Manage your whole Fusion ecosystem in one place.',
-            image: `https://wandisco.com/assets/partnerpages/oracle/WD_Oracle_Benefits-03.png`,
+            image: `img/WD_Oracle_Benefits-03.png`,
             imageAlign: 'top',
             title: 'OneUI',
           },

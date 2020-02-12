@@ -39,10 +39,11 @@ const siteConfig = {
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
+    {doc: 'why-fusion/benefits', label: 'Why Fusion?'},
     {doc: 'quickstarts/installation/quickstart-config', label: 'Quickstarts'},
     {doc: 'docs/doc1', label: 'Docs'},
     {doc: 'glossary/a', label: 'Glossary'},
-    {doc: 'api/api', label: 'API'},
+  //  {doc: 'api/api', label: 'API'},
     {doc: 'help/need_help', label: 'Help'},
   ],
 

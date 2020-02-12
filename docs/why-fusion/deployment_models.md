@@ -1,10 +1,10 @@
 ---
 id: deployment_models
-title: Deployment models for WANdisco Fusion
+title: Deployment models
 sidebar_label: Deployment models
 ---
 
-These are some of the deployment models that WANdisco Fusion is used for.
+There are numerous use cases for WANdisco Fusion, some of these are explored below.
 
 ## Migration
 
