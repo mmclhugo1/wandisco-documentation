@@ -83,7 +83,7 @@ Your Databricks cluster must be **running** before integrating LiveAnalytics.
 
    `docker-compose exec fusion-server-adls2 bash`
 
-[//]: <DAP-135 workaround>
+[//]: <Awaiting improvements in ONEUI-1222>
 
 2. Upload the LiveAnalytics 'datatransformer.jar'.
 
@@ -125,23 +125,19 @@ The examples shown below are for guidance only.
 
 1. Log in to OneUI via a web browser
 
-    `http://<docker_IP_address>:8081`
+   `http://<docker_IP_address>:8081`
 
-    Insert your email address and choose a password. Be sure to make a note of the password you choose.
+   Insert your email address and choose a password. Be sure to make a note of the password you choose.
 
-2. Click on the **Settings** cog in the **ADLS GEN2** zone, and fill in the following details:
-
-* Account Name: `adlsg2storage`
-
-* Container Name: `fusionreplication`
-
-* Account key: `KEY_1_STRING` - the Primary Access Key is now referred to as "Key1" in Microsoft’s documentation. You can get the Access Key from the Microsoft Azure storage account under the **Access Keys** section.
+2. Click on the **Settings** cog in the **ADLS GEN2** zone, and fill in the details for your ADLS Gen2 storage account. See the [Info you will require](#info-you-will-require) section for reference.
 
 3. Tick the **Use Secure Protocol** box.
 
 4. Click **Apply Configuration**
 
-At this point, OneUI will return to the main page, and there will be a spinning circle where the Settings cog was previously. Wait for that to stop spinning and move on to the next step.
+At this point, OneUI will return to the main page, and there will be a spinning circle where the Settings cog was previously.
+
+Wait for this to stop spinning and move on to the next step.
 
 ### Check HDP services are started
 
@@ -160,19 +156,21 @@ The HDP sandbox services can take up to 5-10 minutes to start. You will need to 
 
 ### Live Hive activation
 
-1. Go back to the OneUI interface:
+1. Go back to the OneUI interface.
 
    `http://<docker_IP_address>:8081`
 
-2. Click on the **fusion-server-sandbox-hdp** link in the **HCFS HDP** zone. This will open the UI for this zone in a new tab.
+2. Click on the **fusion-server-sandbox-hdp** link in the **HCFS HDP** zone to open the UI for this zone in a new tab.
 
 3. Click on **Settings -> Live Hive: Plugin Activation**, then scroll back to the top of the page and click **Activate**.
 
-When prompted click the link to reload the page, then go back to the OneUI tab.
+4. When prompted reload the page, then go back to the OneUI tab.
 
 ### Setup Databricks in Fusion
 
-1. Go to the Fusion UI for the ADLS Gen2 zone by clicking on the **fusion-server-adls2** link, which will open in a new tab.
+[//]: <Awaiting improvements in ONEUI-1222>
+
+1. Go to the Fusion UI for the ADLS Gen2 zone by clicking on the **fusion-server-adls2** link, which will open a new tab.
 
 2. Enter your Databricks Configuration details on the Settings page (as mentioned in the [Info you will require](#info-you-will-require) section) and **Update**.
 
@@ -196,15 +194,13 @@ Follow the steps below to demonstrate live replication of HCFS data and Hive met
 
 5. Click **Next** then click **FINISH**.
 
-6. Log in to the Fusion UI for the HDP zone by clicking on the **fusion-server-sandbox-hdp** link. This will open in another tab.
+6. Log in to the Fusion UI for the HDP zone by clicking on the **fusion-server-sandbox-hdp** link.
 
 7. Enter the Replication tab, and select to **+ Create** a replication rule.
 
 [//]: <INC-846>
 
 8. Create a new Hive rule using the UI with the following properties:
-
-   On the Replication tab, select to **+ Create** a replication rule again.
 
    * Type = `Hive`
 
@@ -299,8 +295,6 @@ Your Databricks cluster must be **running** before testing replication.
    )
    stored as ORC;
    ```
-
-[//]: <DAP-223>
 
 8. Now insert data into the table:
 
