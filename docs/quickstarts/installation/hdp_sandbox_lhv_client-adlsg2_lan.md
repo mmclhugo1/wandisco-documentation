@@ -122,37 +122,20 @@ Follow the steps below to demonstrate live replication of HCFS data and Hive met
 
 ### Create replication rules
 
-1. On the dashboard, click the plus sign next to **Rules**.
+1. On the dashboard, create a **HCFS** rule with the following parameters:
 
-2. Set **Rule Name** to `warehouse`.
+   * Rule Name = `warehouse`
+   * Path for all zones = `/apps/hive/warehouse`
+   * Default exclusions
+   * Preserve HCFS Block Size = *True*
 
-3. Set **Path for all zones** to `/apps/hive/warehouse`, and click **Next**.
+2. Now create a **Hive** rule with the following parameters:
 
-4. Click **Next** again to keep the default exclusions.
+   * Rule Name = `Demo`
+   * Pattern to match database names = `databricks_demo`
+   * Pattern to match table names = `*`
 
-5. Click the checkbox for **Preserve HCFS Block Size**, then click **Finish**.
-
-   The rule will be displayed shortly afterwards.
-
-6. Log in to the Fusion UI for the HDP zone by clicking on the **fusion-server-sandbox-hdp** link.
-
-7. Enter the Replication tab, and select to **+ Create** a replication rule.
-
-[//]: <DOCU-442>
-
-8. Create a new Hive rule using the UI with the following properties:
-
-   * Type = `Hive`
-
-   * Database name = `databricks_demo`
-
-   * Table name = `*`
-
-   * Description = `Demo` _- this field is optional_
-
-   Click **Create rule** once complete.
-
-   Both rules should now display on the **Replication** tab.
+   Both rules should be displayed afterwards.
 
 ### Test replication
 
