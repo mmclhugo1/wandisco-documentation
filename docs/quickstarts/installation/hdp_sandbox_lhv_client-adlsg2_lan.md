@@ -45,7 +45,7 @@ To complete this demo, you will need:
   * [Databricks Service Address (Instance name)](https://docs.databricks.com/workspace/workspace-details.html#workspace-instance-and-id) (Example: `westeurope.azuredatabricks.net`)
   * [Bearer Token](https://docs.databricks.com/dev-tools/api/latest/authentication.html#generate-a-token) (Example: `dapibe21cfg45efae945t6f0b57dfd1dffb4`)
   * [Databricks Cluster ID](https://docs.databricks.com/workspace/workspace-details.html#cluster-url) (Example: `0234-125567-cowls978`)
-  * [Unique JDBC HTTP path](https://docs.databricks.com/bi/jdbc-odbc-bi.html#construct-the-jdbc-url) (Example: `sql/protocolv1/o/8445611090456789/0234-125567-cowls978`)
+  * [JDBC/ODBC HTTP path](https://docs.databricks.com/bi/jdbc-odbc-bi.html#construct-the-jdbc-url) (Example: `sql/protocolv1/o/8445611090456789/0234-125567-cowls978`)
 
 _These instructions have been tested on Ubuntu LTS._
 
@@ -143,7 +143,7 @@ Follow the steps below to demonstrate live replication of HCFS data and Hive met
 
 ### Test Hive replication
 
-Your Databricks cluster must be **running** before testing Hive replication.
+Your Databricks cluster must be **running** before testing Hive replication. Sample data is provided in this HDP Sandbox.
 
 1. Return to the terminal session on the **Docker host**.
 
@@ -151,11 +151,11 @@ Your Databricks cluster must be **running** before testing Hive replication.
 
    `docker-compose exec -u hdfs sandbox-hdp beeline -u jdbc:hive2://sandbox-hdp:10000/ -n hdfs`
 
-3. Create a database to store the sample data:
+3. Create a database for the sample data:
 
    `CREATE DATABASE IF NOT EXISTS retail_demo;`
 
-4. Create a table inside the database that points to the data previously uploaded:
+4. Create a table inside the database that points to the sample data:
 
    ```sql
    CREATE TABLE retail_demo.customer_addresses_dim_hive
