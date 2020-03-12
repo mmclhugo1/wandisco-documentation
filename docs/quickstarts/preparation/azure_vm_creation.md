@@ -1,7 +1,7 @@
 ---
 id: azure_vm_creation
 title: Creating an Azure Linux Virtual Machine for a Fusion installation
-sidebar_label: Azure VM creation
+sidebar_label: Azure VM Creation
 ---
 
 This quickstart helps you create an Azure Linux Virtual Machine (VM) suitable for a Fusion installation. It walks you through:
