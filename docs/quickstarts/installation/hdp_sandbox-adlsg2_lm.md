@@ -1,15 +1,16 @@
 ---
-id: cdh-adlsg2
-title: Cloudera (CDH) to ADLS Gen2
-sidebar_label: Cloudera (CDH) to ADLS Gen2
+id: hdp_sandbox_adlsg2_lm
+title: Hortonworks (HDP) Sandbox to ADLS Gen2 with LiveMigrator
+sidebar_label: HDP Sandbox to ADLS Gen2 with LiveMigrator
 ---
 
-Use this quickstart if you want to configure Fusion to replicate from a non-kerberized Cloudera (CDH) cluster to an ADLS Gen2 container.
+Use this quickstart if you want to configure Fusion to replicate from a non-kerberized Hortonworks (HDP) Sandbox to an ADLS Gen2 container using WANdisco LiveMigrator.
 
 What this guide will cover:
 
-- Installing WANdisco Fusion using the [docker-compose](https://docs.docker.com/compose/) tool.
-- Integrating WANdisco Fusion with the CDH cluster and ADLS Gen2 storage.
+- Installing WANdisco Fusion and a HDP Sandbox using the [docker-compose](https://docs.docker.com/compose/) tool.
+- Integrating WANdisco Fusion with ADLS Gen2 storage.
+- Performing a sample data migration.
 
 ## Prerequisites
 
@@ -18,8 +19,6 @@ What this guide will cover:
 
 To complete this install, you will need:
 
-* CDH cluster.
-  * The [HDFS superuser](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User) must be `hdfs` for the purposes of this quickstart.
 * ADLS Gen2 storage account with [hierarchical namespace](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-namespace) enabled.
   * You will also need a container created inside this account.
 * Azure Virtual Machine (VM).
@@ -33,8 +32,6 @@ To complete this install, you will need:
   * [Docker Compose for Linux](https://docs.docker.com/compose/install/#install-compose) (v1.25.0 or higher)
 
 ### Info you will require
-
-* Administrator credentials for your Cloudera manager.
 
 * ADLS Gen2 storage account details:
 
@@ -54,58 +51,38 @@ Log in to your VM prior to starting these steps.
 
    `git clone https://github.com/WANdisco/fusion-docker-compose.git`
 
-1. Change to the repository directory:
+2. Change to the repository directory:
 
    `cd fusion-docker-compose`
 
-1. Run the setup script:
+3. Run the setup script:
 
    `./setup-env.sh`
 
-1. Enter `n` when asked whether to use the HDP sandbox.
+4. Enter `y` when asked whether to use the HDP sandbox.
 
-1. Enter the zone details:
-
-   * First zone type = `cdh`
-   * First zone name = _press enter for the default value_
-
-   * Second zone type = `adls2`
-   * Second zone name = _press enter for the default value_
-
-1. When prompted, press enter to use the default trial license or provide the absolute file system path to your own license on the VM.
-
-   _Example:_  `/home/vm_user/license.key`
-
-1. Enter your docker hostname, which will be the VM hostname.
-
-   _Example:_  `docker_host01.realm.com`
-
-1. Enter the CDH zone details:
-
-   _Examples:_
-
-   * CDH version = `5.16.0`
-     * All minor versions are supported within each version listed (e.g. choose `5.16.0` if you are using `5.16.1`).
-   * Active NameNode hostname = `namenode.example.com`
-   * Active NameNode port = `8020`
-   * NameNode nameservice = `nameservice01`
-   * Plugins = `NONE`
-
-1. Enter the ADLS Gen2 zone details:
-
-   _Examples:_
-
-   * [HDI version](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-component-versioning) = `3.6`
-     * This is required even if you are not intending to use a HDI cluster.
-   * Plugins = `NONE`
-
-1. You have now completed the setup. To create and start your containers run:
+5. You have now completed the setup, to create and start your containers run:
 
    `docker-compose up -d`
 
    Docker will now download all required images and create the containers.
 
 ## Configuration
+
+### Check HDP services are started
+
+The HDP sandbox services can take up to 5-10 minutes to start. To check that the HDFS service is started:
+
+1. Log in to Ambari via a web browser.
+
+   `http://<docker_IP_address>:8080`
+
+   Username: `admin`
+   Password: `admin`
+
+2. Select the **HDFS** service.
+
+3. Wait until all the HDFS components are showing as **Started**.
 
 ### Configure the ADLS Gen2 zone
 
@@ -123,10 +100,35 @@ Log in to your VM prior to starting these steps.
 
 ## Migration
 
-You can now create a [replication rule](../operation/create-rule.md) and then [migrate your data](../operation/migration.md).
+Follow the steps below to demonstrate migration of HCFS data from the HDP sandbox to the ADLS Gen2 container.
+
+### Create replication rule
+
+On the dashboard, create a **HCFS** rule with the following parameters:
+
+* Rule Name = `migration`
+* Path for all zones = `/retail_demo`
+* Default exclusions
+* Preserve HCFS Block Size = *True*
+
+### Migrate your data
+
+1. On the dashboard, view the `migration` rule.
+
+2. Start your migration with the following overwrite settings:
+
+   * Source Zone = **sandbox-hdp**
+   * Target Zone = **adls2**
+   * Overwrite Settings = **Skip**
+
+3. Wait until the migration is complete, and check the contents of your `/retail_demo` directory in your ADLS Gen2 container.
+
+   A new directory should exist (`customer_addresses_dim_hive`) with a ~50MB file inside (`customer_addresses_dim.tsv.gz`).
+
+_You have now successfully migrated data from your HDP Sandbox to your ADLS Gen2 container using LiveMigrator. Contact [WANdisco](https://wandisco.com/contact) for further information about Fusion and what it can offer you._
 
 ## Troubleshooting
 
 * See our [Troubleshooting](../troubleshooting/hdp_sandbox_lan_troubleshooting.md) guide for help.
 
-_Contact [WANdisco](https://wandisco.com/contact) for further information about Fusion and what it can offer you._
+* See the [shutdown and start up](../operation/hdp_sandbox_fusion_stop_start.md) guide for when you wish to safely shutdown or start back up the environment.

@@ -1,10 +1,8 @@
 ---
 id: hdp_sandbox_lan_troubleshooting
-title: Troubleshooting Hortonworks (HDP) Sandbox to Azure Databricks
-sidebar_label: HDP Sandbox to Azure Databricks
+title: Troubleshooting Hortonworks (HDP) Sandbox to Azure
+sidebar_label: HDP Sandbox to Azure
 ---
-
-This troubleshooting guide should be used in conjunction with the [HDP Sandbox to Azure Databricks](../installation/hdp_sandbox_lhv_client-adlsg2_lan.md) guide.
 
 Please see the [Useful information](./useful_info.md) section for additional commands and help.
 
@@ -68,4 +66,23 @@ To bring the History Server online:
 
 ## Rebuild
 
-If looking to start over, follow our [rebuild](./useful_info.md#rebuild) section for guidance.
+Use these steps if looking to start over.
+
+1. Stop and delete all containers, volumes and unused networks using:
+
+   `docker-compose down -v`
+
+1. If you are using Databricks, delete the `databricks_demo` database from your Databricks cluster using your [notebook](https://docs.databricks.com/notebooks/notebooks-use.html#run-notebooks):
+
+   `DROP DATABASE databricks_demo CASCADE;`
+
+1. Delete the related directories from your ADLS Gen2 container (e.g. via the [Azure CLI](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-directory-file-acl-cli#delete-a-directory)):
+
+   `/apps`  
+   `/wandisco`
+
+1. Run the setup script again (it will not prompt for any questions), followed by the docker compose `up` command to recreate the environment:
+
+   `./setup-env.sh`
+
+   `docker-compose up -d`
