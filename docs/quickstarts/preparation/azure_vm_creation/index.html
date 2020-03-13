@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Creating an Azure Linux VM for a Fusion installation · WANdisco docs</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="This quickstart helps you create an Azure Linux VM suitable for a Fusion installation. It walks you through:"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Creating an Azure Linux VM for a Fusion installation · WANdisco docs"/><meta property="og:type" content="website"/><meta property="og:url" content="https://wandisco.github.io/wandisco-documentation/ https://wandisco.github.io/wandisco-documentation/"/><meta property="og:description" content="This quickstart helps you create an Azure Linux VM suitable for a Fusion installation. It walks you through:"/><meta property="og:image" content="https://wandisco.github.io/wandisco-documentation/ https://wandisco.github.io/wandisco-documentation/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://wandisco.github.io/wandisco-documentation/ https://wandisco.github.io/wandisco-documentation/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="https://wandisco.github.io/wandisco-documentation/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="https://wandisco.github.io/wandisco-documentation/js/scrollSpy.js"></script><link rel="stylesheet" href="https://wandisco.github.io/wandisco-documentation/css/main.css"/><script src="https://wandisco.github.io/wandisco-documentation/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="https://wandisco.github.io/wandisco-documentation/"><img class="logo" src="https://wandisco.github.io/wandisco-documentation/img/favicon.png" alt="WANdisco docs"/><h2 class="headerTitleWithLogo">WANdisco docs</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="https://wandisco.github.io/wandisco-documentation/docs/why-fusion/benefits" target="_self">Why Fusion?</a></li><li class="siteNavGroupActive"><a href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/installation/quickstart-config" target="_self">Quickstarts</a></li><li class=""><a href="https://wandisco.github.io/wandisco-documentation/docs/docs/doc1" target="_self">Docs</a></li><li class=""><a href="https://wandisco.github.io/wandisco-documentation/docs/glossary/a" target="_self">Glossary</a></li><li class=""><a href="https://wandisco.github.io/wandisco-documentation/docs/help/need_help" target="_self">Help</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Preparation</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Preparation<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem navListItemActive"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation">Azure VM creation</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_prep">Azure VM Preparation</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Installation<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/installation/quickstart-config">Introduction</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/installation/hdp-adlsg2">Hortonworks (HDP) to ADLS Gen2</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/installation/cdh-adlsg2">Cloudera (CDH) to ADLS Gen2</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/installation/hdp_sandbox_lhv_client-adlsg2_lan">HDP Sandbox to Azure Databricks with LiveAnalytics</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Operation<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/operation/create-rule">Create a Rule</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/operation/consistency-check">Consistency Check</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/operation/migration">Start a Migration</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/operation/hdp_sandbox_fusion_stop_start">Stop/Start HDP Sandbox &amp; WANdisco Fusion</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Troubleshooting<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/troubleshooting/useful_info">Useful Information</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/troubleshooting/hdp_sandbox_lan_troubleshooting">HDP Sandbox to Azure Databricks</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/troubleshooting/logs">Logs</a></li></ul></div></div></section></div><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Creating an Azure Linux Virtual Machine for a Fusion installation · WANdisco docs</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="This quickstart helps you create an Azure Linux Virtual Machine (VM) suitable for a Fusion installation. It walks you through:"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Creating an Azure Linux Virtual Machine for a Fusion installation · WANdisco docs"/><meta property="og:type" content="website"/><meta property="og:url" content="https://wandisco.github.io/wandisco-documentation/ https://wandisco.github.io/wandisco-documentation/"/><meta property="og:description" content="This quickstart helps you create an Azure Linux Virtual Machine (VM) suitable for a Fusion installation. It walks you through:"/><meta property="og:image" content="https://wandisco.github.io/wandisco-documentation/ https://wandisco.github.io/wandisco-documentation/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://wandisco.github.io/wandisco-documentation/ https://wandisco.github.io/wandisco-documentation/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="https://wandisco.github.io/wandisco-documentation/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="https://wandisco.github.io/wandisco-documentation/js/scrollSpy.js"></script><link rel="stylesheet" href="https://wandisco.github.io/wandisco-documentation/css/main.css"/><script src="https://wandisco.github.io/wandisco-documentation/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="https://wandisco.github.io/wandisco-documentation/"><img class="logo" src="https://wandisco.github.io/wandisco-documentation/img/favicon.png" alt="WANdisco docs"/><h2 class="headerTitleWithLogo">WANdisco docs</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="https://wandisco.github.io/wandisco-documentation/docs/why-fusion/benefits" target="_self">Why Fusion?</a></li><li class="siteNavGroupActive"><a href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/installation/quickstart-config" target="_self">Quickstarts</a></li><li class=""><a href="https://wandisco.github.io/wandisco-documentation/docs/docs/doc1" target="_self">Docs</a></li><li class=""><a href="https://wandisco.github.io/wandisco-documentation/docs/glossary/a" target="_self">Glossary</a></li><li class=""><a href="https://wandisco.github.io/wandisco-documentation/docs/help/need_help" target="_self">Help</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Preparation</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Preparation<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem navListItemActive"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation">Azure VM Creation</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_prep">Azure VM Preparation</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Installation<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/installation/quickstart-config">Introduction</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/installation/hdp-adlsg2">Hortonworks (HDP) to ADLS Gen2</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/installation/cdh-adlsg2">Cloudera (CDH) to ADLS Gen2</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/installation/hdp_sandbox_adlsg2_lm">HDP Sandbox to ADLS Gen2 with LiveMigrator</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/installation/hdp_sandbox_lhv_client-adlsg2_lan">HDP Sandbox to Azure Databricks with LiveAnalytics</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Operation<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/operation/create-rule">Create a Rule</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/operation/consistency-check">Consistency Check</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/operation/migration">Start a Migration</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/operation/hdp_sandbox_fusion_stop_start">Stop/Start HDP Sandbox &amp; WANdisco Fusion</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Troubleshooting<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/troubleshooting/useful_info">Useful Information</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/troubleshooting/hdp_sandbox_lan_troubleshooting">HDP Sandbox to Azure</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/troubleshooting/logs">Logs</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -54,11 +54,11 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Creating an Azure Linux VM for a Fusion installation</h1></header><article><div><span><p>This quickstart helps you create an Azure Linux VM suitable for a Fusion installation. It walks you through:</p>
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Creating an Azure Linux Virtual Machine for a Fusion installation</h1></header><article><div><span><p>This quickstart helps you create an Azure Linux Virtual Machine (VM) suitable for a Fusion installation. It walks you through:</p>
 <ul>
-<li>Creating an <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/linux/create-ssh-secured-vm-from-template">Azure Linux VM template</a> script.</li>
 <li>Creating a <a href="https://cloudinit.readthedocs.io/en/latest/topics/examples.html">cloud-init</a> template to initialise the VM and install required services.</li>
-<li>How to use the Azure Linux VM template script.
+<li>Obtaining <a href="https://docs.microsoft.com/en-us/cli/azure/vm?view=azure-cli-latest#az-vm-create">Azure parameters</a> to create the VM.</li>
+<li>Creating the <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/linux/create-cli-complete">Linux VM with the Azure CLI</a>.
 <ul>
 <li>Logging in to the VM for the first time.</li>
 </ul></li>
@@ -68,82 +68,13 @@
 <li><a href="https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest">Azure CLI</a> with the ability to run <code>az login</code> on your terminal.</li>
 </ul>
 <h3><a class="anchor" aria-hidden="true" id="ssh-keys"></a><a href="#ssh-keys" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SSH keys</h3>
-<p>SSH keys will be generated as part of the VM creation process.
-See the Microsoft documentation for further details - <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys">Linux or macOS</a> or <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/linux/ssh-from-windows">Windows</a>.</p>
-<p>If you already have keys in the default location(s), these keys will be used with the Azure VM and will not be overwritten.</p>
-<h2><a class="anchor" aria-hidden="true" id="create-templates"></a><a href="#create-templates" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create templates</h2>
-<p>The two required templates are given below. Create these in the same location on your local machine with the names given.</p>
-<ol>
-<li><p><code>create_docker_vm.sh</code> - this contains the template options required for the VM.</p>
-<pre><code class="hljs css language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
-<span class="hljs-built_in">set</span> -e
-
-RG=<span class="hljs-string">''</span>
-LOCATION=<span class="hljs-string">''</span>
-VNET=<span class="hljs-string">''</span>
-VRGROUP=<span class="hljs-string">''</span>
-VM_NAME=<span class="hljs-string">''</span>
-VM_USERNAME=<span class="hljs-string">''</span>
-TYPE=<span class="hljs-string">''</span>
-DISK=<span class="hljs-string">''</span>
-IMAGE=<span class="hljs-string">''</span>
-
-<span class="hljs-function"><span class="hljs-title">print_usage</span></span>() {
-  <span class="hljs-built_in">echo</span> <span class="hljs-string">"Usage: ./create_docker_vm.sh -g AZ-VM-RESOURCE-GROUP -l LOCATION -v AZ-VNET -a AZ-VNET-RESOURCE-GROUP -s AZ-SUBNET-NAME -n VM-NAME -u VM-USERNAME -t VM-TYPE -d VM-DISK-SIZE (GB) -i OPERATING-SYSTEM"</span>
-
-  <span class="hljs-built_in">echo</span> <span class="hljs-string">"Example: ./create_docker_vm.sh -g DEV-john.smith1 -l westeurope -v DEV-westeurope-vnet -a DEV -s default -n johnsmith-docker -u john -t Standard_D4_v3 -d 32 -i UbuntuLTS"</span>
-}
-<span class="hljs-comment">#Setup of env</span>
-<span class="hljs-keyword">while</span> <span class="hljs-built_in">getopts</span> <span class="hljs-string">"g:G:l:L:v:V:a:A:s:S:n:N:u:U:t:T:d:D:i:I:h:H:"</span> opt; <span class="hljs-keyword">do</span>
-  <span class="hljs-keyword">case</span> <span class="hljs-variable">$opt</span> <span class="hljs-keyword">in</span>
-    g|G) RG=<span class="hljs-string">"<span class="hljs-variable">${OPTARG}</span>"</span> ;;
-    l|L) LOCATION=<span class="hljs-string">"<span class="hljs-variable">${OPTARG}</span>"</span> ;;
-    v|V) VNET=<span class="hljs-string">"<span class="hljs-variable">${OPTARG}</span>"</span> ;;
-    a|A) VRGROUP=<span class="hljs-string">"<span class="hljs-variable">${OPTARG}</span>"</span> ;;
-    s|S) SUBNAME=<span class="hljs-string">"<span class="hljs-variable">${OPTARG}</span>"</span> ;;
-    n|N) VM_NAME=<span class="hljs-string">"<span class="hljs-variable">${OPTARG}</span>"</span> ;;
-    u|U) VM_USERNAME=<span class="hljs-string">"<span class="hljs-variable">${OPTARG}</span>"</span> ;;
-    t|T) TYPE=<span class="hljs-string">"<span class="hljs-variable">${OPTARG}</span>"</span> ;;
-    d|D) DISK=<span class="hljs-string">"<span class="hljs-variable">${OPTARG}</span>"</span> ;;
-    i|I) IMAGE=<span class="hljs-string">"<span class="hljs-variable">${OPTARG}</span>"</span> ;;
-    h|H) print_usage <span class="hljs-built_in">exit</span> 1;;
-    *) print_usage
-       <span class="hljs-built_in">exit</span> 1 ;;
-  <span class="hljs-keyword">esac</span>
-<span class="hljs-keyword">done</span>
-
-<span class="hljs-comment">#VM Characteristics</span>
-SUBNETID=$(az network vnet subnet show -g <span class="hljs-variable">$VRGROUP</span> -n <span class="hljs-variable">$SUBNAME</span> --vnet-name <span class="hljs-variable">$VNET</span> --output tsv --query <span class="hljs-string">'id'</span>)
-[ -n <span class="hljs-string">"<span class="hljs-variable">$SUBNETID</span>"</span> ]
-
-<span class="hljs-built_in">echo</span> <span class="hljs-string">"Parameters"</span>
-<span class="hljs-built_in">echo</span> <span class="hljs-string">"Resource Group: <span class="hljs-variable">$RG</span>"</span>
-<span class="hljs-built_in">echo</span> <span class="hljs-string">"Location: <span class="hljs-variable">$LOCATION</span>"</span>
-<span class="hljs-built_in">echo</span> <span class="hljs-string">"VNET: <span class="hljs-variable">$VNET</span>"</span>
-<span class="hljs-built_in">echo</span> <span class="hljs-string">"VNET Resource Group: <span class="hljs-variable">$VRGROUP</span>"</span>
-<span class="hljs-built_in">echo</span> <span class="hljs-string">"Subnet Name: <span class="hljs-variable">$SUBNAME</span>"</span>
-<span class="hljs-built_in">echo</span> <span class="hljs-string">"VM Name: <span class="hljs-variable">$VM_NAME</span>"</span>
-<span class="hljs-built_in">echo</span> <span class="hljs-string">"VM Username: <span class="hljs-variable">$VM_USERNAME</span>"</span>
-<span class="hljs-built_in">echo</span> <span class="hljs-string">"VM Type: <span class="hljs-variable">$TYPE</span>"</span>
-<span class="hljs-built_in">echo</span> <span class="hljs-string">"Image (OS): <span class="hljs-variable">$IMAGE</span>"</span>
-<span class="hljs-built_in">echo</span> <span class="hljs-string">"Disk Size: <span class="hljs-variable">$DISK</span> GB"</span>
-<span class="hljs-built_in">echo</span> <span class="hljs-string">"Subnet ID: <span class="hljs-variable">$SUBNETID</span>"</span>
-
-az vm create \
-    --resource-group <span class="hljs-variable">$RG</span> \
-    --name <span class="hljs-variable">$VM_NAME</span> \
-    --location <span class="hljs-variable">$LOCATION</span> \
-    --image <span class="hljs-variable">$IMAGE</span> \
-    --size <span class="hljs-variable">$TYPE</span> \
-    --admin-username <span class="hljs-variable">$VM_USERNAME</span> \
-    --generate-ssh-keys \
-    --storage-sku Standard_LRS \
-    --os-disk-size-gb <span class="hljs-variable">$DISK</span> \
-    --custom-data cloud-init.txt \
-    --subnet <span class="hljs-variable">$SUBNETID</span> \
-    --public-ip-address <span class="hljs-string">""</span>
-</code></pre></li>
-<li><p><code>cloud-init.txt</code> - contains initialisation settings for the VM.</p>
+<p>There is an option to use SSH keys as part of the VM creation process. See the Microsoft documentation for further details:</p>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys">Linux or macOS</a></li>
+<li><a href="https://docs.microsoft.com/en-us/azure/virtual-machines/linux/ssh-from-windows">Windows</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="create-the-cloud-init-template"></a><a href="#create-the-cloud-init-template" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create the cloud-init template</h2>
+<p>Create this file with the name <code>cloud-init.txt</code> in the same location you will run the Azure CLI:</p>
 <pre><code class="hljs css language-text">#cloud-config
 
 package_update: true
@@ -168,7 +99,7 @@ apt:
       source: "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
       key: |
         -----BEGIN PGP PUBLIC KEY BLOCK-----
-
+        
         mQINBFit2ioBEADhWpZ8/wvZ6hUTiXOwQHXMAlaFHcPH9hAtr4F1y2+OYdbtMuth
         lqqwp028AqyY+PRfVMtSYMbjuQuu5byyKR01BbqYhuS3jtqQmljZ/bJvXqnmiVXh
         38UuLa+z077PxyxQhu5BbqntTPQMfiyqEiU+BKbq2WmANUKQf+1AmZY/IruOXbnq
@@ -250,61 +181,101 @@ runcmd:
 system_info:
     default_user:
         groups: [docker]
-</code></pre></li>
-</ol>
-<h2><a class="anchor" aria-hidden="true" id="use-the-azure-template-script-to-create-the-vm"></a><a href="#use-the-azure-template-script-to-create-the-vm" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Use the Azure template script to create the VM</h2>
+</code></pre>
+<p>This template contains initialization parameters for the VM, and pre-installs the required services.</p>
+<h2><a class="anchor" aria-hidden="true" id="required-parameters"></a><a href="#required-parameters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Required parameters</h2>
+<p>The variables required to create a suitable VM are:</p>
+<ul>
+<li><p>The name for the VM (user defined).</p>
+<p><em>Example:</em> <code>--name docker_host01</code></p></li>
+<li><p>The <a href="https://docs.microsoft.com/en-us/cli/azure/group?view=azure-cli-latest#az-group-list">Azure Resource group</a> to use for the VM. <em>Must already exist</em>.</p>
+<p>Use the <code>name</code> value from <code>az group list --output table</code>.</p>
+<p><em>Example:</em> <code>--resource-group GRP-my.name1</code></p></li>
+<li><p>The admin username to log in to the VM with (user defined).</p>
+<p><em>Example:</em> <code>--admin-username vm_user</code></p></li>
+<li><p>The VM size from the <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes">Azure templates</a>.</p>
+<p>Use the <code>name</code> value from <code>az vm list-sizes --location &lt;vm-location&gt; --output table</code>.</p>
+<p><em>Example:</em> <code>--size Standard_D4_v3</code></p></li>
+<li><p>The storage <a href="https://docs.microsoft.com/en-us/rest/api/storagerp/srp_sku_types">SKU type</a> to use.</p>
+<p><em>Example:</em> <code>--storage-sku Standard_LRS</code></p></li>
+<li><p>The <a href="https://docs.microsoft.com/en-us/cli/azure/vm/image?view=azure-cli-latest#az-vm-image-list">image (operating system)</a>.</p>
+<p>Use the <code>urnAlias</code> value from <code>az vm image list --location &lt;vm-location&gt; --output table</code>.</p>
+<p><em>Example:</em> <code>--image UbuntuLTS</code></p></li>
+<li><p>The operating system's disk size (in GB).</p>
+<p>We recommend a minimum of 32 GB as the <code>/var/lib/docker</code> directory will need to store large images.</p>
+<p><em>Example:</em> <code>--os-disk-size-gb 32</code></p></li>
+<li><p>The authentication type when logging in to the VM.</p>
+<p>You can choose an admin password or your local SSH public key, or you can choose both.</p>
 <ol>
-<li><p>Collect all required variables before running the script.</p>
-<table>
-<thead>
-<tr><th>Variable</th><th>Flag</th><th>Example</th><th>Description</th></tr>
-</thead>
-<tbody>
-<tr><td>Resource Group</td><td><code>-g</code></td><td><code>GRP-my.name1</code></td><td>The <a href="https://docs.microsoft.com/en-us/cli/azure/group?view=azure-cli-latest">Azure Resource group</a> to use for the VM. <strong>Must already exist</strong>.</td></tr>
-<tr><td>Location</td><td><code>-l</code></td><td><code>westeurope</code></td><td>The <a href="https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-list-locations">Azure location</a> for the VM.</td></tr>
-<tr><td>VNET</td><td><code>-v</code></td><td><code>GRP-westeurope-vnet</code></td><td>The <a href="https://docs.microsoft.com/en-us/cli/azure/network/vnet?view=azure-cli-latest">Azure Virtual Network</a> to use for the VM. <strong>Must already exist</strong>.</td></tr>
-<tr><td>VNET Resource Group</td><td><code>-a</code></td><td><code>GRP</code></td><td>The <a href="https://docs.microsoft.com/en-us/cli/azure/group?view=azure-cli-latest">Azure Resource group</a> that the chosen VNET resides in. This is used to obtain the <a href="https://docs.microsoft.com/en-us/cli/azure/network/vnet/subnet?view=azure-cli-latest#az-network-vnet-subnet-show">subnet ID</a>. <strong>Must already exist</strong>.</td></tr>
-<tr><td>Subnet Name</td><td><code>-s</code></td><td><code>default</code></td><td>The Azure Virtual Network <a href="https://docs.microsoft.com/en-us/cli/azure/network/vnet/subnet?view=azure-cli-latest">Subnet name</a>. <strong>Must already exist</strong>.</td></tr>
-<tr><td>VM Name</td><td><code>-n</code></td><td><code>docker_host01</code></td><td>Define the Virtual Machine name in Azure.</td></tr>
-<tr><td>VM Username</td><td><code>-u</code></td><td><code>vm_user</code></td><td>Define the username to access the Virtual Machine with.</td></tr>
-<tr><td><a href="https://docs.microsoft.com/en-us/cli/azure/vm?view=azure-cli-latest#az-vm-list-sizes">VM Type</a></td><td><code>-t</code></td><td><code>Standard_D4_v3</code></td><td>Define the Virtual Machine size from the <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes">Azure templates</a>. The <code>name</code> value from <code>az vm list-sizes --location &lt;vm_location&gt;</code> should be the value here.</td></tr>
-<tr><td>Disk Size</td><td><code>-d</code></td><td><code>32</code></td><td>Define the disk space on the Virtual Machine in GigaBytes (GB).</td></tr>
-<tr><td><a href="https://docs.microsoft.com/en-us/cli/azure/vm/image?view=azure-cli-latest#az-vm-image-list">Image (OS)</a></td><td><code>-i</code></td><td><code>UbuntuLTS</code></td><td>Define the Virtual Machine's Operating System from the <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-ps-findimage">Azure images</a>. The <code>urnAlias</code> value from <code>az vm image list [--all] [--location]</code> should be the value here.</td></tr>
-</tbody>
-</table>
-</li>
-<li><p>Make the script executable.</p>
-<p><code>chmod +x create_docker_vm.sh</code></p></li>
-<li><p>Run the script using the variables collected above.</p>
-<p><code>./create_docker_vm.sh -g GRP-my.name1 -l westeurope -v GRP-westeurope-vnet -a GRP -s default -n docker_host01 -u vm_user -t Standard_D4_v3 -d 32 -i UbuntuLTS</code></p>
-<p><em>Example output</em></p>
-<pre><code class="hljs css language-text">Parameters
-Resource Group: GRP-my.name1
-Location: westeurope
-VNET: GRP-westeurope-vnet
-VNET Resource Group: GRP
-Subnet Name: default
-VM Name: docker_host01
-VM Username: vm_user
-VM Type: Standard_D4_v3
-Disk Size: 32 GB
-Image (OS): UbuntuLTS
-Subnet ID: /subscriptions/3842fefa-7697-4e7d-b051-a5a3ae601030/resourceGroups/GRP/providers/Microsoft.Network/virtualNetworks/GRP-westeurope-vnet/subnets/default
-{
-  "fqdns": "",
-  "id": "/subscriptions/3842fefa-7697-4e7d-b051-a5a3ae601030/resourceGroups/GRP-my.name1/providers/Microsoft.Compute/virtualMachines/docker_host01",
-  "location": "westeurope",
-  "macAddress": "00-0D-3A-3A-9D-52",
-  "powerState": "VM running",
-  "privateIpAddress": "172.10.1.10",
-  "publicIpAddress": "",
-  "resourceGroup": "GRP-my.name1",
-  "zones": ""
-}
-</code></pre></li>
+<li><em>Example:</em> <code>--authentication-type ssh --ssh-key-values ~/.ssh/id_rsa.pub</code></li>
+<li><em>Example:</em> <code>--authentication-type password --admin-password mypassword</code></li>
+<li><em>Example:</em> <code>--authentication-type all --ssh-key-values ~/.ssh/id_rsa.pub --admin-password mypassword</code></li>
 </ol>
+<p>Alternatively, choose to generate SSH keys for the VM.</p>
+<ol>
+<li><em>Example:</em> <code>--authentication-type ssh --generate-ssh-keys</code></li>
+<li><em>Example:</em> <code>--authentication-type all --generate-ssh-keys --admin-password mypassword</code></li>
+</ol>
+<p>See the links in the <a href="#ssh-keys">SSH keys</a> section for more info.</p></li>
+<li><p>The <a href="https://docs.microsoft.com/en-us/cli/azure/network/vnet/subnet?view=azure-cli-latest#az-network-vnet-subnet-list">subnet ID</a> to use for the VM.</p>
+<p>You first need a virtual network (VNet) and its subnet name. Using these, you can get the subnet ID.</p>
+<ol>
+<li><p>To get a list of VNets available to your account, use:</p>
+<p><code>az resource list --location &lt;vm-location&gt; --query &quot;[?type=='Microsoft.Network/virtualNetworks'].{VNetName:name, ResourceGroup:resourceGroup}&quot; --output table</code></p></li>
+<li><p>The <strong>VNetName</strong> and <strong>ResourceGroup</strong> can then be used to list your VNet subnets:</p>
+<p><code>az network vnet subnet list --vnet-name &lt;vnet-name&gt; -g &lt;vnet-resource-group&gt; --output table</code></p>
+<p>The subnet names are listed in the <strong>Name</strong> column.</p></li>
+<li><p>Now get the subnet ID by using the <strong>VNetName</strong>, <strong>ResourceGroup</strong> and subnet <strong>Name</strong> in the following command:</p>
+<p><code>az network vnet subnet show --vnet-name &lt;vnet-name&gt; -g &lt;vnet-resource-group&gt; -n &lt;subnet-name&gt; --output tsv --query 'id'</code></p></li>
+</ol>
+<p>Use the output of this last step for the subnet parameter.</p>
+<p><em>Example:</em>  <code>--subnet /subscriptions/3842fefa-8901-4e7d-c789-a5a3ae567890/resourceGroups/GRP/providers/Microsoft.Network/virtualNetworks/GRP-westeurope-vnet/subnets/default</code></p></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="optional-parameters"></a><a href="#optional-parameters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Optional parameters</h3>
+<ul>
+<li><p>The <a href="https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-list-locations">Azure location</a> for the VM.</p>
+<p>The location will default to the Azure resource group you have selected for the VM. You can change it with this parameter.</p>
+<p><em>Example:</em> <code>--location westeurope</code></p></li>
+<li><p>Use a private IP address for the VM.</p>
+<p>Prevent a public IP address from being generated by setting the parameter value to none.</p>
+<p><em>Example:</em> <code>--public-ip-address &quot;&quot;</code></p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="create-the-vm"></a><a href="#create-the-vm" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create the VM</h2>
+<p>Create the VM using the information collected above. You must also include the <code>--custom-data</code> parameter to reference the <code>cloud-init.txt</code> template created earlier.</p>
+<p><em>Example usage</em></p>
+<pre><code class="hljs css language-bash">az vm create \
+--custom-data cloud-init.txt \
+--name docker_host01 \
+--resource-group GRP-my.name1 \
+--admin-username vm_user \
+--size Standard_D4_v3 \
+--storage-sku Standard_LRS \
+--image UbuntuLTS \
+--os-disk-size-gb 32 \
+--authentication-type ssh --ssh-key-values ~/.ssh/id_rsa.pub \
+--subnet /subscriptions/3842fefa-8901-4e7d-c789-a5a3ae567890/resourceGroups/GRP/providers/Microsoft.Network/virtualNetworks/GRP-westeurope-vnet/subnets/default \
+--location westeurope \
+--public-ip-address <span class="hljs-string">""</span>
+</code></pre>
+<p><em>Example output</em></p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"fqdns"</span>: <span class="hljs-string">""</span>,
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"/subscriptions/3842fefa-8901-4e7d-c789-a5a3ae567890/resourceGroups/GRP-my.name4/providers/Microsoft.Compute/virtualMachines/docker_host01"</span>,
+  <span class="hljs-attr">"location"</span>: <span class="hljs-string">"westeurope"</span>,
+  <span class="hljs-attr">"macAddress"</span>: <span class="hljs-string">"00-0D-3A-A8-71-A6"</span>,
+  <span class="hljs-attr">"powerState"</span>: <span class="hljs-string">"VM running"</span>,
+  <span class="hljs-attr">"privateIpAddress"</span>: <span class="hljs-string">"172.10.1.10"</span>,
+  <span class="hljs-attr">"publicIpAddress"</span>: <span class="hljs-string">""</span>,
+  <span class="hljs-attr">"resourceGroup"</span>: <span class="hljs-string">"GRP-my.name4"</span>,
+  <span class="hljs-attr">"zones"</span>: <span class="hljs-string">""</span>
+}
+</code></pre>
 <p>You can now log in to your Azure VM, for example <code>ssh vm_user@172.10.1.10</code>.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_prep"><span>Azure VM Preparation</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#prerequisites">Prerequisites</a><ul class="toc-headings"><li><a href="#ssh-keys">SSH keys</a></li></ul></li><li><a href="#create-templates">Create templates</a></li><li><a href="#use-the-azure-template-script-to-create-the-vm">Use the Azure template script to create the VM</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="https://wandisco.github.io/wandisco-documentation/" class="nav-home"></a><div><h5>Docs</h5><a href="https://wandisco.github.io/wandisco-documentation/docs/en/quickstarts/quickstart-config.html">Getting Started</a><a href="https://docs.wandisco.com">Product User Guides</a><a href="https://community.wandisco.com/s/knowledge-base">Knowledge Base</a></div><div><h5>Community</h5><a href="https://community.wandisco.com/">WANdisco Community</a><a href="//wandisco.com/partners/find">Partners</a><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="https://wandisco.com/blog">Blog</a><a href="https://blogs.wandisco.com/">Developer Blog</a><a href="https://github.com/wandisco">GitHub</a></div></section><section class="copyright">Copyright © 2020 WANdisco, Inc.</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+<h2><a class="anchor" aria-hidden="true" id="references"></a><a href="#references" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>References</h2>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/cli/azure/vm?view=azure-cli-latest#az-vm-create">Azure parameters for VM creation</a></li>
+</ul>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_prep"><span>Azure VM Preparation</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#prerequisites">Prerequisites</a><ul class="toc-headings"><li><a href="#ssh-keys">SSH keys</a></li></ul></li><li><a href="#create-the-cloud-init-template">Create the cloud-init template</a></li><li><a href="#required-parameters">Required parameters</a><ul class="toc-headings"><li><a href="#optional-parameters">Optional parameters</a></li></ul></li><li><a href="#create-the-vm">Create the VM</a></li><li><a href="#references">References</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="https://wandisco.github.io/wandisco-documentation/" class="nav-home"></a><div><h5>Docs</h5><a href="https://wandisco.github.io/wandisco-documentation/docs/en/quickstarts/quickstart-config.html">Getting Started</a><a href="https://docs.wandisco.com">Product User Guides</a><a href="https://community.wandisco.com/s/knowledge-base">Knowledge Base</a></div><div><h5>Community</h5><a href="https://community.wandisco.com/">WANdisco Community</a><a href="//wandisco.com/partners/find">Partners</a><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="https://wandisco.com/blog">Blog</a><a href="https://blogs.wandisco.com/">Developer Blog</a><a href="https://github.com/wandisco">GitHub</a></div></section><section class="copyright">Copyright © 2020 WANdisco, Inc.</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;
