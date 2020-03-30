@@ -68,7 +68,7 @@ Log in to your VM prior to starting these steps.
 
    `./setup-env.sh`
 
-1. Enter `n` when asked whether to use the Hortonworks Sandbox.
+1. Choose the `Custom deployment` option when prompted.
 
 1. Enter the zone details:
 
@@ -153,13 +153,13 @@ On the dashboard, create a **HCFS** rule with the following parameters:
 
 1. On the dashboard, view the `migration` rule.
 
-2. Start your migration with the following settings:
+1. Start your migration with the following settings:
 
    * Source Zone = **adls1**
    * Target Zone = **adls2**
    * Overwrite Settings = **Skip**
 
-3. Wait until the migration is complete, and check the contents of your ADLS Gen2 container.
+1. Wait until the migration is complete, and check the contents of your ADLS Gen2 container.
 
    A new ~50MB file will exist inside (`customer_addresses_dim.tsv.gz`).
 
