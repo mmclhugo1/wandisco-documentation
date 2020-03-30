@@ -4,6 +4,12 @@
     "docs.wandisco.com": [
       "docs/doc1"
     ],
+    "Architecture": [
+      "docs/architecture/arch_hdp_sandbox_az_databricks_lan"
+    ],
+    "Network": [
+      "docs/network/net_bandwidth_considerations"
+    ],
     "Configuration properties": [
       "docs/config-properties/config-properties",
       "docs/config-properties/application.properties",
@@ -35,9 +41,9 @@
     ],
     "Installation": [
       "quickstarts/installation/quickstart-config",
-      "quickstarts/installation/hdp-adlsg2",
-      "quickstarts/installation/cdh-adlsg2",
+      "quickstarts/installation/adlsg1-adlsg2",
       "quickstarts/installation/hdp_sandbox_adlsg2_lm",
+      "quickstarts/installation/hdp_sandbox_adlsg2_ld",
       "quickstarts/installation/hdp_sandbox_lhv_client-adlsg2_lan"
     ],
     "Operation": [
@@ -47,9 +53,12 @@
       "quickstarts/operation/hdp_sandbox_fusion_stop_start"
     ],
     "Troubleshooting": [
-      "quickstarts/troubleshooting/useful_info",
-      "quickstarts/troubleshooting/hdp_sandbox_lan_troubleshooting",
-      "quickstarts/troubleshooting/logs"
+      "quickstarts/troubleshooting/general_troubleshooting",
+      "quickstarts/troubleshooting/hdp_sandbox_troubleshooting",
+      "quickstarts/troubleshooting/adlsg2_troubleshooting",
+      "quickstarts/troubleshooting/databricks_troubleshooting",
+      "quickstarts/troubleshooting/logs",
+      "quickstarts/troubleshooting/useful_info"
     ]
   },
   "Glossary": {

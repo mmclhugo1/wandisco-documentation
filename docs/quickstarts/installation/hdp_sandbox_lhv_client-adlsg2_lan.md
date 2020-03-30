@@ -12,7 +12,12 @@ What this guide will cover:
 
 - Installing WANdisco Fusion and a HDP Sandbox using the [docker-compose](https://docs.docker.com/compose/) tool.
 - Integrating WANdisco Fusion with Azure Databricks.
-- Performing a sample data migration.
+- Live replication of sample data and metadata.
+
+If you would like to try something different with the HDP Sandbox, see:
+
+* [Migration of data to ADLS Gen2](./hdp_sandbox-adlsg2_lm.md)
+* [Live replication of data to ADLS Gen2](./hdp_sandbox-adlsg2_ld.md)
 
 ## Prerequisites
 
@@ -241,7 +246,10 @@ Your Databricks cluster must be **running** before testing Hive replication. Sam
 
 4. Under the Plot Options, remove all **Keys** that are present.
 
-5. Click and drag **state_code** from the **All fields** box into the **Keys** box. Click **Apply** afterwards.
+5. Configure the map as follows:
+
+   * Keys: **state_code**
+   * Values: **customer_id**
 
    You should now see a plot of USA with color shading - dependent on the population density.
 
@@ -257,6 +265,6 @@ _You have now successfully replicated data from your HDP Sandbox to your ADLS Ge
 
 ## Troubleshooting
 
-* See our [Troubleshooting](../troubleshooting/hdp_sandbox_lan_troubleshooting.md) guide for help with this install.
+* See our [Troubleshooting](../troubleshooting/hdp_sandbox_troubleshooting.md) guide for help with this install.
 
 * See the [shutdown and start up](../operation/hdp_sandbox_fusion_stop_start.md) guide for when you wish to safely shutdown or start back up the environment.
