@@ -115,7 +115,21 @@
 <p><code>cd fusion-docker-compose</code></p></li>
 <li><p>Run the setup script:</p>
 <p><code>./setup-env.sh</code></p></li>
-<li><p>Enter <code>y</code> when asked whether to use the HDP sandbox.</p></li>
+<li><p>Choose the <code>Hortonworks Sandbox to custom distribution</code> option when prompted.</p></li>
+<li><p>Enter the second zone details:</p>
+<ul>
+<li>Second zone type = <code>adls2</code></li>
+<li>Second zone name = <em>press enter for the default value</em></li>
+</ul></li>
+<li><p>Enter the ADLS Gen2 zone details:</p>
+<p><em>Examples:</em></p>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-component-versioning">HDI version</a> = <code>3.6</code>
+<ul>
+<li>This is required even if you are not intending to use a HDI cluster.</li>
+</ul></li>
+<li>Plugins = <code>NONE</code></li>
+</ul></li>
 <li><p>You have now completed the setup, to create and start your containers run:</p>
 <p><code>docker-compose up -d</code></p>
 <p>Docker will now download all required images and create the containers.</p></li>
