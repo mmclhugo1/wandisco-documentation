@@ -56,17 +56,30 @@ Log in to your VM prior to starting these steps.
 
    `git clone https://github.com/WANdisco/fusion-docker-compose.git`
 
-2. Change to the repository directory:
+1. Change to the repository directory:
 
    `cd fusion-docker-compose`
 
-3. Run the setup script:
+1. Run the setup script:
 
    `./setup-env.sh`
 
-4. Enter `y` when asked whether to use the HDP sandbox.
+1. Choose the `Hortonworks Sandbox to custom distribution` option when prompted.
 
-5. You have now completed the setup, to create and start your containers run:
+1. Enter the second zone details:
+
+   * Second zone type = `adls2`
+   * Second zone name = _press enter for the default value_
+
+1. Enter the ADLS Gen2 zone details:
+
+   _Examples:_
+
+   * [HDI version](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-component-versioning) = `3.6`
+     * This is required even if you are not intending to use a HDI cluster.
+   * Plugins = `NONE`
+
+1. You have now completed the setup, to create and start your containers run:
 
    `docker-compose up -d`
 
@@ -85,9 +98,9 @@ The HDP sandbox services can take up to 5-10 minutes to start. To check that the
    Username: `admin`
    Password: `admin`
 
-2. Select the **HDFS** service.
+1. Select the **HDFS** service.
 
-3. Wait until all the HDFS components are showing as **Started**.
+1. Wait until all the HDFS components are showing as **Started**.
 
 ### Configure the ADLS Gen2 zone
 
@@ -97,11 +110,11 @@ The HDP sandbox services can take up to 5-10 minutes to start. To check that the
 
    Enter your email address and choose a password you will remember.
 
-2. Click on the **Settings** cog for the **ADLS GEN2** zone, and fill in the details for your ADLS Gen2 storage account. See the [Info you will require](#info-you-will-require) section for reference.
+1. Click on the **Settings** cog for the **ADLS GEN2** zone, and fill in the details for your ADLS Gen2 storage account. See the [Info you will require](#info-you-will-require) section for reference.
 
-3. Check the **Use Secure Protocol** box.
+1. Check the **Use Secure Protocol** box.
 
-4. Click **Apply Configuration** and wait for this to complete.
+1. Click **Apply Configuration** and wait for this to complete.
 
 ## Migration
 
@@ -120,13 +133,13 @@ On the dashboard, create a **HCFS** rule with the following parameters:
 
 1. On the dashboard, view the `migration` rule.
 
-2. Start your migration with the following overwrite settings:
+1. Start your migration with the following overwrite settings:
 
    * Source Zone = **sandbox-hdp**
    * Target Zone = **adls2**
    * Overwrite Settings = **Skip**
 
-3. Wait until the migration is complete, and check the contents of your `/retail_demo` directory in your ADLS Gen2 container.
+1. Wait until the migration is complete, and check the contents of your `/retail_demo` directory in your ADLS Gen2 container.
 
    A new directory should exist (`customer_addresses_dim_hive`) with a ~50MB file inside (`customer_addresses_dim.tsv.gz`).
 

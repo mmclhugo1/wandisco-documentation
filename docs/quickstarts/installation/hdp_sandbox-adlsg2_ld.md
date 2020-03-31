@@ -64,7 +64,20 @@ Log in to your VM prior to starting these steps.
 
    `./setup-env.sh`
 
-1. Enter `y` when asked whether to use the HDP sandbox.
+1. Choose the `Hortonworks Sandbox to custom distribution` option when prompted.
+
+1. Enter the second zone details:
+
+   * Second zone type = `adls2`
+   * Second zone name = _press enter for the default value_
+
+1. Enter the ADLS Gen2 zone details:
+
+   _Examples:_
+
+   * [HDI version](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-component-versioning) = `3.6`
+     * This is required even if you are not intending to use a HDI cluster.
+   * Plugins = `NONE`
 
 1. You have now completed the setup, to create and start your containers run:
 
@@ -122,7 +135,7 @@ On the dashboard, create a **HCFS** rule with the following parameters:
 
    `docker-compose exec -u hdfs sandbox-hdp hdfs dfs -put /etc/services /testdir/test_file`
 
-2. Check that the `test_file` is now located in your `/testdir` directory on your ADLS Gen2 container.
+1. Check that the `test_file` is now located in your `/testdir` directory on your ADLS Gen2 container.
 
 _You have now set up live replication from your HDP Sandbox to your ADLS Gen2 container. Contact [WANdisco](https://wandisco.com/contact) for further information about Fusion and what it can offer you._
 

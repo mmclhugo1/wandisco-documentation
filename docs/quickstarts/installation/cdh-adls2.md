@@ -62,7 +62,7 @@ Log in to your VM prior to starting these steps.
 
    `./setup-env.sh`
 
-1. Enter `n` when asked whether to use the HDP sandbox.
+1. Choose the `Custom deployment` option when prompted.
 
 1. Enter the zone details:
 
@@ -115,11 +115,11 @@ Log in to your VM prior to starting these steps.
 
    Enter your email address and choose a password you will remember.
 
-2. Click on the **Settings** cog for the **ADLS GEN2** zone, and fill in the details for your ADLS Gen2 storage account. See the [Info you will require](#info-you-will-require) section for reference.
+1. Click on the **Settings** cog for the **ADLS GEN2** zone, and fill in the details for your ADLS Gen2 storage account. See the [Info you will require](#info-you-will-require) section for reference.
 
-3. Check the **Use Secure Protocol** box.
+1. Check the **Use Secure Protocol** box.
 
-4. Click **Apply Configuration** and wait for this to complete.
+1. Click **Apply Configuration** and wait for this to complete.
 
 ## Migration
 

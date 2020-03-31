@@ -64,17 +64,17 @@ Log in to your VM prior to starting these steps.
 
    `git clone https://github.com/WANdisco/fusion-docker-compose.git`
 
-2. Change to the repository directory:
+1. Change to the repository directory:
 
    `cd fusion-docker-compose`
 
-3. Run the setup script:
+1. Run the setup script:
 
    `./setup-env.sh`
 
-4. Enter `y` when asked whether to use the HDP sandbox.
+1. Choose the `Hortonworks Sandbox to ADLS Gen2, Live Hive and Databricks integration` option when prompted.
 
-5. You have now completed the setup, to create and start your containers run:
+1. You have now completed the setup, to create and start your containers run:
 
    `docker-compose up -d`
 
@@ -93,9 +93,9 @@ The HDP sandbox services can take up to 5-10 minutes to start. To check that the
    Username: `admin`
    Password: `admin`
 
-2. Select the **HDFS** service.
+1. Select the **HDFS** service.
 
-3. Wait until all the HDFS components are showing as **Started**.
+1. Wait until all the HDFS components are showing as **Started**.
 
 ### Configure the ADLS Gen2 zone
 
@@ -105,17 +105,17 @@ The HDP sandbox services can take up to 5-10 minutes to start. To check that the
 
    Enter your email address and choose a password you will remember.
 
-2. Click on the **Settings** cog for the **ADLS GEN2** zone, and fill in the details for your ADLS Gen2 storage account. See the [Info you will require](#info-you-will-require) section for reference.
+1. Click on the **Settings** cog for the **ADLS GEN2** zone, and fill in the details for your ADLS Gen2 storage account. See the [Info you will require](#info-you-will-require) section for reference.
 
-3. Check the **Use Secure Protocol** box.
+1. Check the **Use Secure Protocol** box.
 
-4. Click **Apply Configuration** and wait for this to complete.
+1. Click **Apply Configuration** and wait for this to complete.
 
 ### Configure Fusion Plugin for Databricks Delta Lake
 
 1. Click on the **Settings** cog in the **ADLS GEN2** zone, and fill in the details for your Databricks cluster. See the [Info you will require](#info-you-will-require) section for reference.
 
-2. Click **Activate** and wait for the status to show as **Active** before continuing.
+1. Click **Activate** and wait for the status to show as **Active** before continuing.
 
 ## Replication
 
@@ -130,7 +130,7 @@ Follow the steps below to demonstrate live replication of HCFS data and Hive met
    * Default exclusions
    * Preserve HCFS Block Size = *True*
 
-2. Now create a **Hive** rule with the following parameters:
+1. Now create a **Hive** rule with the following parameters:
 
    * Rule Name = `Demo`
    * Pattern to match database names = `databricks_demo`
@@ -144,7 +144,7 @@ Follow the steps below to demonstrate live replication of HCFS data and Hive met
 
    `docker-compose exec -u hdfs sandbox-hdp hdfs dfs -put /etc/services /apps/hive/warehouse/test_file`
 
-2. Check that the `test_file` is now located in your `/apps/hive/warehouse` directory on your ADLS Gen2 container.
+1. Check that the `test_file` is now located in your `/apps/hive/warehouse` directory on your ADLS Gen2 container.
 
 ### Test Hive replication
 
@@ -152,15 +152,15 @@ Your Databricks cluster must be **running** before testing Hive replication. Sam
 
 1. Return to the terminal session on the **Docker host**.
 
-2. Use beeline on the **sandbox-hdp** container to connect to the Hiveserver2 service as hdfs user:
+1. Use beeline on the **sandbox-hdp** container to connect to the Hiveserver2 service as hdfs user:
 
    `docker-compose exec -u hdfs sandbox-hdp beeline -u jdbc:hive2://sandbox-hdp:10000/ -n hdfs`
 
-3. Create a database for the sample data:
+1. Create a database for the sample data:
 
    `CREATE DATABASE IF NOT EXISTS retail_demo;`
 
-4. Create a table inside the database that points to the sample data:
+1. Create a table inside the database that points to the sample data:
 
    ```sql
    CREATE TABLE retail_demo.customer_addresses_dim_hive
@@ -184,11 +184,11 @@ Your Databricks cluster must be **running** before testing Hive replication. Sam
    LOCATION '/retail_demo/customer_addresses_dim_hive/';
    ```
 
-5. Create a second database matching the Database name in the Hive replication rule created earlier:
+1. Create a second database matching the Database name in the Hive replication rule created earlier:
 
    `CREATE DATABASE IF NOT EXISTS databricks_demo;`
 
-6. Create a table inside this second database:
+1. Create a table inside this second database:
 
    ```sql
    CREATE TABLE databricks_demo.customer_addresses_dim_hive
@@ -210,7 +210,7 @@ Your Databricks cluster must be **running** before testing Hive replication. Sam
    stored as ORC;
    ```
 
-7. Now insert data into the table:
+1. Now insert data into the table:
 
    `INSERT INTO databricks_demo.customer_addresses_dim_hive SELECT * FROM retail_demo.customer_addresses_dim_hive WHERE state_code = 'CA';`
 
@@ -238,22 +238,22 @@ Your Databricks cluster must be **running** before testing Hive replication. Sam
 
    You should now see a blank notebook.
 
-2. Inside the **Cmd 1** box, add the query and **Run Cell**:
+1. Inside the **Cmd 1** box, add the query and **Run Cell**:
 
    `SELECT * FROM databricks_demo.customer_addresses_dim_hive;`
 
-3. Wait for the query to return, then select the drop-down graph type and choose **Map**.
+1. Wait for the query to return, then select the drop-down graph type and choose **Map**.
 
-4. Under the Plot Options, remove all **Keys** that are present.
+1. Under the Plot Options, remove all **Keys** that are present.
 
-5. Configure the map as follows:
+1. Configure the map as follows:
 
    * Keys: **state_code**
    * Values: **customer_id**
 
    You should now see a plot of USA with color shading - dependent on the population density.
 
-6. If desired, you can repeat this process except using the Texas state code instead of California.
+1. If desired, you can repeat this process except using the Texas state code instead of California.
 
    Back in the Hive beeline session on the **fusion_sandbox-hdp_1** container, run the following command:
 
