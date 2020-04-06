@@ -5,8 +5,9 @@
       "docs/doc1"
     ],
     "Architecture": [
-      "docs/architecture/arch_hdp_sandbox_az_databricks_lan",
-      "docs/architecture/arch_hdp_sandbox_adlsg2"
+      "docs/architecture/arch_adlsg1_adlsg2",
+      "docs/architecture/arch_hdp_sandbox_adlsg2",
+      "docs/architecture/arch_hdp_sandbox_az_databricks_lan"
     ],
     "Network": [
       "docs/network/net_bandwidth_considerations"
