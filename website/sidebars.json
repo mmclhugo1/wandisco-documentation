@@ -39,7 +39,7 @@
   "quickstarts": {
     "Preparation": [
       "quickstarts/preparation/azure_vm_creation",
-      "quickstarts/preparation/azure_vm_prep"
+      "quickstarts/preparation/vm_prep"
     ],
     "Installation": [
       "quickstarts/installation/quickstart-config",
