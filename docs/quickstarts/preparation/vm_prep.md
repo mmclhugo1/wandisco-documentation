@@ -1,25 +1,27 @@
 ---
-id: azure_vm_prep
-title: Preparing an Azure Linux VM for a Fusion installation
-sidebar_label: Azure VM Preparation
+id: vm_prep
+title: Preparing a Virtual Machine for a Fusion installation
+sidebar_label: VM Preparation
 ---
 
-This quickstart helps you prepare an Azure Linux VM suitable for a Fusion installation using docker. It walks you through:
+This quickstart helps you prepare an Linux Virtual Machine (VM) suitable for a Fusion installation using docker. It walks you through:
 
 * Installation of services.
 * Verification of available storage for docker images.
+
+[//]: <Include reference to DOCU-516 once complete.>
 
 |This is not required if you have used our [Azure VM Creation](./azure_vm_creation.md) guide, as all services and disk requirements will have been included.|
 |---|
 
 ## Prerequisites
 
-* Azure Virtual Machine (VM).
+* Linux Virtual Machine.
   * Root or sudo access on server (this is normally available by default).
   * A minimum of 24GB available storage for the `/var/lib/docker` directory.
     * If creating your VM through the Azure portal, you may have insufficient disk space by default. See the [Microsoft docs](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/expand-os-disk) for further info.
 
-_These instructions have been tested on Ubuntu LTS._
+_These instructions have been tested on Ubuntu 18.04 LTS._
 
 ## Preparation
 
@@ -27,11 +29,11 @@ _These instructions have been tested on Ubuntu LTS._
 
 1. Log in to the VM via a terminal session.
 
-2. Run the command below to install Git.
+1. Run the command below to install Git.
 
    `apt-get update && apt install -y git`
 
-3. Run the commands below to install [Docker](https://docs.docker.com/install/) (v19.03.5 or higher).
+1. Run the commands below to install [Docker](https://docs.docker.com/install/) (v19.03.5 or higher).
 
    `apt install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common`
 
@@ -41,7 +43,7 @@ _These instructions have been tested on Ubuntu LTS._
 
    `apt-get update && apt install -y docker-ce docker-ce-cli containerd.io`
 
-4. Start the Docker service and verify that it is correctly installed.
+1. Start the Docker service and verify that it is correctly installed.
 
    `systemctl start docker`
 
@@ -49,7 +51,7 @@ _These instructions have been tested on Ubuntu LTS._
 
    `systemctl enable docker` - This will enable docker to start up automatically on server reboot.
 
-5. Install [Docker Compose for Linux](https://docs.docker.com/compose/install/#install-compose) (v1.25.0 or higher) by running the commands below.
+1. Install [Docker Compose for Linux](https://docs.docker.com/compose/install/#install-compose) (v1.25.0 or higher) by running the commands below.
 
    `curl -L "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose`
 
@@ -57,7 +59,7 @@ _These instructions have been tested on Ubuntu LTS._
 
    `ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose`
 
-6. Verify that Docker Compose is correctly installed.
+1. Verify that Docker Compose is correctly installed.
 
    `docker-compose --version`
 
