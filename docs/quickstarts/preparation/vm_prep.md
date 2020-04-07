@@ -4,17 +4,19 @@ title: Preparing a Virtual Machine for a Fusion installation
 sidebar_label: VM Preparation
 ---
 
-This quickstart helps you prepare an Azure Linux VM suitable for a Fusion installation using docker. It walks you through:
+This quickstart helps you prepare an Linux Virtual Machine (VM) suitable for a Fusion installation using docker. It walks you through:
 
 * Installation of services.
 * Verification of available storage for docker images.
+
+[//]: <Include reference to DOCU-516 once complete.>
 
 |This is not required if you have used our [Azure VM Creation](./azure_vm_creation.md) guide, as all services and disk requirements will have been included.|
 |---|
 
 ## Prerequisites
 
-* Azure Virtual Machine (VM).
+* Linux Virtual Machine.
   * Root or sudo access on server (this is normally available by default).
   * A minimum of 24GB available storage for the `/var/lib/docker` directory.
     * If creating your VM through the Azure portal, you may have insufficient disk space by default. See the [Microsoft docs](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/expand-os-disk) for further info.
