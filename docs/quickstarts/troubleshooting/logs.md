@@ -84,37 +84,31 @@ The `vim` and `less` commands are not available by default, to install them:
 
 #### Log locations
 
-You will be logged inside of the `/debug` directory, which contains directories that reference each Fusion component in their specific zone.
+You will be logged inside of the `/debug` directory, which contains directories for each Fusion zone and the OneUI (which is not linked to a specific zone).
 
 _Example_
 ```bash
-drwxr-xr-x 7 1000 1000 4096 Feb 26 16:47 ihc-server-adls2
-drwxr-xr-x 7 1000 1000 4096 Feb 26 16:47 ihc-server-sandbox-hdp
-drwxr-xr-x 7 1000 1000 4096 Feb 26 16:47 livehive-sandbox-hdp
-drwxr-xr-x 7 1000 1000 4096 Feb 26 16:47 npx-sandbox-hdp
-drwxr-xr-x 3 root root 4096 Feb 26 16:47 oneui-server
-drwxr-xr-x 7 1000 1000 4096 Feb 26 16:47 server-adls2
-drwxr-xr-x 7 1000 1000 4096 Feb 26 16:47 server-sandbox-hdp
-drwxr-xr-x 7 1000 1000 4096 Feb 26 16:47 ui-server-adls2
-drwxr-xr-x 7 1000 1000 4096 Feb 26 16:47 ui-server-sandbox-hdp
+drwxr-xr-x 3 root root 4096 Mar 31 11:51 oneui-server
+drwxr-xr-x 7 1000 1000 4096 Mar 31 11:51 adls2
+drwxr-xr-x 7 1000 1000 4096 Mar 31 11:51 sandbox-hdp
 ```
 
 The log locations for each component are slightly different to that of the individual containers.
 
 Fusion Server:
-`/debug/server-<zone-name>/server/`
+`/debug/<zone-name>/server/`
 
 IHC Server:
-`/debug/ihc-server-<zone-name>/ihc/server/`
+`/debug/<zone-name>/ihc/server/`
 
 UI Server:
-`/debug/ui-server-<zone-name>/ui/`
+`/debug/<zone-name>/ui/`
 
 NameNode Proxy:
-`/debug/npx-<zone-name>/plugins/live-nn/`
+`/debug/<zone-name>/plugins/live-nn/`
 
 Live Hive Proxy:
-`/debug/livehive-<zone-name>/plugins/live-hive-proxy/`
+`/debug/<zone-name>/plugins/live-hive-proxy/`
 
 OneUI:
 `/debug/oneui-server/oneui/`
