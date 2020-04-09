@@ -4,7 +4,7 @@ title: Hortonworks (HDP) Sandbox to S3 with LiveMigrator
 sidebar_label: HDP Sandbox to S3 with LiveMigrator
 ---
 
-Use this quickstart if you want to configure Fusion to replicate from a non-kerberized Hortonworks (HDP) Sandbox to a S3 bucket using WANdisco LiveMigrator.
+Use this quickstart if you want to configure Fusion to replicate from a non-kerberized Hortonworks (HDP) Sandbox to an S3 bucket using WANdisco LiveMigrator.
 
 What this guide will cover:
 
@@ -65,7 +65,7 @@ Log in to your VM prior to starting these steps.
 
    `./setup-env.sh`
 
-1. Choose the `Hortonworks Sandbox to AWS S3` option when prompted.
+1. Choose the `HDP Sandbox to S3` option when prompted.
 
 1. You have now completed the setup, to create and start your containers run:
 
@@ -77,7 +77,7 @@ Log in to your VM prior to starting these steps.
 
 ### Check HDP services are started
 
-The HDP sandbox services can take up to 5-10 minutes to start. To check that the HDFS service is started:
+The HDP Sandbox services can take up to 5-10 minutes to start. To check that the HDFS service is started:
 
 1. Log in to Ambari via a web browser.
 
@@ -104,7 +104,7 @@ The HDP sandbox services can take up to 5-10 minutes to start. To check that the
 
 ## Migration
 
-Follow the steps below to demonstrate migration of HCFS data from the HDP sandbox to the S3 bucket.
+Follow the steps below to demonstrate migration of HCFS data from the HDP Sandbox to the S3 bucket.
 
 ### Create replication rule
 
