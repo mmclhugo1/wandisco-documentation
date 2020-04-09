@@ -90,7 +90,7 @@ The HDP sandbox services can take up to 5-10 minutes to start. To check that the
 
 1. Wait until all the HDFS components are showing as **Started**.
 
-### Configure the S3 zone
+### Configure the S3 storage
 
 1. Log in to Fusion via a web browser.
 
@@ -98,7 +98,7 @@ The HDP sandbox services can take up to 5-10 minutes to start. To check that the
 
    Enter your email address and choose a password you will remember.
 
-1. Click on the **Settings** cog for the **s3** zone, and fill in the details for your S3 bucket. See the [Info you will require](#info-you-will-require) section for reference.
+1. Click on the **Settings** cog for the **s3** storage, and fill in the details for your S3 bucket. See the [Info you will require](#info-you-will-require) section for reference.
 
 1. Click **Apply Configuration** and wait for this to complete.
 
@@ -111,7 +111,7 @@ Follow the steps below to demonstrate migration of HCFS data from the HDP sandbo
 On the dashboard, create a **HCFS** rule with the following parameters:
 
 * Rule Name = `migration`
-* Path for all zones = `/retail_demo`
+* Path for all storages = `/retail_demo`
 * Default exclusions
 * Preserve HCFS Block Size = *True*
 
