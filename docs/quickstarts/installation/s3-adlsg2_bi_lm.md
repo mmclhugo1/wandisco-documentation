@@ -10,7 +10,7 @@ What this guide will cover:
 
 - Installing WANdisco Fusion using the [docker-compose](https://docs.docker.com/compose/) tool.
 - Integrating WANdisco Fusion with S3 and ADLS Gen2 storage.
-- Performing a sample data migration in each direction.
+- Performing sample data migrations in both directions.
 
 ## Prerequisites
 
@@ -105,7 +105,7 @@ Log in to your VM prior to starting these steps.
 
 ## Migration
 
-Follow the steps below to demonstrate migration of HCFS data to and from the S3 bucket and the ADLS Gen2 container.
+Follow the steps below to demonstrate migration of HCFS data between the S3 bucket and the ADLS Gen2 container.
 
 ### Get sample data
 
@@ -119,7 +119,7 @@ Follow the steps below to demonstrate migration of HCFS data to and from the S3 
 1. Get the sample data from the link below:  
    [customer_addresses_dim.tsv.gz](https://github.com/pivotalsoftware/pivotal-samples/raw/master/sample-data/customer_addresses_dim.tsv.gz)
 
-1. Upload the data to the directories created earlier on your S3 bucket and ADLS Gen2 container, see the links below for guidance:
+1. Upload the data to the directories created earlier on your S3 bucket and ADLS Gen2 container, see the relevant docs for more info:
 
    * [Amazon S3 console](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html#upload-objects-by-drag-and-drop) / [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/s3/cp.html#examples)
    * [ADLS Gen2](https://docs.microsoft.com/en-us/azure/data-lake-store/data-lake-store-get-started-portal#uploaddata)
@@ -168,7 +168,7 @@ Follow the steps below to demonstrate migration of HCFS data to and from the S3 
 
    A new ~50MB file will exist inside (`customer_addresses_dim.tsv.gz`).
 
-_You have now successfully migrated data to and from your S3 bucket and ADLS Gen2 container using LiveMigrator._
+_You have now successfully migrated data between your S3 bucket and ADLS Gen2 container using LiveMigrator._
 
 ## Troubleshooting
 
