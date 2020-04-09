@@ -47,7 +47,7 @@
       "quickstarts/installation/hdp_sandbox_adlsg2_lm",
       "quickstarts/installation/hdp_sandbox_adlsg2_ld",
       "quickstarts/installation/hdp_sandbox_lhv_client-adlsg2_lan",
-      "quickstarts/installation/s3_adlsg2_bi_lm"
+      "quickstarts/installation/s3-adlsg2_bi_lm"
     ],
     "Operation": [
       "quickstarts/operation/create-rule",

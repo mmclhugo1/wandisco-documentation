@@ -1,5 +1,5 @@
 ---
-id: s3_adlsg2_bi_lm
+id: s3-adlsg2_bi_lm
 title: S3 and Azure Data Lake Storage Gen2 (bi-directional) with LiveMigrator
 sidebar_label: S3 & ADLS Gen2 with LiveMigrator
 ---
@@ -19,11 +19,11 @@ What this guide will cover:
 
 To complete this install, you will need:
 
-* AWS S3 bucket.
+* S3 bucket.
 * ADLS Gen2 storage account with [hierarchical namespace](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-namespace) enabled.
   * You will also need a container created inside this account.
 * Linux Virtual Machine (e.g. AWS EC2 instance, Azure VM, etc).
-  * Minimum size recommendation = **4 vcpus, 16 GiB memory**
+  * Minimum size recommendation = **4 vcpus, 16 GiB memory** (e.g. [t3a.xlarge](https://aws.amazon.com/ec2/instance-types/), [Standard_D4_v3](https://docs.microsoft.com/en-us/azure/virtual-machines/dv3-dsv3-series?toc=/azure/virtual-machines/linux/toc.json&bc=/azure/virtual-machines/linux/breadcrumb/toc.json#dv3-series)).
   * A minimum of 24GB available storage for the `/var/lib/docker` directory.
     * If creating your VM through the Azure portal (and not via our [guide](../preparation/azure_vm_creation.md)), you may have insufficient disk space by default. See the [Microsoft docs](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/expand-os-disk) for further info.
 
@@ -83,7 +83,7 @@ Log in to your VM prior to starting these steps.
 
 ## Configuration
 
-### Configure the S3 zone
+### Configure the S3 storage
 
 1. Log in to Fusion via a web browser.
 
@@ -91,19 +91,13 @@ Log in to your VM prior to starting these steps.
 
    Enter your email address and choose a password you will remember.
 
-1. Click on the **Settings** cog for the **s3** zone, and fill in the details for your S3 bucket. See the [Info you will require](#info-you-will-require) section for reference.
+1. Click on the **Settings** cog for the **s3** storage, and fill in the details for your S3 bucket. See the [Info you will require](#info-you-will-require) section for reference.
 
 1. Click **Apply Configuration** and wait for this to complete.
 
-### Configure the ADLS Gen2 zone
+### Configure the ADLS Gen2 storage
 
-1. Log in to Fusion via a web browser.
-
-   `http://<docker_IP_address>:8081`
-
-   Enter your email address and choose a password you will remember.
-
-1. Click on the **Settings** cog for the **adls2** zone, and fill in the details for your ADLS Gen2 container. See the [Info you will require](#info-you-will-require) section for reference.
+1. Click on the **Settings** cog for the **adls2** storage, and fill in the details for your ADLS Gen2 container. See the [Info you will require](#info-you-will-require) section for reference.
 
 1. Check the **Use Secure Protocol** box.
 
@@ -135,14 +129,14 @@ Follow the steps below to demonstrate migration of HCFS data to and from the S3 
 1. On the dashboard, create a **HCFS** rule with the following parameters:
 
    * Rule Name = `migration_to_adls2`
-   * Path for all zones = `/s3_to_adls2`
+   * Path for all storages = `/s3_to_adls2`
    * Default exclusions
    * Preserve HCFS Block Size = *False*
 
 1. Create a second **HCFS** rule with the following parameters:
 
    * Rule Name = `migration_to_s3`
-   * Path for all zones = `/adls2_to_s3`
+   * Path for all storages = `/adls2_to_s3`
    * Default exclusions
    * Preserve HCFS Block Size = *False*
 
