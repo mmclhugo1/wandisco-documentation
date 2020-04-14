@@ -151,8 +151,8 @@ On the dashboard, create a **HCFS** rule with the following parameters:
 
 1. Start your migration with the following settings:
 
-   * Source Zone = **adls1**
-   * Target Zone = **adls2**
+   * Source Storage = **adls1**
+   * Target Storage = **adls2**
    * Overwrite Settings = **Skip**
 
 1. Wait until the migration is complete, and check the contents of your ADLS Gen2 container.
