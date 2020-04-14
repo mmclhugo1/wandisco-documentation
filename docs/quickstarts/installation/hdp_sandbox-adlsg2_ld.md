@@ -102,7 +102,7 @@ The HDP sandbox services can take up to 5-10 minutes to start. To check that the
 
 1. Wait until all the HDFS components are showing as **Started**.
 
-### Configure the ADLS Gen2 zone
+### Configure the ADLS Gen2 storage
 
 1. Log in to Fusion via a web browser.
 
@@ -110,7 +110,7 @@ The HDP sandbox services can take up to 5-10 minutes to start. To check that the
 
    Enter your email address and choose a password you will remember.
 
-1. Click on the **Settings** cog for the **adls2** zone, and fill in the details for your ADLS Gen2 storage account. See the [Info you will require](#info-you-will-require) section for reference.
+1. Click on the **Settings** cog for the **adls2** storage, and fill in the details for your ADLS Gen2 storage account. See the [Info you will require](#info-you-will-require) section for reference.
 
 1. Check the **Use Secure Protocol** box.
 
@@ -125,7 +125,7 @@ Follow the steps below to demonstrate live replication of HCFS data from the HDP
 On the dashboard, create a **HCFS** rule with the following parameters:
 
 * Rule Name = `replicate`
-* Path for all zones = `/testdir`
+* Path for all storages = `/testdir`
 * Default exclusions
 * Preserve HCFS Block Size = *False*
 
