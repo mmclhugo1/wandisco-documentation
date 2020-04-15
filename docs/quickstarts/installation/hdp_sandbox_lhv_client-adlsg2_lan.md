@@ -157,13 +157,11 @@ Your Databricks cluster must be **running** before testing Hive replication. Sam
    Username: `hdfs`
    Password: `hdfs`
 
-1. Inside the **Hive** box, add the query and push **play** button:
-
-1. Create a database for the sample data:
+1. To create a database for the sample data, add the query below inside the **Hive** box and push the **play** button:
 
    `CREATE DATABASE IF NOT EXISTS retail_demo;`
 
-1. Create a table inside the database that points to the sample data:
+1. Create a table inside the database that points to the sample data (add the query like before):
 
    ```sql
    CREATE TABLE retail_demo.customer_addresses_dim_hive
