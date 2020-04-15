@@ -72,10 +72,6 @@ Log in to your VM prior to starting these steps.
    * Second zone type = `adls2`
    * Second zone name = _press enter for the default value_
 
-1. When prompted, press enter to use the default trial license or provide the absolute file system path to your own license on the VM.
-
-   _Example:_  `/home/vm_user/license.key`
-
 1. Enter your docker hostname, which will be the VM hostname.
 
    _Example:_  `docker_host01.realm.com`
@@ -106,7 +102,7 @@ Log in to your VM prior to starting these steps.
 
 ## Configuration
 
-### Configure the ADLS Gen2 zone
+### Configure the ADLS Gen2 storage
 
 1. Log in to Fusion via a web browser.
 
@@ -114,7 +110,7 @@ Log in to your VM prior to starting these steps.
 
    Enter your email address and choose a password you will remember.
 
-1. Click on the **Settings** cog for the **ADLS GEN2** zone, and fill in the details for your ADLS Gen2 storage account. See the [Info you will require](#info-you-will-require) section for reference.
+1. Click on the **Settings** cog for the **ADLS GEN2** storage, and fill in the details for your ADLS Gen2 storage account. See the [Info you will require](#info-you-will-require) section for reference.
 
 1. Check the **Use Secure Protocol** box.
 

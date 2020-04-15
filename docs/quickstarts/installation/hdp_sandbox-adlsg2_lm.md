@@ -102,7 +102,7 @@ The HDP sandbox services can take up to 5-10 minutes to start. To check that the
 
 1. Wait until all the HDFS components are showing as **Started**.
 
-### Configure the ADLS Gen2 zone
+### Configure the ADLS Gen2 storage
 
 1. Log in to Fusion via a web browser.
 
@@ -110,7 +110,7 @@ The HDP sandbox services can take up to 5-10 minutes to start. To check that the
 
    Enter your email address and choose a password you will remember.
 
-1. Click on the **Settings** cog for the **ADLS GEN2** zone, and fill in the details for your ADLS Gen2 storage account. See the [Info you will require](#info-you-will-require) section for reference.
+1. Click on the **Settings** cog for the **ADLS GEN2** storage, and fill in the details for your ADLS Gen2 storage account. See the [Info you will require](#info-you-will-require) section for reference.
 
 1. Check the **Use Secure Protocol** box.
 
@@ -125,7 +125,7 @@ Follow the steps below to demonstrate migration of HCFS data from the HDP sandbo
 On the dashboard, create a **HCFS** rule with the following parameters:
 
 * Rule Name = `migration`
-* Path for all zones = `/retail_demo`
+* Path for all storages = `/retail_demo`
 * Default exclusions
 * Preserve HCFS Block Size = *True*
 
@@ -135,8 +135,8 @@ On the dashboard, create a **HCFS** rule with the following parameters:
 
 1. Start your migration with the following overwrite settings:
 
-   * Source Zone = **sandbox-hdp**
-   * Target Zone = **adls2**
+   * Source Storage = **sandbox-hdp**
+   * Target Storage = **adls2**
    * Overwrite Settings = **Skip**
 
 1. Wait until the migration is complete, and check the contents of your `/retail_demo` directory in your ADLS Gen2 container.
