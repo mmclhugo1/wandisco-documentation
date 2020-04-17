@@ -196,9 +196,9 @@ _Example output_
                         }
                     ],
                     "Ipv6Addresses": [],
-                    "MacAddress": "12:7b:31:d6:9e:9d",
-                    "NetworkInterfaceId": "eni-04b72973da1b89ce8",
-                    "OwnerId": "187496921210",
+                    "MacAddress": "13:7f:33:d7:8e:4e",
+                    "NetworkInterfaceId": "eni-04b73083da1b86yu7",
+                    "OwnerId": "187407821311",
                     "PrivateDnsName": "ip-172-30-54-79.ec2.internal",
                     "PrivateIpAddress": "172.30.54.79",
                     "PrivateIpAddresses": [
@@ -250,8 +250,8 @@ _Example output_
             }
         }
     ],
-    "OwnerId": "187496921210",
-    "ReservationId": "r-020174a18d8924eaa"
+    "OwnerId": "187407821311",
+    "ReservationId": "r-131175b29d6789eaa"
 }
 ```
 
