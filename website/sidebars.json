@@ -38,6 +38,7 @@
   },
   "quickstarts": {
     "Preparation": [
+      "quickstarts/preparation/aws_vm_creation",
       "quickstarts/preparation/azure_vm_creation",
       "quickstarts/preparation/vm_prep"
     ],

@@ -18,7 +18,7 @@ If you would like to try something different with the HDP Sandbox, see:
 
 ## Prerequisites
 
-|For info on how to install the services, see our [VM Preparation](../preparation/vm_prep.md) guide.|
+|For info on how to create a suitable VM with all services installed, see our [AWS VM creation](../preparation/aws_vm_creation.md) guide. See our [VM Preparation](../preparation/vm_prep.md) guide for how to install the services only.|
 |---|
 
 To complete this install, you will need:
