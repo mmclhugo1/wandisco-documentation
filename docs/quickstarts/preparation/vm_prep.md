@@ -9,9 +9,7 @@ This quickstart helps you prepare an Linux Virtual Machine (VM) suitable for a F
 * Installation of services.
 * Verification of available storage for docker images.
 
-[//]: <Include reference to DOCU-516 once complete.>
-
-|This is not required if you have used our [Azure VM Creation](./azure_vm_creation.md) guide, as all services and disk requirements will have been included.|
+|This is not required if you have used one of our [Azure VM Creation](./azure_vm_creation.md) or [AWS VM Creation](./aws_vm_creation.md) guides, as all services and disk requirements will have been included.|
 |---|
 
 ## Prerequisites
