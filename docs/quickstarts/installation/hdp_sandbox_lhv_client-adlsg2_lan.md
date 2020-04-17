@@ -48,6 +48,7 @@ To complete this install, you will need:
 
 * Credentials for your Azure Databricks cluster:
   * [Databricks Service Address (Instance name)](https://docs.databricks.com/workspace/workspace-details.html#workspace-instance-and-id) (Example: `westeurope.azuredatabricks.net`)
+    * As of April 16th 2020, the URL scheme for a new Databricks Workspace will have a format of `adb-<workspace-id>.<random>.azuredatabricks.net`. The URL format for existing Workspaces will stay the same.
   * [Bearer Token](https://docs.databricks.com/dev-tools/api/latest/authentication.html#generate-a-token) (Example: `dapibe21cfg45efae945t6f0b57dfd1dffb4`)
   * [Databricks Cluster ID](https://docs.databricks.com/workspace/workspace-details.html#cluster-url) (Example: `0234-125567-cowls978`)
   * [JDBC/ODBC HTTP path](https://docs.databricks.com/bi/jdbc-odbc-bi.html#construct-the-jdbc-url) (Example: `sql/protocolv1/o/8445611090456789/0234-125567-cowls978`)

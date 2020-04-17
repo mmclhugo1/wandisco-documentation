@@ -12,6 +12,8 @@ The service address (or Workspace Instance in the Databricks docs) is the first 
 
 For example, if the URL is:`https://westeurope.azuredatabricks.net/?o=2678593749589794#`, the service address would be `westeurope.azuredatabricks.net`.
 
+* As of April 16th 2020, the URL scheme for a new Databricks Workspace will have a format of `adb-<workspace-id>.<random>.azuredatabricks.net`. The URL format for existing Workspaces will stay the same.
+
 See the [Workspace Instance and ID](https://docs.databricks.com/workspace/workspace-details.html#workspace-instance-and-id) section in the Databricks docs for more info.
 
 ## Bearer Token
