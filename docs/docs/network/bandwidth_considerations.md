@@ -8,7 +8,17 @@ The graph below illustrates network bandwidth capacities and the impact they hav
 
 ![Data migration - illustration of bandwidth measurement](../../assets/network_bandwidth.jpg)
 
-_All estimates given are based on a round-trip time (RTT) of 20ms and a packet loss of 1e-05%. See https://wintelguy.com/wanperf.pl  to try your own network throughput calculations._
+All estimates given are based on a round-trip time (RTT) of 20ms and a packet loss of 1e-05%. See https://wintelguy.com/wanperf.pl to try your own network throughput calculations.
+
+|Data size / bandwidth|10 Mbps|100 Mbps|500 Mbps|1 Gbps|10 Gbps|
+|---|---|---|---|---|---|
+|**100GB**|23.5 hrs|2.5 hrs|28 mins|14 mins|7 mins|
+|**1TB**|10 days|23.5 hrs|5 hrs|2.5 hrs|1.5 hrs|
+|**10TB**|97.5 days|9.5 days|2 days|23.5 hrs|12 hrs|
+|**100TB**|975 days|97.5 days|19.5 days|9.5 days|5 days|
+|**500TB**|13.5 years|487.5 days|97.5 days|49 days|25 days|
+|**1PB**|27 years|975 days|195 days|97.5 days|50 days|
+_Times shown are to the nearest 0.5._
 
 ## File sizes
 
