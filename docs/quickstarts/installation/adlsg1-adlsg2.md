@@ -68,27 +68,7 @@ Log in to your VM prior to starting these steps.
 
    `./setup-env.sh`
 
-1. Choose the `Custom deployment` option when prompted.
-
-1. Enter the zone details:
-
-   * First zone type = `adls1`
-   * First zone name = _press enter for the default value_
-
-   * Second zone type = `adls2`
-   * Second zone name = _press enter for the default value_
-
-1. Enter your docker hostname, which will be the VM hostname.
-
-   _Example:_  `docker_host01.realm.com`
-
-1. Enter the [HDI version](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-component-versioning) for the ADLS Gen1 zone. This is required even if you are not intending to use a HDI cluster.
-
-1. When prompted to select a plugin for the ADLS Gen1 zone, press enter for `NONE`.
-
-1. Enter the [HDI version](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-component-versioning) for the ADLS Gen2 zone. This is required even if you are not intending to use a HDI cluster.
-
-1. When prompted to select a plugin for the ADLS Gen2 zone, press enter for `NONE`.
+1. Choose the `ADLS Gen1 to Gen2` option when prompted.
 
 1. You have now completed the setup. To create and start your containers run:
 

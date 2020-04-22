@@ -64,7 +64,7 @@ Log in to your VM prior to starting these steps.
 
    `./setup-env.sh`
 
-1. Choose the `Hortonworks Sandbox to custom distribution` option when prompted.
+1. Choose the `HDP Sandbox to custom distribution` option when prompted.
 
 1. Enter the second zone details:
 
