@@ -29,11 +29,15 @@ Save this file to the same location you will run the AWS CLI:
 
 The template contains initialization parameters for the VM, and pre-installs the required services.
 
+_This file has been configured to work with an Ubuntu LTS image._
+
 ## Required parameters
 
 The variables required to create a suitable VM are:
 
 * The [AMI ID](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html), which defines the operating system and configuration of the VM.
+
+  _Use an Ubuntu LTS image to ensure compatiblity with the cloud-init template._
 
   See the [Ubuntu AMI Locator](https://cloud-images.ubuntu.com/locator/ec2/) for a list of IDs. We recommend using the current Amazon quickstart AMI ID for Ubuntu 18.04 LTS (`ami-07ebfd5b3428b6f4d`).
 
