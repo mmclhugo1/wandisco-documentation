@@ -4,11 +4,9 @@ title: Bandwidth Considerations
 sidebar_label: Bandwidth Considerations
 ---
 
-The graph below illustrates network bandwidth capacities and the impact they have on data migration.
+The graph and table below illustrate network bandwidth capacities and the impact they have on data migration.
 
 ![Data migration - illustration of bandwidth measurement](../../assets/network_bandwidth.jpg)
-
-All estimates given are based on a round-trip time (RTT) of 20ms and a packet loss of 1e-05%. See https://wintelguy.com/wanperf.pl to try your own network throughput calculations.
 
 |Data size / bandwidth|10 Mbps|100 Mbps|500 Mbps|1 Gbps|10 Gbps|
 |---|---|---|---|---|---|
@@ -18,7 +16,9 @@ All estimates given are based on a round-trip time (RTT) of 20ms and a packet lo
 |**100TB**|975 days|97.5 days|19.5 days|9.5 days|5 days|
 |**500TB**|13.5 years|487.5 days|97.5 days|49 days|25 days|
 |**1PB**|27 years|975 days|195 days|97.5 days|50 days|
-_Times shown are to the nearest 0.5._
+
+_Times shown are to the nearest 0.5. All estimates given are based on a round-trip time (RTT) of 20ms and a packet loss of 1e-05%._  
+_See https://wintelguy.com/wanperf.pl to try your own network throughput calculations._
 
 ## File sizes
 
