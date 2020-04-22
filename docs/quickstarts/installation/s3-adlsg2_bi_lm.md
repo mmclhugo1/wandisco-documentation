@@ -71,10 +71,6 @@ Log in to your VM prior to starting these steps.
 
 1. Choose the `S3 and ADLS Gen2 (bi-directional)` option when prompted.
 
-1. Enter the [HDI version](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-component-versioning) for the ADLS Gen2 zone. This is required even if you are not intending to use a HDI cluster.
-
-1. When prompted to select a plugin for the ADLS Gen2 zone, press enter for `NONE`.
-
 1. You have now completed the setup, to create and start your containers run:
 
    `docker-compose up -d`

@@ -73,7 +73,7 @@ Log in to your VM prior to starting these steps.
 
    `./setup-env.sh`
 
-1. Choose the `Hortonworks Sandbox to ADLS Gen2, Live Hive and Databricks integration` option when prompted.
+1. Choose the `HDP Sandbox to ADLS Gen2, Live Hive and Databricks integration` option when prompted.
 
 1. You have now completed the setup, to create and start your containers run:
 
