@@ -10,6 +10,7 @@
       "docs/architecture/arch_hdp_sandbox_az_databricks_lan",
       "docs/architecture/arch_hdp_sandbox_s3",
       "docs/architecture/arch_s3_adlsg2_bi"
+
     ],
     "Network": [
       "docs/network/net_bandwidth_considerations"
