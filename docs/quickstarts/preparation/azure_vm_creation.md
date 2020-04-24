@@ -30,6 +30,8 @@ Save this file to the same location you will run the Azure CLI:
 
 The template contains initialization parameters for the VM, and pre-installs the required services.
 
+_This file has been configured to work with an UbuntuLTS image._
+
 ## Required parameters
 
 The variables required to create a suitable VM are:
@@ -60,7 +62,7 @@ The variables required to create a suitable VM are:
 
 * The [image (operating system)](https://docs.microsoft.com/en-us/cli/azure/vm/image?view=azure-cli-latest#az-vm-image-list).
 
-  Use the `urnAlias` value from `az vm image list --location <vm-location> --output table`.
+  Use the `UbuntuLTS` image to ensure compatiblity with the cloud-init template.
 
   _Example:_ `--image UbuntuLTS`
 

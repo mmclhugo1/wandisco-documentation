@@ -21,7 +21,7 @@ If you would like to try something different with the HDP Sandbox, see:
 
 ## Prerequisites
 
-|For info on how to create a suitable VM with all services installed, see our [Azure VM creation](../preparation/azure_vm_creation.md) guide. See our [Azure VM preparation](../preparation/azure_vm_prep.md) guide for how to install the services only.|
+|For info on how to create a suitable VM with all services installed, see our [Azure VM creation](../preparation/azure_vm_creation.md) guide. See our [VM Preparation](../preparation/vm_prep.md) guide for how to install the services only.|
 |---|
 
 To complete this install, you will need:
@@ -44,10 +44,11 @@ To complete this install, you will need:
 * ADLS Gen2 storage account details:
   * [Account name](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal#create-a-storage-account) (Example: `adlsg2storage`)
   * [Container name](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal#create-a-container) (Example: `fusionreplication`)
-  * [Account key](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage#view-access-keys-and-connection-string) (Example: `eTFdESnXOuG2qoUrqlDyCL+e6456789opasweghtfFMKAHjJg5JkCG8t1h2U1BzXvBwtYfoj5nZaDF87UK09po==`)
+  * [Access key](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage#view-access-keys-and-connection-string) (Example: `eTFdESnXOuG2qoUrqlDyCL+e6456789opasweghtfFMKAHjJg5JkCG8t1h2U1BzXvBwtYfoj5nZaDF87UK09po==`)
 
 * Credentials for your Azure Databricks cluster:
   * [Databricks Service Address (Instance name)](https://docs.databricks.com/workspace/workspace-details.html#workspace-instance-and-id) (Example: `westeurope.azuredatabricks.net`)
+    * As of April 16th 2020, the URL scheme for a new Databricks Workspace will have a format of `adb-<workspace-id>.<random>.azuredatabricks.net`. The URL format for existing Workspaces will stay the same.
   * [Bearer Token](https://docs.databricks.com/dev-tools/api/latest/authentication.html#generate-a-token) (Example: `dapibe21cfg45efae945t6f0b57dfd1dffb4`)
   * [Databricks Cluster ID](https://docs.databricks.com/workspace/workspace-details.html#cluster-url) (Example: `0234-125567-cowls978`)
   * [JDBC/ODBC HTTP path](https://docs.databricks.com/bi/jdbc-odbc-bi.html#construct-the-jdbc-url) (Example: `sql/protocolv1/o/8445611090456789/0234-125567-cowls978`)
@@ -72,7 +73,7 @@ Log in to your VM prior to starting these steps.
 
    `./setup-env.sh`
 
-1. Choose the `Hortonworks Sandbox to ADLS Gen2, Live Hive and Databricks integration` option when prompted.
+1. Choose the `HDP Sandbox to ADLS Gen2, Live Hive and Databricks integration` option when prompted.
 
 1. You have now completed the setup, to create and start your containers run:
 
@@ -97,7 +98,7 @@ The HDP sandbox services can take up to 5-10 minutes to start. To check that the
 
 1. Wait until all the HDFS components are showing as **Started**.
 
-### Configure the ADLS Gen2 zone
+### Configure the ADLS Gen2 storage
 
 1. Log in to Fusion via a web browser.
 
@@ -105,7 +106,7 @@ The HDP sandbox services can take up to 5-10 minutes to start. To check that the
 
    Enter your email address and choose a password you will remember.
 
-1. Click on the **Settings** cog for the **ADLS GEN2** zone, and fill in the details for your ADLS Gen2 storage account. See the [Info you will require](#info-you-will-require) section for reference.
+1. Click on the **Settings** cog for the **ADLS GEN2** storage, and fill in the details for your ADLS Gen2 storage account. See the [Info you will require](#info-you-will-require) section for reference.
 
 1. Check the **Use Secure Protocol** box.
 
@@ -113,7 +114,7 @@ The HDP sandbox services can take up to 5-10 minutes to start. To check that the
 
 ### Configure Fusion Plugin for Databricks Delta Lake
 
-1. Click on the **Settings** cog in the **ADLS GEN2** zone, and fill in the details for your Databricks cluster. See the [Info you will require](#info-you-will-require) section for reference.
+1. Click on the **Settings** cog in the **ADLS GEN2** storage, and fill in the details for your Databricks cluster. See the [Info you will require](#info-you-will-require) section for reference.
 
 1. Click **Activate** and wait for the status to show as **Active** before continuing.
 
@@ -126,7 +127,7 @@ Follow the steps below to demonstrate live replication of HCFS data and Hive met
 1. On the dashboard, create a **HCFS** rule with the following parameters:
 
    * Rule Name = `warehouse`
-   * Path for all zones = `/apps/hive/warehouse`
+   * Path for all storages = `/apps/hive/warehouse`
    * Default exclusions
    * Preserve HCFS Block Size = *True*
 
@@ -150,17 +151,18 @@ Follow the steps below to demonstrate live replication of HCFS data and Hive met
 
 Your Databricks cluster must be **running** before testing Hive replication. Sample data is provided in this HDP Sandbox.
 
-1. Return to the terminal session on the **Docker host**.
+1. Log in to **Hue** via a web browser.
 
-1. Use beeline on the **sandbox-hdp** container to connect to the Hiveserver2 service as hdfs user:
+   `http://<docker_IP_address>:8000`
 
-   `docker-compose exec -u hdfs sandbox-hdp beeline -u jdbc:hive2://sandbox-hdp:10000/ -n hdfs`
+   Username: `hdfs`
+   Password: `hdfs`
 
-1. Create a database for the sample data:
+1. To create a database for the sample data, add the query below inside the **Hive** box and click the **play** button:
 
    `CREATE DATABASE IF NOT EXISTS retail_demo;`
 
-1. Create a table inside the database that points to the sample data:
+1. Create a table inside the database that points to the sample data, and add the query as above:
 
    ```sql
    CREATE TABLE retail_demo.customer_addresses_dim_hive
@@ -216,17 +218,8 @@ Your Databricks cluster must be **running** before testing Hive replication. Sam
 
    _The data will take a couple of minutes to be replicated and appear in the Databricks cluster. This is because during the first transfer of Hive data, the Datatransformer jar (`etl.jar`) will also be installed in the Databricks library._
 
-   On the terminal, a Hive job will launch that inserts the data values provided in this example. If successful, the STATUS will be **SUCCEEDED**.
-
-   ```json
-   --------------------------------------------------------------------------------
-           VERTICES      STATUS  TOTAL  COMPLETED  RUNNING  PENDING  FAILED  KILLED
-   --------------------------------------------------------------------------------
-   Map 1 ..........   SUCCEEDED      1          1        0        0       0       0
-   --------------------------------------------------------------------------------
-   VERTICES: 01/01  [==========================>>] 100%  ELAPSED TIME: X.YZ s
-   --------------------------------------------------------------------------------
-   ```
+1. A Hive job will launch that inserts the data values provided in this example.
+   Select the **jobs** service. If successful, the STATUS will be **SUCCEEDED**.
 
 ### Setup Databricks Notebook to view data
 
@@ -255,7 +248,7 @@ Your Databricks cluster must be **running** before testing Hive replication. Sam
 
 1. If desired, you can repeat this process except using the Texas state code instead of California.
 
-   Back in the Hive beeline session on the **fusion_sandbox-hdp_1** container, run the following command:
+   Back in the **Hue** interface, run the following command:
 
    `INSERT INTO databricks_demo.customer_addresses_dim_hive SELECT * FROM retail_demo.customer_addresses_dim_hive WHERE state_code = 'TX';`
 

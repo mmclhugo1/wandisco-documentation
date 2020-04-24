@@ -19,7 +19,7 @@ If you would like to try something different with the HDP Sandbox, see:
 
 ## Prerequisites
 
-|For info on how to create a suitable VM with all services installed, see our [Azure VM creation](../preparation/azure_vm_creation.md) guide. See our [Azure VM preparation](../preparation/azure_vm_prep.md) guide for how to install the services only.|
+|For info on how to create a suitable VM with all services installed, see our [Azure VM creation](../preparation/azure_vm_creation.md) guide. See our [VM Preparation](../preparation/vm_prep.md) guide for how to install the services only.|
 |---|
 
 To complete this install, you will need:
@@ -31,7 +31,7 @@ To complete this install, you will need:
   * A minimum of 24GB available storage for the `/var/lib/docker` directory.
     * If creating your VM through the Azure portal (and not via our [guide](../preparation/azure_vm_creation.md)), you may have insufficient disk space by default. See the [Microsoft docs](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/expand-os-disk) for further info.
 
-* The following services must be installed on the VM:  
+* The following services must be installed on the VM:
   * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
   * [Docker](https://docs.docker.com/install/) (v19.03.5 or higher)
   * [Docker Compose for Linux](https://docs.docker.com/compose/install/#install-compose) (v1.25.0 or higher)
@@ -42,7 +42,7 @@ To complete this install, you will need:
 
   * [Account name](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal#create-a-storage-account) (Example: `adlsg2storage`)
   * [Container name](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal#create-a-container) (Example: `fusionreplication`)
-  * [Account key](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage#view-access-keys-and-connection-string) (Example: `eTFdESnXOuG2qoUrqlDyCL+e6456789opasweghtfFMKAHjJg5JkCG8t1h2U1BzXvBwtYfoj5nZaDF87UK09po==`)
+  * [Access key](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage#view-access-keys-and-connection-string) (Example: `eTFdESnXOuG2qoUrqlDyCL+e6456789opasweghtfFMKAHjJg5JkCG8t1h2U1BzXvBwtYfoj5nZaDF87UK09po==`)
 
 _These instructions have been tested on Ubuntu LTS._
 
@@ -64,7 +64,7 @@ Log in to your VM prior to starting these steps.
 
    `./setup-env.sh`
 
-1. Choose the `Hortonworks Sandbox to custom distribution` option when prompted.
+1. Choose the `HDP Sandbox to custom distribution` option when prompted.
 
 1. Enter the second zone details:
 
@@ -102,7 +102,7 @@ The HDP sandbox services can take up to 5-10 minutes to start. To check that the
 
 1. Wait until all the HDFS components are showing as **Started**.
 
-### Configure the ADLS Gen2 zone
+### Configure the ADLS Gen2 storage
 
 1. Log in to Fusion via a web browser.
 
@@ -110,7 +110,7 @@ The HDP sandbox services can take up to 5-10 minutes to start. To check that the
 
    Enter your email address and choose a password you will remember.
 
-1. Click on the **Settings** cog for the **ADLS GEN2** zone, and fill in the details for your ADLS Gen2 storage account. See the [Info you will require](#info-you-will-require) section for reference.
+1. Click on the **Settings** cog for the **ADLS GEN2** storage, and fill in the details for your ADLS Gen2 storage account. See the [Info you will require](#info-you-will-require) section for reference.
 
 1. Check the **Use Secure Protocol** box.
 
@@ -125,7 +125,7 @@ Follow the steps below to demonstrate migration of HCFS data from the HDP sandbo
 On the dashboard, create a **HCFS** rule with the following parameters:
 
 * Rule Name = `migration`
-* Path for all zones = `/retail_demo`
+* Path for all storages = `/retail_demo`
 * Default exclusions
 * Preserve HCFS Block Size = *True*
 
@@ -135,8 +135,8 @@ On the dashboard, create a **HCFS** rule with the following parameters:
 
 1. Start your migration with the following overwrite settings:
 
-   * Source Zone = **sandbox-hdp**
-   * Target Zone = **adls2**
+   * Source Storage = **sandbox-hdp**
+   * Target Storage = **adls2**
    * Overwrite Settings = **Skip**
 
 1. Wait until the migration is complete, and check the contents of your `/retail_demo` directory in your ADLS Gen2 container.

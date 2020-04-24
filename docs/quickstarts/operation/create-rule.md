@@ -12,7 +12,7 @@ From the rules section of the dashboard, you can create a rule. By default, this
 
 1. Define the rule you wish to create:
    - Give the rule a unique name (i.e. one you haven't used before).
-   - Provide the path for all zones. If wanting to **replicate to a different path on target**, select the option and provide the paths for the [source zone](../../glossary/s.md#source) and [target zone](../../glossary/t.md#target).
+   - Provide the path for all storages. If wanting to **replicate to a different path on target**, select the option and provide the paths for the [source storage](../../glossary/s.md#source) and [target storage](../../glossary/t.md#target).
 1. Files or directories can be excluded from replication using glob patterns:
    - The default exclusions shown are for Fusion’s housekeeping files, trash directories and Hive staging directories.
    - You can add any other exclusions required.
@@ -24,7 +24,7 @@ You can now perform a [consistency check](./consistency-check.md) or [start migr
 
 ## Hive
 
-|Always create a HCFS rule that will match the location of your underlying Hive data. Without this, Hive queries on the target zone will not work.|
+|Always create a HCFS rule that will match the location of your underlying Hive data. Without this, Hive queries on the target storage will not work.|
 |---|
 
 1. Define a unique rule name.
