@@ -10,6 +10,11 @@ The docs are written in Markdown, if you're not familiar with this start here:
 
 We use [Docusaurus](https://docusaurus.io) to create the doc website - https://wandisco.github.io/wandisco-documentation
 
+**Note for WANdisco staff**
+The WANdisco GitHub docs are for the newer versions of products. This is currently those relating to the new UI, Docker and FRP. Other product documentation will gradually move here.
+For changes to the older docs, please raise JIRA tickets as normal.
+If unsure, please contact the docs team.
+
 ## Branching strategy
 
 There are 2 main branches - master and develop.

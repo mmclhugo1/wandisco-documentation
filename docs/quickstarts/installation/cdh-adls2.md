@@ -113,6 +113,7 @@ Log in to your VM prior to starting these steps.
 
 1. Click on the **Settings** cog for the **ADLS GEN2** storage, and fill in the details for your ADLS Gen2 storage account. See the [Info you will require](#info-you-will-require) section for reference.
 
+
 1. Check the **Use Secure Protocol** box.
 
 1. Click **Apply Configuration** and wait for this to complete.
