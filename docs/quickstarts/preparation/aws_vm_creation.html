@@ -1,0 +1,286 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Creating an Amazon Web Services Linux VM for a Fusion installation · WANdisco docs</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="This quickstart helps you create an Amazon Web Services Linux VM (EC2 instance) suitable for a Fusion installation. It walks you through:"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Creating an Amazon Web Services Linux VM for a Fusion installation · WANdisco docs"/><meta property="og:type" content="website"/><meta property="og:url" content="https://wandisco.github.io/wandisco-documentation/ https://wandisco.github.io/wandisco-documentation/"/><meta property="og:description" content="This quickstart helps you create an Amazon Web Services Linux VM (EC2 instance) suitable for a Fusion installation. It walks you through:"/><meta property="og:image" content="https://wandisco.github.io/wandisco-documentation/ https://wandisco.github.io/wandisco-documentation/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://wandisco.github.io/wandisco-documentation/ https://wandisco.github.io/wandisco-documentation/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="https://wandisco.github.io/wandisco-documentation/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="https://wandisco.github.io/wandisco-documentation/js/scrollSpy.js"></script><link rel="stylesheet" href="https://wandisco.github.io/wandisco-documentation/css/main.css"/><script src="https://wandisco.github.io/wandisco-documentation/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="https://wandisco.github.io/wandisco-documentation/"><img class="logo" src="https://wandisco.github.io/wandisco-documentation/img/favicon.png" alt="WANdisco docs"/><h2 class="headerTitleWithLogo">WANdisco docs</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="https://wandisco.github.io/wandisco-documentation/docs/why-fusion/benefits" target="_self">Why Fusion?</a></li><li class="siteNavGroupActive"><a href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/installation/quickstart-config" target="_self">Quickstarts</a></li><li class=""><a href="https://wandisco.github.io/wandisco-documentation/docs/docs/doc1" target="_self">Docs</a></li><li class=""><a href="https://wandisco.github.io/wandisco-documentation/docs/glossary/a" target="_self">Glossary</a></li><li class=""><a href="https://wandisco.github.io/wandisco-documentation/docs/help/need_help" target="_self">Help</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Preparation</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Preparation<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem navListItemActive"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/aws_vm_creation">AWS VM Creation</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation">Azure VM Creation</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/vm_prep">VM Preparation</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Installation<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/installation/quickstart-config">Introduction</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/installation/adlsg1-adlsg2">ADLS Gen1 to ADLS Gen2</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/installation/hdp_sandbox_adlsg2_lm">HDP Sandbox to ADLS Gen2 with LiveMigrator</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/installation/hdp_sandbox_adlsg2_ld">HDP Sandbox to ADLS Gen2 with LiveData</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/installation/hdp_sandbox_lhv_client-adlsg2_lan">HDP Sandbox to Azure Databricks with LiveAnalytics</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Operation<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/operation/create-rule">Create a Rule</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/operation/consistency-check">Consistency Check</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/operation/migration">Start a Migration</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/operation/hdp_sandbox_fusion_stop_start">Stop/Start HDP Sandbox &amp; WANdisco Fusion</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Troubleshooting<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/troubleshooting/general_troubleshooting">General</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/troubleshooting/hdp_sandbox_troubleshooting">HDP Sandbox</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/troubleshooting/adlsg2_troubleshooting">ADLS Gen2</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/troubleshooting/databricks_troubleshooting">Databricks Delta Lake</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/troubleshooting/logs">Logs</a></li><li class="navListItem"><a class="navItem" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/troubleshooting/useful_info">Useful Information</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Creating an Amazon Web Services Linux VM for a Fusion installation</h1></header><article><div><span><p>This quickstart helps you create an Amazon Web Services Linux VM (EC2 instance) suitable for a Fusion installation. It walks you through:</p>
+<ul>
+<li>Downloading a <a href="https://cloudinit.readthedocs.io/en/latest/topics/examples.html">cloud-init</a> template to initialize the VM and install required services.</li>
+<li>Obtaining <a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html">AWS parameters</a> to create the VM.</li>
+<li>Creating the <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-services-ec2-instances.html#launching-instances">Linux VM with the AWS CLI</a>.
+<ul>
+<li>Logging in to the VM for the first time.</li>
+</ul></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="prerequisites"></a><a href="#prerequisites" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Prerequisites</h2>
+<ul>
+<li>AWS CLI <a href="https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html">installed</a> and <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html">configured</a>.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="ssh-keys"></a><a href="#ssh-keys" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SSH keys</h3>
+<p>You will need to use SSH keys as part of the VM creation process. See the Amazon documentation for further details:</p>
+<p><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair">Amazon EC2 key pairs</a></p>
+<h2><a class="anchor" aria-hidden="true" id="download-the-cloud-init-template"></a><a href="#download-the-cloud-init-template" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Download the cloud-init template</h2>
+<p>Save this file to the same location you will run the AWS CLI:</p>
+<p><a id="cloud-init-ec2.txt" href="https://github.com/WANdisco/wandisco-documentation/raw/master/docs/assets/cloud-init-ec2.txt">cloud-init-ec2.txt</a></p>
+<p>The template contains initialization parameters for the VM, and pre-installs the required services.</p>
+<p><em>This file has been configured to work with an Ubuntu LTS image.</em></p>
+<h2><a class="anchor" aria-hidden="true" id="required-parameters"></a><a href="#required-parameters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Required parameters</h2>
+<p>The variables required to create a suitable VM are:</p>
+<ul>
+<li><p>The <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html">AMI ID</a>, which defines the operating system and configuration of the VM.</p>
+<p><em>Use an Ubuntu LTS image to ensure compatiblity with the cloud-init template.</em></p>
+<p>See the <a href="https://cloud-images.ubuntu.com/locator/ec2/">Ubuntu AMI Locator</a> for a list of IDs. We recommend using the current Amazon quickstart AMI ID for Ubuntu 18.04 LTS (<code>ami-07ebfd5b3428b6f4d</code>).</p>
+<p><em>Example:</em> <code>--image-id ami-07ebfd5b3428b6f4d</code></p></li>
+<li><p>The number of VMs to create.</p>
+<p><em>Example:</em> <code>--count 1</code></p></li>
+<li><p>The instance type from the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html">AWS templates</a>.</p>
+<p>Use the <code>InstanceType</code> value from <code>aws ec2 describe-instance-types --output table</code>. Use <code>aws ec2 describe-instance-type-offerings</code> to list available instance types in your configured region.</p>
+<p><em>Example:</em> <code>--instance-type t3.xlarge</code></p></li>
+<li><p>The <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-services-ec2-instances.html#block-device-mapping">Block Device settings</a>.</p>
+<p>We recommend a minimum of 32 GB for the root device volume as the <code>/var/lib/docker</code> directory will need to store large images.</p>
+<p><em>Example:</em> <code>--block-device-mappings &quot;[{\&quot;DeviceName\&quot;:\&quot;/dev/sda1\&quot;,\&quot;Ebs\&quot;:{\&quot;VolumeSize\&quot;:32,\&quot;DeleteOnTermination\&quot;:true}}]&quot;</code></p></li>
+<li><p>The <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">SSH key pair</a> to use for the VM.</p>
+<p>Use the <code>KeyName</code> value from <code>aws ec2 describe-key-pairs --output table</code>.</p>
+<p><em>Example:</em> <code>--key-name MyKeyPair</code></p>
+<p>See the link in the <a href="#ssh-keys">SSH keys</a> section for more info.</p></li>
+<li><p>The <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#vpc-subnet-basics">Subnet</a> of the Virtual Private Cloud (VPC) to use for the VM. The subnet must belong to the same network as your chosen security group.</p>
+<p>Here are two options on how to get the <code>SubnetId</code> value needed:</p>
+<ul>
+<li><p>Use <code>aws ec2 describe-subnets --output table</code> to list all available subnets in your configured region.</p></li>
+<li><p>Use <code>aws ec2 describe-subnets --output table --filters &quot;Name=vpc-id,Values=vpc-id-value&quot;</code> to list subnets in a specific VPC.</p>
+<p>To get a list of available VPCs in your configured region, run:</p>
+<p><code>aws ec2 describe-vpcs --output table</code></p>
+<p>Replace <code>vpc-id-value</code> with the <code>VpcId</code> value in the command shown above.</p></li>
+</ul>
+<p><em>Example:</em> <code>--subnet-id subnet-6d8i789e</code></p>
+<p>If not specified, your <a href="https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#view-default-vpc">default VPC/subnet</a> is used.</p></li>
+<li><p>The <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html">Security Group</a> to use. The security group must belong to the same network as your chosen subnet.</p>
+<p>Here are two options on how to get the <code>GroupId</code> value needed:</p>
+<ul>
+<li><p>Use <code>aws ec2 describe-security-groups --output table</code> to list all available security groups in your configured region.</p></li>
+<li><p>Use <code>aws ec2 describe-security-groups --output table --filters &quot;Name=vpc-id,Values=vpc-id-value&quot;</code> to list security groups that were created with the specified VPC.</p>
+<p>To get a list of available VPCs in your configured region, run:</p>
+<p><code>aws ec2 describe-vpcs --output table</code></p>
+<p>Replace <code>vpc-id-value</code> with the <code>VpcId</code> value in the command shown above.</p></li>
+</ul>
+<p><em>Example:</em> <code>--security-group-ids sg-038uiocgh67f052r5</code></p>
+<p>If not specified, your <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#DefaultSecurityGroup">default security group</a> is used.</p></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="optional-parameters"></a><a href="#optional-parameters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Optional parameters</h3>
+<ul>
+<li><p>Use a private IP address for the VM.</p>
+<p>Prevent a public IP address from being generated by using this option.</p>
+<p><em>Example:</em> <code>--no-associate-public-ip-address</code></p></li>
+<li><p>Enable <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html">EBS optimization</a>.</p>
+<p>Some instance types are <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html#ebs-optimization-support">EBS optimized by default</a>, otherwise specify this option to enable it.</p>
+<p><em>Example:</em> <code>--ebs-optimized</code></p></li>
+<li><p>Assign a <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">tag</a> to the VM and/or Volume.</p>
+<p>You can assign tags to both the VM and Volume in AWS in order to help identify and manage them.</p>
+<ol>
+<li><em>Example for VM tag:</em> <code>--tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=MyVMName}]'</code></li>
+<li><em>Example for Volume tag:</em> <code>--tag-specifications 'ResourceType=volume,Tags=[{Key=Name,Value=MyVolName}]'</code></li>
+<li><em>Example for VM &amp; Volume tag:</em> <code>--tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=MyVMName}]' 'ResourceType=volume,Tags=[{Key=Name,Value=MyVolName}]'</code></li>
+</ol></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="create-the-vm"></a><a href="#create-the-vm" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create the VM</h2>
+<p>Create the VM using the information collected above. You must also include the <code>--user-data</code> parameter to reference the <code>cloud-init-ec2.txt</code> template created earlier.</p>
+<p><em>Example usage</em></p>
+<pre><code class="hljs css language-bash">aws ec2 run-instances \
+--user-data file://cloud-init-ec2.txt \
+--image-id ami-07ebfd5b3428b6f4d \
+--count 1 \
+--instance-type t3.xlarge \
+--block-device-mappings <span class="hljs-string">"[{\"DeviceName\":\"/dev/sda1\",\"Ebs\":{\"VolumeSize\":32,\"DeleteOnTermination\":false}}]"</span> \
+--key-name MyKeyPair \
+--subnet-id subnet-6d8i789e \
+--security-group-ids sg-038uiocgh67f052r5 \
+--no-associate-public-ip-address \
+--ebs-optimized \
+--tag-specifications <span class="hljs-string">'ResourceType=instance,Tags=[{Key=Name,Value=MyVMName}]'</span> <span class="hljs-string">'ResourceType=volume,Tags=[{Key=Name,Value=MyVolName}]'</span>
+</code></pre>
+<p><em>Example output</em></p>
+<pre><code class="hljs css language-json">{
+    <span class="hljs-attr">"Groups"</span>: [],
+    <span class="hljs-attr">"Instances"</span>: [
+        {
+            <span class="hljs-attr">"AmiLaunchIndex"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"ImageId"</span>: <span class="hljs-string">"ami-07ebfd5b3428b6f4d"</span>,
+            <span class="hljs-attr">"InstanceId"</span>: <span class="hljs-string">"i-0ffe1fc1oi7552c56"</span>,
+            <span class="hljs-attr">"InstanceType"</span>: <span class="hljs-string">"t3.xlarge"</span>,
+            <span class="hljs-attr">"KeyName"</span>: <span class="hljs-string">"MyKeyPair"</span>,
+            <span class="hljs-attr">"LaunchTime"</span>: <span class="hljs-string">"2020-04-17T08:36:00+00:00"</span>,
+            <span class="hljs-attr">"Monitoring"</span>: {
+                <span class="hljs-attr">"State"</span>: <span class="hljs-string">"disabled"</span>
+            },
+            <span class="hljs-attr">"Placement"</span>: {
+                <span class="hljs-attr">"AvailabilityZone"</span>: <span class="hljs-string">"us-east-1a"</span>,
+                <span class="hljs-attr">"GroupName"</span>: <span class="hljs-string">""</span>,
+                <span class="hljs-attr">"Tenancy"</span>: <span class="hljs-string">"default"</span>
+            },
+            <span class="hljs-attr">"PrivateDnsName"</span>: <span class="hljs-string">"ip-172-30-54-79.ec2.internal"</span>,
+            <span class="hljs-attr">"PrivateIpAddress"</span>: <span class="hljs-string">"172.30.54.79"</span>,
+            <span class="hljs-attr">"ProductCodes"</span>: [],
+            <span class="hljs-attr">"PublicDnsName"</span>: <span class="hljs-string">""</span>,
+            <span class="hljs-attr">"State"</span>: {
+                <span class="hljs-attr">"Code"</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-attr">"Name"</span>: <span class="hljs-string">"pending"</span>
+            },
+            <span class="hljs-attr">"StateTransitionReason"</span>: <span class="hljs-string">""</span>,
+            <span class="hljs-attr">"SubnetId"</span>: <span class="hljs-string">"subnet-6d8i789e"</span>,
+            <span class="hljs-attr">"VpcId"</span>: <span class="hljs-string">"vpc-2egd265b"</span>,
+            <span class="hljs-attr">"Architecture"</span>: <span class="hljs-string">"x86_64"</span>,
+            <span class="hljs-attr">"BlockDeviceMappings"</span>: [],
+            <span class="hljs-attr">"ClientToken"</span>: <span class="hljs-string">""</span>,
+            <span class="hljs-attr">"EbsOptimized"</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">"Hypervisor"</span>: <span class="hljs-string">"xen"</span>,
+            <span class="hljs-attr">"NetworkInterfaces"</span>: [
+                {
+                    <span class="hljs-attr">"Attachment"</span>: {
+                        <span class="hljs-attr">"AttachTime"</span>: <span class="hljs-string">"2020-04-17T08:36:00+00:00"</span>,
+                        <span class="hljs-attr">"AttachmentId"</span>: <span class="hljs-string">"eni-attach-052289f29141a33b3"</span>,
+                        <span class="hljs-attr">"DeleteOnTermination"</span>: <span class="hljs-literal">true</span>,
+                        <span class="hljs-attr">"DeviceIndex"</span>: <span class="hljs-number">0</span>,
+                        <span class="hljs-attr">"Status"</span>: <span class="hljs-string">"attaching"</span>
+                    },
+                    <span class="hljs-attr">"Description"</span>: <span class="hljs-string">""</span>,
+                    <span class="hljs-attr">"Groups"</span>: [
+                        {
+                            <span class="hljs-attr">"GroupName"</span>: <span class="hljs-string">"default"</span>,
+                            <span class="hljs-attr">"GroupId"</span>: <span class="hljs-string">"sg-038uiocgh67f052r5"</span>
+                        }
+                    ],
+                    <span class="hljs-attr">"Ipv6Addresses"</span>: [],
+                    <span class="hljs-attr">"MacAddress"</span>: <span class="hljs-string">"13:7f:33:d7:8e:4e"</span>,
+                    <span class="hljs-attr">"NetworkInterfaceId"</span>: <span class="hljs-string">"eni-04b73083da1b86yu7"</span>,
+                    <span class="hljs-attr">"OwnerId"</span>: <span class="hljs-string">"187407821311"</span>,
+                    <span class="hljs-attr">"PrivateDnsName"</span>: <span class="hljs-string">"ip-172-30-54-79.ec2.internal"</span>,
+                    <span class="hljs-attr">"PrivateIpAddress"</span>: <span class="hljs-string">"172.30.54.79"</span>,
+                    <span class="hljs-attr">"PrivateIpAddresses"</span>: [
+                        {
+                            <span class="hljs-attr">"Primary"</span>: <span class="hljs-literal">true</span>,
+                            <span class="hljs-attr">"PrivateDnsName"</span>: <span class="hljs-string">"ip-172-30-54-79.ec2.internal"</span>,
+                            <span class="hljs-attr">"PrivateIpAddress"</span>: <span class="hljs-string">"172.30.54.79"</span>
+                        }
+                    ],
+                    <span class="hljs-attr">"SourceDestCheck"</span>: <span class="hljs-literal">true</span>,
+                    <span class="hljs-attr">"Status"</span>: <span class="hljs-string">"in-use"</span>,
+                    <span class="hljs-attr">"SubnetId"</span>: <span class="hljs-string">"subnet-6d8i789e"</span>,
+                    <span class="hljs-attr">"VpcId"</span>: <span class="hljs-string">"vpc-2egd265b"</span>,
+                    <span class="hljs-attr">"InterfaceType"</span>: <span class="hljs-string">"interface"</span>
+                }
+            ],
+            <span class="hljs-attr">"RootDeviceName"</span>: <span class="hljs-string">"/dev/sda1"</span>,
+            <span class="hljs-attr">"RootDeviceType"</span>: <span class="hljs-string">"ebs"</span>,
+            <span class="hljs-attr">"SecurityGroups"</span>: [
+                {
+                    <span class="hljs-attr">"GroupName"</span>: <span class="hljs-string">"default"</span>,
+                    <span class="hljs-attr">"GroupId"</span>: <span class="hljs-string">"sg-038uiocgh67f052r5"</span>
+                }
+            ],
+            <span class="hljs-attr">"SourceDestCheck"</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">"StateReason"</span>: {
+                <span class="hljs-attr">"Code"</span>: <span class="hljs-string">"pending"</span>,
+                <span class="hljs-attr">"Message"</span>: <span class="hljs-string">"pending"</span>
+            },
+            <span class="hljs-attr">"Tags"</span>: [
+                {
+                    <span class="hljs-attr">"Key"</span>: <span class="hljs-string">"Name"</span>,
+                    <span class="hljs-attr">"Value"</span>: <span class="hljs-string">"MyVMName"</span>
+                }
+            ],
+            <span class="hljs-attr">"VirtualizationType"</span>: <span class="hljs-string">"hvm"</span>,
+            <span class="hljs-attr">"CpuOptions"</span>: {
+                <span class="hljs-attr">"CoreCount"</span>: <span class="hljs-number">2</span>,
+                <span class="hljs-attr">"ThreadsPerCore"</span>: <span class="hljs-number">2</span>
+            },
+            <span class="hljs-attr">"CapacityReservationSpecification"</span>: {
+                <span class="hljs-attr">"CapacityReservationPreference"</span>: <span class="hljs-string">"open"</span>
+            },
+            <span class="hljs-attr">"MetadataOptions"</span>: {
+                <span class="hljs-attr">"State"</span>: <span class="hljs-string">"pending"</span>,
+                <span class="hljs-attr">"HttpTokens"</span>: <span class="hljs-string">"optional"</span>,
+                <span class="hljs-attr">"HttpPutResponseHopLimit"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-attr">"HttpEndpoint"</span>: <span class="hljs-string">"enabled"</span>
+            }
+        }
+    ],
+    <span class="hljs-attr">"OwnerId"</span>: <span class="hljs-string">"187407821311"</span>,
+    <span class="hljs-attr">"ReservationId"</span>: <span class="hljs-string">"r-131175b29d6789eaa"</span>
+}
+</code></pre>
+<p>You can now log in to your VM, for example <code>ssh ubuntu@ip-172-30-54-79.ec2.internal</code>.</p>
+<h2><a class="anchor" aria-hidden="true" id="references"></a><a href="#references" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html">AWS parameters for VM creation</a></li>
+</ul>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/azure_vm_creation"><span>Azure VM Creation</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#prerequisites">Prerequisites</a><ul class="toc-headings"><li><a href="#ssh-keys">SSH keys</a></li></ul></li><li><a href="#download-the-cloud-init-template">Download the cloud-init template</a></li><li><a href="#required-parameters">Required parameters</a><ul class="toc-headings"><li><a href="#optional-parameters">Optional parameters</a></li></ul></li><li><a href="#create-the-vm">Create the VM</a></li><li><a href="#references">References</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="https://wandisco.github.io/wandisco-documentation/" class="nav-home"></a><div><h5>Docs</h5><a href="https://wandisco.github.io/wandisco-documentation/docs/en/quickstarts/quickstart-config.html">Getting Started</a><a href="https://docs.wandisco.com">Product User Guides</a><a href="https://community.wandisco.com/s/knowledge-base">Knowledge Base</a></div><div><h5>Community</h5><a href="https://community.wandisco.com/">WANdisco Community</a><a href="//wandisco.com/partners/find">Partners</a><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="https://wandisco.com/blog">Blog</a><a href="https://blogs.wandisco.com/">Developer Blog</a><a href="https://github.com/wandisco">GitHub</a></div></section><section class="copyright">Copyright © 2020 WANdisco, Inc.</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '56e573413aa88e9ec072a585bec45683',
+                indexName: 'wandisco',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {}
+              });
+            </script></body></html>
