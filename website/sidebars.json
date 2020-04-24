@@ -7,10 +7,7 @@
     "Architecture": [
       "docs/architecture/arch_adlsg1_adlsg2",
       "docs/architecture/arch_hdp_sandbox_adlsg2",
-      "docs/architecture/arch_hdp_sandbox_az_databricks_lan",
-      "docs/architecture/arch_hdp_sandbox_s3",
-      "docs/architecture/arch_s3_adlsg2_bi"
-
+      "docs/architecture/arch_hdp_sandbox_az_databricks_lan"
     ],
     "Network": [
       "docs/network/net_bandwidth_considerations"
@@ -50,10 +47,7 @@
       "quickstarts/installation/adlsg1-adlsg2",
       "quickstarts/installation/hdp_sandbox_adlsg2_lm",
       "quickstarts/installation/hdp_sandbox_adlsg2_ld",
-      "quickstarts/installation/hdp_sandbox_lhv_client-adlsg2_lan",
-      "quickstarts/installation/hdp_sandbox-s3_lm",
-      "quickstarts/installation/hdp_sandbox-s3_ld",
-      "quickstarts/installation/s3_adlsg2_bi_lm"
+      "quickstarts/installation/hdp_sandbox_lhv_client-adlsg2_lan"
     ],
     "Operation": [
       "quickstarts/operation/create-rule",
