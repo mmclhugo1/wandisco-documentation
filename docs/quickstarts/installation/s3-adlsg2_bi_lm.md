@@ -1,25 +1,25 @@
 ---
 id: s3-adlsg2_bi_lm
-title: S3 and Azure Data Lake Storage Gen2 (bi-directional) with LiveMigrator
-sidebar_label: S3 & ADLS Gen2 with LiveMigrator
+title: AWS S3 and Azure Data Lake Storage Gen2 (bi-directional) with LiveMigrator
+sidebar_label: AWS S3 & ADLS Gen2 with LiveMigrator
 ---
 
-Use this quickstart if you want to configure Fusion to replicate between an S3 bucket and an ADLS Gen2 container in either direction using WANdisco LiveMigrator.
+Use this quickstart if you want to configure Fusion to replicate between an AWS S3 bucket and an ADLS Gen2 container in either direction using WANdisco LiveMigrator.
 
 What this guide will cover:
 
 - Installing WANdisco Fusion using the [docker-compose](https://docs.docker.com/compose/) tool.
-- Integrating WANdisco Fusion with S3 and ADLS Gen2 storage.
+- Integrating WANdisco Fusion with AWS S3 and ADLS Gen2 storage.
 - Performing sample data migrations in both directions.
 
 ## Prerequisites
 
-|For info on how to create a suitable Azure VM with all services installed, see our [Azure VM creation](../preparation/azure_vm_creation.md) guide. See our [VM Preparation](../preparation/vm_prep.md) guide for how to install the services only.|
+|For info on how to create a suitable VM with all services installed, see our [Azure VM creation](../preparation/azure_vm_creation.md) or [AWS VM creation](../preparation/aws_vm_creation.md) guides. See our [VM Preparation](../preparation/vm_prep.md) guide for how to install the services only.|
 |---|
 
 To complete this install, you will need:
 
-* S3 bucket.
+* AWS S3 bucket.
 * ADLS Gen2 storage account with [hierarchical namespace](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-namespace) enabled.
   * You will also need a container created inside this account.
 * Linux Virtual Machine (e.g. AWS EC2 instance, Azure VM, etc).
@@ -34,7 +34,7 @@ To complete this install, you will need:
 
 ### Info you will require
 
-* S3 details:
+* AWS S3 details:
 
   * [Bucket name](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) (Example: `fusion-bucket`)
   * [Bucket endpoint](https://docs.aws.amazon.com/general/latest/gr/s3.html) (Example: `s3.eu-west-1.amazonaws.com`)
@@ -87,7 +87,7 @@ Log in to your VM prior to starting these steps.
 
    Enter your email address and choose a password you will remember.
 
-1. Click on the **Settings** cog for the **s3** storage, and fill in the details for your S3 bucket. See the [Info you will require](#info-you-will-require) section for reference.
+1. Click on the **Settings** cog for the **s3** storage, and fill in the details for your AWS S3 bucket. See the [Info you will require](#info-you-will-require) section for reference.
 
 1. Click **Apply Configuration** and wait for this to complete.
 
@@ -101,13 +101,13 @@ Log in to your VM prior to starting these steps.
 
 ## Migration
 
-Follow the steps below to demonstrate migration of HCFS data between the S3 bucket and the ADLS Gen2 container.
+Follow the steps below to demonstrate migration of HCFS data between the AWS S3 bucket and the ADLS Gen2 container.
 
 ### Get sample data
 
 1. Create the following directories to host the sample data:
 
-   * S3 bucket = `/s3_to_adls2`
+   * AWS S3 bucket = `/s3_to_adls2`
      * See the S3 docs ([Amazon console](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html) / [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/workdocs/create-folder.html)) for guidance.
    * ADLS Gen2 container = `/adls2_to_s3`
      * See the [Microsoft docs](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-explorer#create-a-directory) for guidance.
@@ -115,7 +115,7 @@ Follow the steps below to demonstrate migration of HCFS data between the S3 buck
 1. Get the sample data from the link below:  
    [customer_addresses_dim.tsv.gz](https://github.com/pivotalsoftware/pivotal-samples/raw/master/sample-data/customer_addresses_dim.tsv.gz)
 
-1. Upload the data to the directories created earlier on your S3 bucket and ADLS Gen2 container, see the relevant docs for more info:
+1. Upload the data to the directories created earlier on your AWS S3 bucket and ADLS Gen2 container, see the relevant docs for more info:
 
    * [Amazon S3 console](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html#upload-objects-by-drag-and-drop) / [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/s3/cp.html#examples)
    * [ADLS Gen2](https://docs.microsoft.com/en-us/azure/data-lake-store/data-lake-store-get-started-portal#uploaddata)
@@ -150,7 +150,7 @@ Follow the steps below to demonstrate migration of HCFS data between the S3 buck
 
    A new ~50MB file will exist inside (`customer_addresses_dim.tsv.gz`).
 
-### Migrate your data to S3
+### Migrate your data to AWS S3
 
 1. On the dashboard, view the `migration_to_s3` rule.
 
@@ -160,11 +160,11 @@ Follow the steps below to demonstrate migration of HCFS data between the S3 buck
    * Target Zone = **s3**
    * Overwrite Settings = **Skip**
 
-1. Wait until the migration is complete, and check the contents of your `/adls2_to_s3` directory in your S3 bucket.
+1. Wait until the migration is complete, and check the contents of your `/adls2_to_s3` directory in your AWS S3 bucket.
 
    A new ~50MB file will exist inside (`customer_addresses_dim.tsv.gz`).
 
-_You have now successfully migrated data between your S3 bucket and ADLS Gen2 container using LiveMigrator._
+_You have now successfully migrated data between your AWS S3 bucket and ADLS Gen2 container using LiveMigrator._
 
 ## Troubleshooting
 
