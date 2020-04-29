@@ -1,20 +1,20 @@
 ---
 id: hdp_sandbox-s3_lm
-title: Hortonworks (HDP) Sandbox to S3 with LiveMigrator
-sidebar_label: HDP Sandbox to S3 with LiveMigrator
+title: Hortonworks (HDP) Sandbox to AWS S3 with LiveMigrator
+sidebar_label: HDP Sandbox to AWS S3 with LiveMigrator
 ---
 
-Use this quickstart if you want to configure Fusion to replicate from a non-kerberized Hortonworks (HDP) Sandbox to an S3 bucket using WANdisco LiveMigrator.
+Use this quickstart if you want to configure Fusion to replicate from a non-kerberized Hortonworks (HDP) Sandbox to an AWS S3 bucket using WANdisco LiveMigrator.
 
 What this guide will cover:
 
 - Installing WANdisco Fusion and a HDP Sandbox using the [docker-compose](https://docs.docker.com/compose/) tool.
-- Integrating WANdisco Fusion with S3.
+- Integrating WANdisco Fusion with AWS S3.
 - Live replication of sample data.
 
 If you would like to try something different with the HDP Sandbox, see:
 
-* [Live replication of data to S3](./hdp_sandbox-s3_ld.md)
+* [Live replication of data to AWS S3](./hdp_sandbox-s3_ld.md)
 
 ## Prerequisites
 
@@ -23,7 +23,7 @@ If you would like to try something different with the HDP Sandbox, see:
 
 To complete this install, you will need:
 
-* S3 bucket.
+* AWS S3 bucket.
 * Linux Virtual Machine (e.g. AWS EC2 instance).
   * Minimum size recommendation = **4 vcpus, 16 GiB memory** (e.g. [t3a.xlarge](https://aws.amazon.com/ec2/instance-types/)).
   * A minimum of 24GB available storage for the `/var/lib/docker` directory.
@@ -35,7 +35,7 @@ To complete this install, you will need:
 
 ### Info you will require
 
-* S3 details:
+* AWS S3 details:
 
   * [Bucket name](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) (Example: `fusion-bucket`)
   * [Bucket endpoint](https://docs.aws.amazon.com/general/latest/gr/s3.html) (Example: `s3.eu-west-1.amazonaws.com`)
@@ -98,13 +98,13 @@ The HDP Sandbox services can take up to 5-10 minutes to start. To check that the
 
    Enter your email address and choose a password you will remember.
 
-1. Click on the **Settings** cog for the **s3** storage, and fill in the details for your S3 bucket. See the [Info you will require](#info-you-will-require) section for reference.
+1. Click on the **Settings** cog for the **s3** storage, and fill in the details for your AWS S3 bucket. See the [Info you will require](#info-you-will-require) section for reference.
 
 1. Click **Apply Configuration** and wait for this to complete.
 
 ## Migration
 
-Follow the steps below to demonstrate migration of HCFS data from the HDP Sandbox to the S3 bucket.
+Follow the steps below to demonstrate migration of HCFS data from the HDP Sandbox to the AWS S3 bucket.
 
 ### Create replication rule
 
@@ -125,11 +125,11 @@ On the dashboard, create a **HCFS** rule with the following parameters:
    * Target Zone = **s3**
    * Overwrite Settings = **Skip**
 
-1. Wait until the migration is complete, and check the contents of your `/retail_demo` directory in your S3 bucket.
+1. Wait until the migration is complete, and check the contents of your `/retail_demo` directory in your AWS S3 bucket.
 
    A new directory should exist (`customer_addresses_dim_hive`) with a ~50MB file inside (`customer_addresses_dim.tsv.gz`).
 
-_You have now successfully migrated data from your HDP Sandbox to your S3 bucket using LiveMigrator. You can now try live replication by following our [LiveData quickstart](./hdp_sandbox-s3_ld.md#replication)._
+_You have now successfully migrated data from your HDP Sandbox to your AWS S3 bucket using LiveMigrator. You can now try live replication by following our [LiveData quickstart](./hdp_sandbox-s3_ld.md#replication)._
 
 ## Troubleshooting
 
