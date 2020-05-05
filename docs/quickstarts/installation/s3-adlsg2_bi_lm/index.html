@@ -71,7 +71,10 @@
 </table>
 <p>To complete this install, you will need:</p>
 <ul>
-<li><p>AWS S3 bucket.</p></li>
+<li><p>AWS S3 bucket.</p>
+<ul>
+<li>Only <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-2.html">regions that support Signature Version 2</a> are currently supported.</li>
+</ul></li>
 <li><p>ADLS Gen2 storage account with <a href="https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-namespace">hierarchical namespace</a> enabled.</p>
 <ul>
 <li>You will also need a container created inside this account.</li>
