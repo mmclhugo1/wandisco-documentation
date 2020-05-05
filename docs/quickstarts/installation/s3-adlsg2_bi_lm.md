@@ -20,6 +20,8 @@ What this guide will cover:
 To complete this install, you will need:
 
 * AWS S3 bucket.
+  * Only [regions that support Signature Version 2](https://docs.aws.amazon.com/general/latest/gr/signature-version-2.html) are currently supported.
+
 * ADLS Gen2 storage account with [hierarchical namespace](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-namespace) enabled.
   * You will also need a container created inside this account.
 * Linux Virtual Machine (e.g. AWS EC2 instance, Azure VM, etc).
