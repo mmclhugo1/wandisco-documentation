@@ -162,7 +162,7 @@ Your Databricks cluster must be **running** before testing Hive replication. Sam
 
    `CREATE DATABASE IF NOT EXISTS retail_demo;`
 
-1. Create a table inside the database that points to the sample data, and add the query as above:
+1. Create a table inside the database that points to the sample data, add the query below inside the **Hive** box and click the **play** button:
 
    ```sql
    CREATE TABLE retail_demo.customer_addresses_dim_hive
