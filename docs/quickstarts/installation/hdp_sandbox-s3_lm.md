@@ -24,6 +24,7 @@ If you would like to try something different with the HDP Sandbox, see:
 To complete this install, you will need:
 
 * AWS S3 bucket.
+  * Only [regions that support Signature Version 2](https://docs.aws.amazon.com/general/latest/gr/signature-version-2.html) are currently supported.
 * Linux Virtual Machine (e.g. AWS EC2 instance).
   * Minimum size recommendation = **4 vcpus, 16 GiB memory** (e.g. [t3a.xlarge](https://aws.amazon.com/ec2/instance-types/)).
   * A minimum of 24GB available storage for the `/var/lib/docker` directory.
