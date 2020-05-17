@@ -42,6 +42,7 @@ const siteConfig = {
     {doc: 'why-fusion/benefits', label: 'Why Fusion?'},
     {doc: 'quickstarts/installation/quickstart-config', label: 'Quickstarts'},
     {doc: 'docs/doc1', label: 'Docs'},
+    {doc: 'docs/install_guides/install_guides_intro', label: 'Install Guides'},
     {doc: 'glossary/a', label: 'Glossary'},
   //  {doc: 'api/api', label: 'API'},
     {doc: 'help/need_help', label: 'Help'},

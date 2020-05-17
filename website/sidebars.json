@@ -36,6 +36,11 @@
       "help/variables"
     ]
   },
+  "Install Guides": {
+    "Guides": [
+      "install_guides/install_guides_intro"
+    ]
+  },
   "quickstarts": {
     "Preparation": [
       "quickstarts/preparation/aws_vm_creation",
